@@ -114,7 +114,7 @@ button { font-family:'Poppins',sans-serif; }
   display:inline-block;
   white-space:nowrap;
   font-size:12px;
-  animation:ticker 40s linear infinite;
+  animation:ticker 80s linear infinite;
   padding-left:100%;
 }
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-100%)}}
