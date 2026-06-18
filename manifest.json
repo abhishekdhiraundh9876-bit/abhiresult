@@ -1,0 +1,16 @@
+{
+  "name": "Abhi Result",
+  "short_name": "Abhi Result",
+  "description": "India's most trusted Government Job portal since 2012.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2c3e50",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

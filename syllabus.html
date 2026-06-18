@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Syllabus 2026 – Download Sarkari Exam Syllabus PDF | Abhi Result</title>
+  <meta name="description" content="Sarkari Syllabus 2026 – SSC, UPSC, Railway, UP Police, Bihar Police – Sabhi Exams ka Syllabus PDF Download karein.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<header class="header" id="mainHeader">
+  <div class="header-top"><div class="container"><div class="header-inner">
+    <div class="logo-area"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <div class="logo-3d"><div class="logo-badge-img"><img src="abhi-logo.png?v=3" alt="Abhi Result"></div></div>
+      <div><div class="brand-name">Abhi Result</div><p class="brand-tagline">India's No.1 सरकारी नौकरी पोर्टल</p></div>
+    </a></div>
+    <div class="header-right">
+      <div class="search-box"><input type="text" id="searchInput" placeholder="Syllabus khojein..." autocomplete="off"><button class="search-btn" onclick="doSearch()"><i class="fas fa-search"></i></button><div class="search-results" id="searchResults"></div></div>
+    </div>
+  </div></div></div>
+  <nav class="main-nav" id="mainNav"><div class="container">
+    <div class="nav-toggle" onclick="toggleNav()" id="navToggle"><span></span><span></span><span></span></div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="latest-jobs.html"><i class="fas fa-briefcase"></i> Latest Jobs</a></li>
+      <li><a href="results.html"><i class="fas fa-poll"></i> Results</a></li>
+      <li><a href="admit-card.html"><i class="fas fa-id-card"></i> Admit Card</a></li>
+      <li><a href="answer-key.html"><i class="fas fa-key"></i> Answer Key</a></li>
+      <li><a href="syllabus.html" class="active"><i class="fas fa-book"></i> Syllabus</a></li>
+      <li><a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a></li>
+      <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+    </ul>
+  </div></nav>
+</header>
+
+<section class="page-hero" style="background:linear-gradient(135deg,#4a148c 0%,#7b2d8b 100%)">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Syllabus</span></div>
+    <h1>📚 Sarkari Exam Syllabus 2026</h1>
+    <p>Sabhi Exams ka naya Exam Pattern aur Syllabus PDF download karein</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="result-stats">
+    <div class="result-stat"><div class="n" id="totalSyllabus">0</div><div class="l">Total Syllabus</div></div>
+    <div class="result-stat"><div class="n">PDF</div><div class="l">Official Documents</div></div>
+    <div class="result-stat"><div class="n">2026</div><div class="l">Latest Exam Pattern</div></div>
+    <div class="result-stat"><div class="n">Live</div><div class="l">Verified Links</div></div>
+  </div>
+
+  <div class="page-cats">
+    <button class="page-cat-btn active" onclick="filterCat('',this)"><i class="fas fa-th"></i> All</button>
+    <button class="page-cat-btn" onclick="filterCat('upsc',this)"><i class="fas fa-landmark"></i> UPSC</button>
+    <button class="page-cat-btn" onclick="filterCat('ssc',this)"><i class="fas fa-file-alt"></i> SSC</button>
+    <button class="page-cat-btn" onclick="filterCat('railway',this)"><i class="fas fa-train"></i> Railway</button>
+    <button class="page-cat-btn" onclick="filterCat('ibps',this)"><i class="fas fa-university"></i> Bank</button>
+    <button class="page-cat-btn" onclick="filterCat('bpsc',this)"><i class="fas fa-flag"></i> Bihar</button>
+    <button class="page-cat-btn" onclick="filterCat('police',this)"><i class="fas fa-shield-alt"></i> Police</button>
+    <button class="page-cat-btn" onclick="filterCat('defence',this)"><i class="fas fa-star"></i> Defence</button>
+    <button class="page-cat-btn" onclick="filterCat('tet',this)"><i class="fas fa-chalkboard-teacher"></i> TET/Teacher</button>
+    <button class="page-cat-btn" onclick="filterCat('central',this)"><i class="fas fa-building"></i> Central</button>
+    <button class="page-cat-btn" onclick="filterCat('hssc',this)"><i class="fas fa-briefcase"></i> Haryana</button>
+    <button class="page-cat-btn" onclick="filterCat('rpsc',this)"><i class="fas fa-map"></i> Rajasthan</button>
+  </div>
+
+  <div class="filter-bar">
+    <label><i class="fas fa-search"></i> Search Syllabus:</label>
+    <input type="text" class="filter-input" id="searchFilter" placeholder="Search Syllabus..." oninput="filterItems()">
+    <button class="filter-btn" onclick="clearFilters()"><i class="fas fa-times"></i> Clear</button>
+    <span style="font-size:13px;color:var(--text-light);margin-left:auto" id="resCount"></span>
+  </div>
+
+  <div class="page-layout">
+    <div>
+      <div class="notice-board">
+        <div class="board-header syllabus-header">
+          <h2><i class="fas fa-book"></i> Download Syllabus PDF</h2>
+          <span style="color:rgba(255,255,255,0.8);font-size:12px" id="boardCount"></span>
+        </div>
+        <div id="itemsGrid" style="min-height:100px"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="detail-overlay" id="detailOverlay" onclick="closeModal()"></div>
+<div class="detail-modal" id="detailModal">
+  <div class="modal-header" id="modalHeader"><h3 id="modalTitle">Syllabus Details</h3><button class="modal-close" onclick="closeModal()">×</button></div>
+  <div class="modal-body"><table class="modal-table" id="modalTable"></table><div class="modal-actions" id="modalActions"></div></div>
+</div>
+
+<footer class="footer"><div class="footer-bottom"><div class="container"><p>Copyright © 2012–2026 | <strong>Abhi Result</strong></p></div></div></footer>
+
+<nav class="bottom-nav"><div class="bottom-nav-items">
+  <a href="index.html" class="bn-item"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="latest-jobs.html" class="bn-item"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+  <a href="results.html" class="bn-item"><i class="fas fa-trophy"></i><span>Results</span></a>
+  <a href="admit-card.html" class="bn-item"><i class="fas fa-id-card"></i><span>Admit</span></a>
+  <a href="admission.html" class="bn-item"><i class="fas fa-graduation-cap"></i><span>Admission</span></a>
+</div></nav>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+let allItems = [], currentCat = '';
+let displayedCount = 50;
+let filteredItems = [];
+const catColors = {upsc:'#1a73e8',ssc:'#e63946',railway:'#2dc653',ibps:'#0f1b4c',police:'#7b2d8b',bpsc:'#f4a261',defence:'#2dc653',tet:'#1a73e8',central:'#e65100',upsssc:'#1a73e8',rpsc:'#e63946',dsssb:'#f4a261',airforce:'#1a73e8',navy:'#0f1b4c',hssc:'#7b2d8b'};
+const catIcons = {upsc:'fa-landmark',ssc:'fa-file-alt',railway:'fa-train',ibps:'fa-university',police:'fa-shield-alt',bpsc:'fa-flag',defence:'fa-star',tet:'fa-chalkboard-teacher',central:'fa-building',upsssc:'fa-clipboard',rpsc:'fa-map',dsssb:'fa-school',airforce:'fa-fighter-jet',navy:'fa-ship',hssc:'fa-briefcase'};
+
+document.addEventListener('DOMContentLoaded', function() {
+  allItems = siteData.syllabi || [];
+  const totCount = document.getElementById('totalSyllabus');
+  if (totCount) totCount.textContent = allItems.length;
+  const tc = document.getElementById('tickerContent');
+  if (tc && siteData.notifications) tc.textContent = siteData.notifications.join('  ●  ');
+
+  const catParam = getUrlParam('cat');
+  if (catParam) {
+    currentCat = catParam;
+    document.querySelectorAll('.page-cat-btn').forEach(b => {
+      b.classList.remove('active');
+      if (b.getAttribute('onclick')?.includes(`'${catParam}'`)) b.classList.add('active');
+    });
+  }
+  filterItems();
+  const idParam = getUrlParam('id');
+  if (idParam) showDetailById(+idParam);
+});
+
+function filterCat(cat, btn) { currentCat = cat; document.querySelectorAll('.page-cat-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); filterItems(); }
+
+function filterItems() {
+  const search = document.getElementById('searchFilter').value.toLowerCase();
+  
+  displayedCount = 50;
+  
+  filteredItems = allItems.filter(i => (!currentCat || i.category === currentCat) && (!search || i.title.toLowerCase().includes(search)));
+  
+  const countSpan = document.getElementById('resCount');
+  if (countSpan) countSpan.textContent = filteredItems.length + ' syllabus';
+  const boardCountSpan = document.getElementById('boardCount');
+  if (boardCountSpan) boardCountSpan.textContent = filteredItems.length + ' syllabus found';
+  
+  renderItems();
+}
+
+function clearFilters() {
+  currentCat = '';
+  document.getElementById('searchFilter').value = '';
+  document.querySelectorAll('.page-cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.page-cat-btn')[0].classList.add('active');
+  filterItems();
+}
+
+function renderItems() {
+  const grid = document.getElementById('itemsGrid');
+  grid.innerHTML = '';
+  
+  if (!filteredItems.length) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light)"><i class="fas fa-search" style="font-size:40px;opacity:0.2;display:block;margin-bottom:12px"></i>Koi syllabus nahi mila.</div>';
+    removeLoadMoreButton();
+    return;
+  }
+  
+  const sliceOfItems = filteredItems.slice(0, displayedCount);
+  
+  sliceOfItems.forEach((item, idx) => {
+    const color = catColors[item.category] || '#1a73e8';
+    const icon = catIcons[item.category] || 'fa-book';
+    const row = document.createElement('div');
+    row.className = 'item-row slide-up';
+    row.style.animationDelay = (idx * 0.03) + 's';
+    row.innerHTML = `
+      <div class="item-icon" style="background:${escapeHTML(color)}"><i class="fas ${escapeHTML(icon)}"></i></div>
+      <div class="item-info">
+        <div class="item-name">${escapeHTML(item.title)}</div>
+        <div class="item-meta"><span><i class="fas fa-calendar-alt"></i> ${escapeHTML(item.date)}</span><span><i class="fas fa-tag"></i> ${escapeHTML((item.category||'').toUpperCase())}</span></div>
+      </div>
+      <div class="item-action">
+        <span class="itag itag-new">NEW</span>
+        <a href="${safeURL(item.link)}" target="_blank" rel="noopener" class="dl-btn green" onclick="event.stopPropagation()"><i class="fas fa-download"></i> Download PDF</a>
+      </div>`;
+    row.onclick = () => showDetailById(item.id);
+    grid.appendChild(row);
+  });
+  
+  if (filteredItems.length > displayedCount) {
+    showLoadMoreButton();
+  } else {
+    removeLoadMoreButton();
+  }
+}
+
+function showLoadMoreButton() {
+  removeLoadMoreButton();
+  const grid = document.getElementById('itemsGrid');
+  const btn = document.createElement('button');
+  btn.id = 'loadMoreBtn';
+  btn.className = 'filter-btn';
+  btn.style.display = 'block';
+  btn.style.margin = '30px auto';
+  btn.style.padding = '12px 30px';
+  btn.style.fontSize = '15px';
+  btn.style.borderRadius = '30px';
+  btn.style.background = 'linear-gradient(135deg, #7b2d8b, #4a148c)';
+  btn.style.color = '#fff';
+  btn.style.border = 'none';
+  btn.style.cursor = 'pointer';
+  btn.style.fontWeight = '600';
+  btn.style.boxShadow = '0 8px 20px rgba(123, 45, 139, 0.3)';
+  btn.style.transition = 'all 0.3s ease';
+  
+  btn.innerHTML = '<i class="fas fa-sync-alt"></i> Load More Syllabus';
+  btn.onclick = () => {
+    displayedCount += 50;
+    renderItems();
+  };
+  grid.parentNode.insertBefore(btn, grid.nextSibling);
+}
+
+function removeLoadMoreButton() {
+  const btn = document.getElementById('loadMoreBtn');
+  if (btn) btn.remove();
+}
+
+function showDetailById(id) {
+  const item = allItems.find(i => i.id === id);
+  if (!item) return;
+  const color = catColors[item.category] || '#1a73e8';
+  document.getElementById('modalTitle').textContent = item.title;
+  document.getElementById('modalHeader').style.background = `linear-gradient(135deg,${color},${color}99)`;
+  document.getElementById('modalTable').innerHTML = `
+    <tr><th>Exam Name</th><td><strong>${escapeHTML(item.title)}</strong></td></tr>
+    <tr><th>Category</th><td>${escapeHTML((item.category||'').toUpperCase())}</td></tr>
+    <tr><th>Updated On</th><td>${escapeHTML(item.date)}</td></tr>
+    <tr><th>Format</th><td>PDF Document</td></tr>
+    <tr><th>Syllabus Status</th><td><span style="color:#2dc653;font-weight:700">✅ Available – Latest Exam Pattern 2026</span></td></tr>
+    <tr><th>Official Link</th><td><a href="${safeURL(item.link)}" target="_blank" rel="noopener" style="color:var(--blue);word-break:break-all">${escapeHTML(item.link)}</a></td></tr>`;
+  document.getElementById('modalActions').innerHTML = `
+    <a href="${safeURL(item.link)}" target="_blank" rel="noopener" class="modal-btn modal-btn-green"><i class="fas fa-download"></i> Download Syllabus PDF</a>
+    <button class="modal-btn modal-btn-grey" onclick="closeModal()"><i class="fas fa-times"></i> Close</button>`;
+  document.getElementById('detailOverlay').classList.add('show');
+  document.getElementById('detailModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('detailOverlay').classList.remove('show');
+  document.getElementById('detailModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

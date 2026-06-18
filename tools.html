@@ -1,0 +1,2920 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarkari Student Tools 2026 – Image Resizer, Age Calculator, Resume Maker | Abhi Result</title>
+  <meta name="description" content="Sarkari Tools 2026 – Free Image resizer and compressor, Age calculator, Resume Maker/CV Builder, Document Verification and Scholarship links. All-in-one student utilities.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Tab Styling Override */
+    .tools-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .tool-panel {
+      display: none;
+      background: #ffffff;
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.4s ease;
+      margin-bottom: 30px;
+    }
+    .tool-panel.active {
+      display: block;
+    }
+    
+    /* Image Resizer Layout */
+    .resizer-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 768px) {
+      .resizer-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .upload-zone {
+      border: 3px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      background: var(--light);
+      transition: var(--transition);
+      position: relative;
+    }
+    .upload-zone:hover {
+      border-color: var(--blue);
+      background: #eef5ff;
+    }
+    .upload-zone input[type="file"] {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0; cursor: pointer;
+    }
+    .upload-zone i {
+      font-size: 50px;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+    .resizer-preview {
+      background: var(--light);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 250px;
+      border: 1px solid var(--border);
+    }
+    .stats-table {
+      width: 100%;
+      margin-top: 16px;
+      border-collapse: collapse;
+    }
+    .stats-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .stats-table td:nth-child(even) {
+      text-align: right;
+      font-weight: 600;
+    }
+
+    /* Age Calculator Layout */
+    .age-layout {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+    .age-boxes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .age-box {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04);
+      transition: var(--transition);
+    }
+    .age-box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(26, 115, 232, 0.15);
+      border-color: rgba(26, 115, 232, 0.4);
+    }
+    .age-box .n {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .age-box .l {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    /* CV Maker Layout */
+    .cv-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    @media (max-width: 992px) {
+      .cv-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .cv-form-col {
+      max-height: 800px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    .cv-form-col::-webkit-scrollbar {
+      width: 6px;
+    }
+    .cv-form-col::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+    .cv-section-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary-light);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 6px;
+      margin: 24px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .cv-preview-sheet {
+      background: #ffffff;
+      border: 1px solid #c0c0c0;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      padding: 40px;
+      min-height: 800px;
+      position: sticky;
+      top: 150px;
+    }
+    
+    /* CV Templates style classes */
+    .cv-template-serif {
+      font-family: 'Times New Roman', Times, serif;
+      color: #333333;
+    }
+    .cv-template-sans {
+      font-family: 'Poppins', sans-serif;
+      color: #333333;
+    }
+    .cv-template-navy {
+      font-family: 'Poppins', sans-serif;
+      color: #0f1b4c;
+    }
+    
+    .cv-header-preview {
+      border-bottom: 2px solid #333;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .cv-template-navy .cv-header-preview {
+      border-bottom: 3px solid #0f1b4c;
+      text-align: left;
+      background: #f0f4f8;
+      padding: 20px;
+      border-radius: 6px;
+    }
+    .cv-header-preview h2 {
+      font-size: 24px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .cv-header-preview p {
+      font-size: 13px;
+      color: #666;
+    }
+    .cv-template-navy .cv-header-preview p {
+      color: #1a3a8f;
+      font-weight: 700;
+    }
+    .cv-meta-preview {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .cv-template-navy .cv-meta-preview {
+      justify-content: flex-start;
+      color: #555;
+    }
+    .cv-sec-preview {
+      margin-bottom: 18px;
+    }
+    .cv-sec-title-preview {
+      font-size: 14px;
+      font-weight: bold;
+      border-bottom: 1px solid #666;
+      padding-bottom: 2px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .cv-template-navy .cv-sec-title-preview {
+      color: #0f1b4c;
+      border-bottom-color: #0f1b4c;
+    }
+    .cv-item {
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .cv-item-title {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+    }
+    .cv-item-sub {
+      font-style: italic;
+      color: #555;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+    .cv-item-desc {
+      line-height: 1.4;
+      color: #333;
+    }
+    .cv-skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .cv-skill-tag {
+      background: #f0f0f0;
+      border: 1px solid #d0d0d0;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #333;
+    }
+    .cv-template-navy .cv-skill-tag {
+      background: #e8eef6;
+      border-color: #b9cadc;
+      color: #0f1b4c;
+    }
+
+    /* Study Planner / Syllabus Tracker */
+    .planner-header {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .progress-bar-container {
+      background: rgba(255,255,255,0.2);
+      border-radius: 10px;
+      height: 12px;
+      width: 100%;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress-bar-fill {
+      background: var(--gold);
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    .subject-block {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .subject-title {
+      background: var(--light2);
+      padding: 12px 20px;
+      font-weight: 600;
+      color: var(--primary);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .topics-list {
+      padding: 10px 20px;
+    }
+    .topic-row-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    .topic-row-item:last-child {
+      border-bottom: none;
+    }
+    .topic-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .task-checkboxes {
+      display: flex;
+      gap: 16px;
+    }
+    .task-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+    .task-label input {
+      cursor: pointer;
+    }
+
+    /* Quiz Player Styling */
+    .quiz-container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+    .quiz-question-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .quiz-option-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 20px;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 13px;
+      transition: var(--transition);
+    }
+    .quiz-option-btn:hover {
+      background: var(--light2);
+      border-color: var(--blue);
+    }
+    .quiz-option-btn.selected {
+      background: #e3f2fd;
+      border-color: var(--blue);
+      font-weight: 600;
+    }
+    .quiz-option-btn.correct {
+      background: #e8f5e9;
+      border-color: var(--green);
+      color: #2e7d32;
+      font-weight: 600;
+    }
+    .quiz-option-btn.incorrect {
+      background: #ffebee;
+      border-color: var(--accent);
+      color: #c62828;
+      font-weight: 600;
+    }
+    .quiz-explanation {
+      background: #fff8e1;
+      border-left: 4px solid var(--gold);
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #555;
+      margin-top: 12px;
+      display: none;
+    }
+    
+    /* Typing Test Styling */
+    .typing-char {
+      color: #7f8c8d;
+      font-family: inherit;
+    }
+    .typing-char.correct {
+      color: #27ae60;
+      background: rgba(39, 174, 96, 0.1);
+    }
+    .typing-char.incorrect {
+      color: #c0392b;
+      background: rgba(192, 41, 43, 0.15);
+      border-bottom: 2px solid #c0392b;
+    }
+    .typing-char.current {
+      color: #2c3e50;
+      background: #f1c40f;
+      border-left: 2px solid #2c3e50;
+      animation: typingCursorBlink 0.8s infinite;
+    }
+    @keyframes typingCursorBlink {
+      50% { border-left-color: transparent; }
+    }
+  </style>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<div class="top-ticker"><span class="ticker-label"><i class="fas fa-bell"></i> LIVE</span><div class="ticker-wrap"><div class="ticker-content" id="tickerContent">Loading...</div></div></div>
+
+<header class="header" id="mainHeader">
+  <div class="header-top"><div class="container"><div class="header-inner">
+    <div class="logo-area"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <div class="logo-3d"><div class="logo-badge-img"><img src="abhi-logo.png?v=3" alt="Abhi Result"></div></div>
+      <div><div class="brand-name">Abhi Result</div><p class="brand-tagline">India's No.1 सरकारी नौकरी पोर्टल</p></div>
+    </a></div>
+    <div class="header-right">
+      <div class="search-box"><input type="text" id="searchInput" placeholder="Tools or jobs khojein..." autocomplete="off"><button class="search-btn" onclick="doSearch()"><i class="fas fa-search"></i></button><div class="search-results" id="searchResults"></div></div>
+      <div class="social-header"><a href="https://t.me/abhiresultofficial" target="_blank" rel="noopener" class="sh-btn telegram"><i class="fab fa-telegram"></i></a><a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="sh-btn whatsapp"><i class="fab fa-whatsapp"></i></a></div>
+    </div>
+  </div></div></div>
+  <nav class="main-nav" id="mainNav"><div class="container">
+    <div class="nav-toggle" onclick="toggleNav()" id="navToggle"><span></span><span></span><span></span></div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="latest-jobs.html"><i class="fas fa-briefcase"></i> Latest Jobs</a></li>
+      <li><a href="results.html"><i class="fas fa-poll"></i> Results</a></li>
+      <li><a href="admit-card.html"><i class="fas fa-id-card"></i> Admit Card</a></li>
+      <li><a href="answer-key.html"><i class="fas fa-key"></i> Answer Key</a></li>
+      <li><a href="syllabus.html"><i class="fas fa-book"></i> Syllabus</a></li>
+      <li><a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a></li>
+      <li><a href="tools.html" class="active"><i class="fas fa-tools"></i> Tools</a></li>
+    </ul>
+  </div></nav>
+</header>
+
+<section class="page-hero" style="background:linear-gradient(135deg,#0f1b4c 0%,#1a3a8f 100%)">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Sarkari Tools</span></div>
+    <h1>🛠️ Abhi Result Sarkari Student Tools</h1>
+    <p>Image resizer, Age Calculator, Resume CV Builder, Daily GK Quiz, Job eligibility checker, and document portals</p>
+  </div>
+</section>
+
+<div class="container" style="margin-top: 30px;">
+  <!-- TABS BUTTONS -->
+  <div class="tools-cats">
+    <button class="page-cat-btn active" onclick="switchToolTab('resizer', this)"><i class="fas fa-compress-arrows-alt"></i> Photo/Sig Resizer</button>
+    <button class="page-cat-btn" onclick="switchToolTab('agecalc', this)"><i class="fas fa-calculator"></i> Age Calculator</button>
+    <button class="page-cat-btn" onclick="switchToolTab('cvmaker', this)"><i class="fas fa-file-invoice"></i> Resume / CV Maker</button>
+    <button class="page-cat-btn" onclick="switchToolTab('planner', this)"><i class="fas fa-tasks"></i> Study Planner</button>
+    <button class="page-cat-btn" onclick="switchToolTab('quiz', this)"><i class="fas fa-book-reader"></i> GK Quiz Player</button>
+    <button class="page-cat-btn" onclick="switchToolTab('matcher', this)"><i class="fas fa-check-circle"></i> Job Matcher</button>
+    <button class="page-cat-btn" onclick="switchToolTab('documents', this)"><i class="fas fa-id-card"></i> Doc Services</button>
+    <button class="page-cat-btn" onclick="switchToolTab('scholarships', this)"><i class="fas fa-graduation-cap"></i> Scholarships</button>
+    <button class="page-cat-btn" onclick="switchToolTab('typing', this)"><i class="fas fa-keyboard"></i> Typing Test</button>
+    <button class="page-cat-btn" onclick="switchToolTab('salary', this)"><i class="fas fa-rupee-sign"></i> Salary Calculator</button>
+  </div>
+
+  <!-- 1. PHOTO/SIG RESIZER & COMPRESSOR -->
+  <div class="tool-panel active" id="panel-resizer">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-image"></i> Photo & Signature Resizer & Compressor</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Government applications demand strict photo sizes (e.g. less than 50KB) and signatures (e.g. less than 20KB). Compress and resize client-side without sharing your personal image over the internet.</p>
+    
+    <div class="resizer-layout">
+      <div>
+        <div class="upload-zone">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <h4>Upload Image File</h4>
+          <p style="font-size:12px;color:var(--text-light);margin-top:6px;">Drag & Drop or Click to browse (JPG, PNG)</p>
+          <input type="file" id="imageUploader" accept="image/*" onchange="handleImageUpload(event)">
+        </div>
+
+        <div id="resizePreviewArea" style="display:none;margin-top:24px;">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Target Width (px)</label>
+              <input type="number" class="form-control" id="targetWidth" value="150">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Target Height (px)</label>
+              <input type="number" class="form-control" id="targetHeight" value="200">
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px;">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;">
+              <input type="checkbox" id="lockAspect" checked> Aspect Ratio Maintain Rakhein (Lock ratio)
+            </label>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Target Size Limit (KB) (0 = No limit)</label>
+              <input type="number" class="form-control" id="targetKb" value="50" placeholder="e.g. 50">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Output Format</label>
+              <select class="form-control" id="targetFormat" onchange="doResize()">
+                <option value="image/jpeg">JPEG (.jpg)</option>
+                <option value="image/png">PNG (.png)</option>
+              </select>
+            </div>
+          </div>
+          
+          <button class="submit-btn" onclick="doResize()" style="margin-top:10px;background:var(--primary-light)"><i class="fas fa-sync-alt"></i> Apply Resize & Quality settings</button>
+        </div>
+      </div>
+
+      <!-- Preview Column -->
+      <div>
+        <div class="resizer-preview">
+          <div id="noImageText" style="color:var(--text-light)">
+            <i class="fas fa-file-image" style="font-size:48px;opacity:0.2;margin-bottom:12px;display:block;"></i>
+            Upload an image to see details & download.
+          </div>
+          <div id="previewContainer" style="display:none;width:100%;">
+            <h4 style="margin-bottom:12px;font-size:14px;color:var(--primary)">Processed Image Preview:</h4>
+            <div style="background:#fff;padding:10px;border-radius:var(--radius-sm);border:1px dashed var(--border);display:inline-block;">
+              <img id="previewImg" alt="Preview Image" src="">
+            </div>
+            
+            <table class="stats-table">
+              <tr>
+                <td>Original File Size</td>
+                <td id="origSize">-</td>
+              </tr>
+              <tr>
+                <td>Original Dimensions</td>
+                <td><span id="origWidth">-</span> x <span id="origHeight">-</span> px</td>
+              </tr>
+              <tr style="color:var(--green)">
+                <td>Resized File Size</td>
+                <td id="compSize">-</td>
+              </tr>
+              <tr style="color:var(--green)">
+                <td>Resized Dimensions</td>
+                <td><span id="compWidth">-</span> x <span id="compHeight">-</span> px</td>
+              </tr>
+            </table>
+
+            <button class="submit-btn" onclick="downloadResized()" style="margin-top:20px;background:var(--green)"><i class="fas fa-download"></i> Download Resized Image</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. AGE CALCULATOR -->
+  <div class="tool-panel" id="panel-agecalc">
+    <div class="age-layout">
+      <h3 style="color:var(--primary);text-align:center;margin-bottom:8px;"><i class="fas fa-calculator"></i> Age Eligibility Calculator</h3>
+      <p style="color:var(--text-light);text-align:center;font-size:13px;margin-bottom:30px;">Find your exact age (Years, Months, Days) on a specific cut-off date to verify your eligibility for UPSC, SSC, and Railway jobs.</p>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date of Birth (DOB) *</label>
+          <input type="date" class="form-control" id="dob" onchange="calculateAge()">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Calculate Age At Date *</label>
+          <input type="date" class="form-control" id="targetDate" onchange="calculateAge()">
+        </div>
+      </div>
+
+      <div id="ageStatsArea" style="display:none;margin-top:30px;">
+        <h4 style="text-align:center;margin-bottom:16px;font-size:15px;color:var(--primary)">Calculated Age Breakdown:</h4>
+        <div class="age-boxes">
+          <div class="age-box">
+            <div class="n" id="ageResultYears">0</div>
+            <div class="l">Years</div>
+          </div>
+          <div class="age-box">
+            <div class="n" id="ageResultMonths">0</div>
+            <div class="l">Months</div>
+          </div>
+          <div class="age-box">
+            <div class="n" id="ageResultDays">0</div>
+            <div class="l">Days</div>
+          </div>
+        </div>
+
+        <div style="background:var(--light);border-radius:var(--radius);padding:20px;border:1px solid var(--border);margin-top:20px;">
+          <h5 style="margin-bottom:12px;color:var(--primary);font-size:14px;"><i class="fas fa-info-circle"></i> Detailed Lifespan Statistics:</h5>
+          <table class="stats-table" style="margin-top:0;">
+            <tr>
+              <td>Days Left For Next Birthday</td>
+              <td><span id="daysToNextBirthday" style="color:var(--accent);font-weight:700;">-</span> days</td>
+            </tr>
+            <tr>
+              <td>Total Months Lived</td>
+              <td><span id="totalMonthsLived">-</span> months</td>
+            </tr>
+            <tr>
+              <td>Total Weeks Lived</td>
+              <td><span id="totalWeeksLived">-</span> weeks</td>
+            </tr>
+            <tr>
+              <td>Total Days Lived</td>
+              <td><span id="totalDaysLived">-</span> days</td>
+            </tr>
+            <tr>
+              <td>Total Hours Lived</td>
+              <td><span id="totalHoursLived">-</span> hours</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. RESUME / CV MAKER -->
+  <div class="tool-panel" id="panel-cvmaker">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-file-invoice"></i> Free Government Job Resume Maker (Ultra Pro)</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Create, save progress, select elegant templates, and print your resume cleanly as a standard PDF document.</p>
+    
+    <div class="cv-layout">
+      <!-- Form Input Column -->
+      <div class="cv-form-col">
+        <div class="cv-section-title"><i class="fas fa-sliders-h"></i> CV Styling & Actions</div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Select Template Theme</label>
+            <select class="form-control" id="cvTemplateSelect" onchange="changeCvTemplate(this.value)">
+              <option value="serif">Classic Serif (Times New Roman)</option>
+              <option value="sans">Modern Minimalist (Sans-Serif)</option>
+              <option value="navy">Professional Executive (Navy Header)</option>
+            </select>
+          </div>
+          <div class="form-group" style="display:flex;align-items:flex-end;gap:10px;">
+            <button class="filter-btn" onclick="exportCvJson()" style="flex:1;padding:12px;font-size:12px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;"><i class="fas fa-download"></i> Save Data (.json)</button>
+            
+            <label class="filter-btn" style="flex:1;padding:12px;font-size:12px;background:var(--primary-light);color:#fff;border:none;border-radius:6px;cursor:pointer;text-align:center;display:inline-block;">
+              <i class="fas fa-upload"></i> Load Data
+              <input type="file" id="cvJsonLoader" accept=".json" style="display:none;" onchange="importCvJson(event)">
+            </label>
+          </div>
+        </div>
+
+        <div class="cv-section-title"><i class="fas fa-user"></i> Personal details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-control" id="cvName" placeholder="e.g. Abhinav Kumar" oninput="updateCv()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Job Title / Tagline *</label>
+            <input type="text" class="form-control" id="cvTitle" placeholder="e.g. Graduate Clerk Aspirant" oninput="updateCv()">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Email ID</label>
+            <input type="email" class="form-control" id="cvEmail" placeholder="e.g. abhi@example.com" oninput="updateCv()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="cvPhone" placeholder="e.g. +91 99999 99999" oninput="updateCv()">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Location (City, State)</label>
+            <input type="text" class="form-control" id="cvLocation" placeholder="e.g. Patna, Bihar" oninput="updateCv()">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Website / LinkedIn</label>
+            <input type="text" class="form-control" id="cvLinkedin" placeholder="e.g. linkedin.com/in/username" oninput="updateCv()">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Profile / Career Objective</label>
+          <textarea class="form-control" id="cvSummary" placeholder="e.g. Dedicated and detail-oriented graduate seeking a growth-oriented career in public services..." oninput="updateCv()"></textarea>
+        </div>
+
+        <div class="cv-section-title"><i class="fas fa-graduation-cap"></i> Education Details</div>
+        <!-- Education 1 -->
+        <div style="background:var(--light);padding:12px;border-radius:var(--radius-sm);margin-bottom:12px;border:1px solid var(--border)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Degree / Class *</label>
+              <input type="text" class="form-control" id="eduDeg1" placeholder="e.g. B.Sc (Hons) Mathematics" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">University / Board *</label>
+              <input type="text" class="form-control" id="eduSchl1" placeholder="e.g. Patna University" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Passing Year</label>
+              <input type="text" class="form-control" id="eduYr1" placeholder="e.g. 2024" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Percentage / CGPA</label>
+              <input type="text" class="form-control" id="eduScore1" placeholder="e.g. 78% or 8.2 CGPA" oninput="updateCv()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Education 2 -->
+        <div style="background:var(--light);padding:12px;border-radius:var(--radius-sm);margin-bottom:12px;border:1px solid var(--border)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Degree / Class</label>
+              <input type="text" class="form-control" id="eduDeg2" placeholder="e.g. 12th (Intermediate)" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">School / Board</label>
+              <input type="text" class="form-control" id="eduSchl2" placeholder="e.g. BSEB Bihar Board" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Passing Year</label>
+              <input type="text" class="form-control" id="eduYr2" placeholder="e.g. 2021" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Percentage / Score</label>
+              <input type="text" class="form-control" id="eduScore2" placeholder="e.g. 82%" oninput="updateCv()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Education 3 -->
+        <div style="background:var(--light);padding:12px;border-radius:var(--radius-sm);margin-bottom:12px;border:1px solid var(--border)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Degree / Class</label>
+              <input type="text" class="form-control" id="eduDeg3" placeholder="e.g. 10th (Matriculation)" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">School / Board</label>
+              <input type="text" class="form-control" id="eduSchl3" placeholder="e.g. BSEB Bihar Board" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Passing Year</label>
+              <input type="text" class="form-control" id="eduYr3" placeholder="e.g. 2019" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Percentage / Score</label>
+              <input type="text" class="form-control" id="eduScore3" placeholder="e.g. 88%" oninput="updateCv()">
+            </div>
+          </div>
+        </div>
+
+        <div class="cv-section-title"><i class="fas fa-briefcase"></i> Work Experience (Optional)</div>
+        <!-- Experience 1 -->
+        <div style="background:var(--light);padding:12px;border-radius:var(--radius-sm);margin-bottom:12px;border:1px solid var(--border)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Job Title</label>
+              <input type="text" class="form-control" id="expTitle1" placeholder="e.g. Data Entry Operator" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company / Organization</label>
+              <input type="text" class="form-control" id="expComp1" placeholder="e.g. Apex Office Services" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Duration (From - To)</label>
+              <input type="text" class="form-control" id="expDur1" placeholder="e.g. Jan 2025 - Present" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Short Description</label>
+            <textarea class="form-control" id="expDesc1" placeholder="e.g. Managed office databases, updated spreadsheets, and sorted entries with high accuracy." oninput="updateCv()"></textarea>
+          </div>
+        </div>
+
+        <!-- Experience 2 -->
+        <div style="background:var(--light);padding:12px;border-radius:var(--radius-sm);margin-bottom:12px;border:1px solid var(--border)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Job Title</label>
+              <input type="text" class="form-control" id="expTitle2" placeholder="e.g. Office Assistant Intern" oninput="updateCv()">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company / Organization</label>
+              <input type="text" class="form-control" id="expComp2" placeholder="e.g. District Registry Office" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Duration (From - To)</label>
+              <input type="text" class="form-control" id="expDur2" placeholder="e.g. Jun 2024 - Dec 2024" oninput="updateCv()">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Short Description</label>
+            <textarea class="form-control" id="expDesc2" placeholder="e.g. Sorted official paperwork and assisted in filing candidate entries." oninput="updateCv()"></textarea>
+          </div>
+        </div>
+
+        <div class="cv-section-title"><i class="fas fa-cogs"></i> Skills & Key Tools</div>
+        <div class="form-group">
+          <label class="form-label">Skills (Comma-separated values)</label>
+          <input type="text" class="form-control" id="cvSkills" placeholder="e.g. Excel, Typing (40 WPM), Billing, Communication, Tally ERP" oninput="updateCv()">
+        </div>
+
+        <!-- Action Buttons for Form Completion -->
+        <div style="background:var(--light);border:1px solid var(--border);border-radius:var(--radius-sm);padding:20px;margin-top:24px;text-align:center;box-shadow:var(--shadow-sm);">
+          <h4 style="font-size:14px;color:var(--primary);margin-bottom:12px;font-weight:700;"><i class="fas fa-check-circle"></i> Step 2: Generate & Download Your Resume</h4>
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:16px;">Apne details bharne ke baad, "Print Resume" par click karein aur PDF format mai save ya print karein.</p>
+          
+          <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+            <button class="submit-btn" onclick="generateAndPrintCv()" style="background:var(--green);font-weight:700;flex:2;min-width:180px;margin:0;"><i class="fas fa-print"></i> Generate & Print Resume</button>
+            <button class="filter-btn" onclick="resetCvForm()" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:12px;font-size:13px;cursor:pointer;flex:1;min-width:100px;"><i class="fas fa-undo"></i> Reset Form</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Column -->
+      <div>
+        <div class="cv-preview-sheet cv-template-serif" id="cvPreviewPrintArea">
+          <div class="cv-header-preview">
+            <h2 id="pName">Abhinav Kumar</h2>
+            <p id="pTitle">Graduate Clerk Aspirant</p>
+            <div class="cv-meta-preview">
+              <span><i class="fas fa-envelope"></i> <span id="pEmail">email@example.com</span></span>
+              <span><i class="fas fa-phone"></i> <span id="pPhone">+91 00000000000</span></span>
+              <span><i class="fas fa-map-marker-alt"></i> <span id="pLocation">Patna, Bihar</span></span>
+              <span><i class="fab fa-linkedin"></i> <span id="pLink">linkedin.com/in/username</span></span>
+            </div>
+          </div>
+
+          <div class="cv-sec-preview">
+            <div class="cv-sec-title-preview">Career Objective</div>
+            <p class="cv-item-desc" id="pSummary" style="font-size:12px;">Dedicated and detail-oriented graduate seeking a growth-oriented career in public services...</p>
+          </div>
+
+          <div class="cv-sec-preview">
+            <div class="cv-sec-title-preview">Education Background</div>
+            <div id="pEducation">
+              <div class="cv-item">
+                <div class="cv-item-title"><strong>Bachelor of Commerce (B.Com)</strong></div>
+                <div class="cv-item-sub">Delhi University | Year: 2024 | Score: 78%</div>
+              </div>
+              <div class="cv-item">
+                <div class="cv-item-title"><strong>12th Class (Intermediate)</strong></div>
+                <div class="cv-item-sub">State Board | Year: 2021 | Score: 85%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-sec-preview">
+            <div class="cv-sec-title-preview">Work Experience</div>
+            <div id="pExperience">
+              <div class="cv-item">
+                <div class="cv-item-title"><strong>Data Entry Operator & Assistant</strong></div>
+                <div class="cv-item-sub">Apex Solutions Pvt Ltd | Jan 2025 - Present</div>
+                <div class="cv-item-desc">Managed database operations, updated student registers, and generated daily excel reports. Key responsibilities included high-accuracy data sorting.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cv-sec-preview">
+            <div class="cv-sec-title-preview">Key Skills</div>
+            <div class="cv-skills-list" id="pSkills">
+              <span class="cv-skill-tag">MS Office</span>
+              <span class="cv-skill-tag">Data Entry</span>
+              <span class="cv-skill-tag">Communication</span>
+              <span class="cv-skill-tag">Problem Solving</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="submit-btn" onclick="printCv()" style="margin-top:20px;background:var(--blue);font-weight:700;"><i class="fas fa-print"></i> Print Resume / Save as PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. STUDY PLANNER -->
+  <div class="tool-panel" id="panel-planner">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-tasks"></i> Sarkari Study Planner & Syllabus revision tracker</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Paste or choose your syllabus. Check off topics as you read, revise, and practice them. Track your exam readiness in real time.</p>
+    
+    <div class="planner-header">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h4 id="plannerExamTitle" style="font-family:'Rajdhani',sans-serif;font-size:22px;color:var(--gold);">SSC CGL Syllabus Plan 2026</h4>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <select id="examPlanSelect" class="form-control" style="background:#fff;color:#333;width:200px;font-size:12px;height:34px;padding:4px 8px;" onchange="loadSelectedPlan(this.value)">
+            <option value="ssc">SSC CGL Plan</option>
+            <option value="upsc">UPSC Prelims Plan</option>
+            <option value="rrb">RRB NTPC Plan</option>
+          </select>
+          <button onclick="resetPlanProgress()" style="padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;"><i class="fas fa-redo"></i> Reset</button>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;">
+          <span>Overall Study Completion Progress:</span>
+          <span id="plannerProgressPercent">0%</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="plannerProgressFill"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subjects & Topics Container -->
+    <div id="plannerSubjectsContainer"></div>
+  </div>
+
+  <!-- 5. DAILY GK & MATH QUIZ -->
+  <div class="tool-panel" id="panel-quiz">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-book-reader"></i> Daily GK & Aptitude Quiz Player</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Practice daily mock questions in History, Polity, Science, and Mathematics to check your exam preparation level.</p>
+    
+    <div class="quiz-container">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:2px solid var(--border);padding-bottom:12px;">
+        <h4 id="quizTitle" style="color:var(--primary);font-size:16px;font-weight:700;">GK Mock Quiz</h4>
+        <select id="quizSubjectSelect" class="form-control" style="width:220px;font-size:12px;" onchange="startQuiz(this.value)">
+          <option value="gk">History & Constitution</option>
+          <option value="science">General Science</option>
+          <option value="math">Mathematics Aptitude</option>
+        </select>
+      </div>
+
+      <!-- Play Zone -->
+      <div id="quizPlayZone">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text-light);margin-bottom:10px;">
+          <span id="quizQuestionNumber">Question 1 of 5</span>
+          <span><i class="fas fa-clock"></i> Time: <span id="quizTimer" style="font-weight:600;color:var(--accent);">00:00</span></span>
+        </div>
+        
+        <div class="quiz-question-box">
+          <h4 id="quizQuestionText" style="font-size:15px;line-height:1.6;color:var(--primary)">What was the first capital of Magadha Empire?</h4>
+        </div>
+
+        <div id="quizOptionsList">
+          <!-- buttons here -->
+        </div>
+
+        <div class="quiz-explanation" id="quizExplanation">
+          <strong>Explanation:</strong> <span id="quizExplanationText">Magadha's first capital was Rajgir (Girivraj).</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;">
+          <button class="filter-btn" id="quizPrevBtn" onclick="prevQuizQuestion()" style="background:var(--light2);color:var(--text)"><i class="fas fa-chevron-left"></i> Previous</button>
+          <button class="filter-btn" id="quizNextBtn" onclick="nextQuizQuestion()" style="background:var(--blue);color:#fff">Next Question <i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Score Zone -->
+      <div id="quizScoreZone" style="display:none;text-align:center;padding:30px 0;">
+        <div style="font-size:60px;margin-bottom:16px;">🏆</div>
+        <h3 style="color:var(--primary);margin-bottom:6px;">Quiz Completed!</h3>
+        <p style="color:var(--text-light);font-size:13px;margin-bottom:20px;">Check your GK preparation score card below.</p>
+        
+        <div style="display:inline-block;background:#f0f4f8;padding:20px 40px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:24px;">
+          <div style="font-size:40px;font-weight:800;color:var(--primary);" id="quizScoreText">4 / 5</div>
+          <div style="font-size:12px;color:var(--text-light);margin-top:4px;">Questions Correct</div>
+        </div>
+        
+        <p style="font-size:13px;color:var(--text-light);margin-bottom:20px;">Total time taken: <span id="quizTimeTaken" style="font-weight:600;color:var(--text)">0m 45s</span></p>
+        
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button class="filter-btn" onclick="retryQuiz()" style="background:var(--blue);color:#fff"><i class="fas fa-redo"></i> Play Again</button>
+          <button class="filter-btn" onclick="reviewQuizAnswers()" style="background:var(--light2);color:var(--text)"><i class="fas fa-eye"></i> Review Answers</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. SMART JOB ELIGIBILITY MATCHER -->
+  <div class="tool-panel" id="panel-matcher">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-check-circle"></i> Smart Government Job Eligibility Matcher</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Select your educational qualification, category, and state to automatically scan our database of active recruitments and find jobs you can apply for.</p>
+    
+    <div class="form-row" style="background:var(--light);padding:20px;border-radius:var(--radius);border:1px solid var(--border);margin-bottom:30px;">
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-graduation-cap"></i> Minimum Qualification</label>
+        <select class="form-control" id="matchQual">
+          <option value="10th">10th Pass (Matriculation)</option>
+          <option value="12th">12th Pass (Intermediate / 10+2)</option>
+          <option value="graduate" selected>Graduate / College Degree (B.Sc, B.A, B.Com, B.Tech)</option>
+          <option value="pg">Post Graduate / Master's Degree</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-university"></i> Preferred Department</label>
+        <select class="form-control" id="matchDept">
+          <option value="">All Departments</option>
+          <option value="ssc">SSC</option>
+          <option value="upsc">UPSC</option>
+          <option value="railway">Railways</option>
+          <option value="ibps">Banking</option>
+          <option value="police">Police & Defence</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-map-marker-alt"></i> Preferred Location</label>
+        <select class="form-control" id="matchLoc">
+          <option value="">All Locations</option>
+          <option value="central">Central Govt (All India)</option>
+          <option value="up">Uttar Pradesh</option>
+          <option value="bihar">Bihar</option>
+          <option value="raj">Rajasthan</option>
+          <option value="delhi">Delhi</option>
+        </select>
+      </div>
+      <div class="form-group" style="display:flex;align-items:flex-end;">
+        <button class="submit-btn" onclick="findMatchingJobs()" style="height:45px;background:var(--green);font-weight:700;margin-top:0;"><i class="fas fa-search"></i> Match My Profile</button>
+      </div>
+    </div>
+
+    <!-- Results list -->
+    <div class="notice-board">
+      <div class="board-header jobs-header">
+        <h2><i class="fas fa-briefcase"></i> Matching Active Recruitments</h2>
+        <span id="matchCountBadge" style="color:#ffd700;font-size:12px;font-weight:700;">Find jobs now</span>
+      </div>
+      <div class="notice-table" id="matchedJobsList" style="min-height:100px;">
+        <div style="text-align:center;padding:40px;color:var(--text-light)">
+          <i class="fas fa-user-check" style="font-size:40px;opacity:0.2;display:block;margin-bottom:12px"></i>
+          Select qualifications above and click "Match My Profile" to see eligible recruitments.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. DOCUMENT PORTAL SERVICES -->
+  <div class="tool-panel" id="panel-documents">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-id-card"></i> Official Document Services & Correction links</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Direct official government portals for card issuance, document corrections, status checking, and linking.</p>
+    
+    <div class="state-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:20px;">
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#1a73e8"><i class="fas fa-address-card"></i> Aadhaar Card Services</div>
+        <div class="sw-body">
+          <a href="https://myaadhaar.uidai.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-download"></i> Download Aadhaar Card</a>
+          <a href="https://myaadhaar.uidai.gov.in/check-aadhaar" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-eye"></i> Verify Aadhaar Online</a>
+          <a href="https://appointments.uidai.gov.in/bookappointment.aspx" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-map-marker-alt"></i> Find Enrollment Center</a>
+          <a href="https://myaadhaar.uidai.gov.in/RetrieveIDandEID" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-key"></i> Retrieve Lost UID/EID</a>
+        </div>
+      </div>
+
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#e63946"><i class="fas fa-credit-card"></i> PAN Card Services</div>
+        <div class="sw-body">
+          <a href="https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-plus"></i> Apply New PAN Card</a>
+          <a href="https://www.onlineservices.nsdl.com/paam/endUserRegisterContact.html" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-edit"></i> PAN Card Data Correction</a>
+          <a href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/link-aadhaar-status" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-link"></i> Check PAN Aadhaar Link Status</a>
+          <a href="https://eportal.incometax.gov.in/iec/foservices/#/pre-login/bl-link-aadhaar" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-plus-square"></i> Link PAN to Aadhaar Card</a>
+        </div>
+      </div>
+
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#2dc653"><i class="fas fa-vote-yea"></i> Voter ID Card Services</div>
+        <div class="sw-body">
+          <a href="https://voters.eci.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-plus"></i> Register as a New Voter</a>
+          <a href="https://voters.eci.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-search"></i> Search Name in Electoral Roll</a>
+          <a href="https://voters.eci.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-file-download"></i> Download e-EPIC Voter Card</a>
+          <a href="https://voters.eci.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-map-marker"></i> Track Application Status</a>
+        </div>
+      </div>
+
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#7b2d8b"><i class="fas fa-car-side"></i> Driving License & Passport</div>
+        <div class="sw-body">
+          <a href="https://sarathi.parivahan.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-id-badge"></i> Apply Learner/Driving License</a>
+          <a href="https://sarathi.parivahan.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-file-invoice"></i> Check DL Application Status</a>
+          <a href="https://www.passportindia.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-passport"></i> Apply New Passport Online</a>
+          <a href="https://www.passportindia.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-search-location"></i> Track Passport Application</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. SCHOLARSHIP PORTALS -->
+  <div class="tool-panel" id="panel-scholarships">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-graduation-cap"></i> Government Scholarship Portals</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">National and state-wise scholarship portals to apply online and track financial aid status.</p>
+    
+    <div class="state-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:20px;">
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#1a73e8"><i class="fas fa-landmark"></i> National Scholarship</div>
+        <div class="sw-body">
+          <a href="https://scholarships.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-external-link-alt"></i> NSP National Scholarship Portal</a>
+          <a href="https://scholarships.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-info-circle"></i> Check NSP Eligibility & Guidelines</a>
+        </div>
+      </div>
+
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#f4a261"><i class="fas fa-flag"></i> UP State Scholarship</div>
+        <div class="sw-body">
+          <a href="https://scholarship.up.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-external-link-alt"></i> UP Scholarship Online Registration</a>
+          <a href="https://scholarship.up.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-eye"></i> Track UP Scholarship Status</a>
+        </div>
+      </div>
+
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#e63946"><i class="fas fa-map-marker-alt"></i> Bihar Post-Matric</div>
+        <div class="sw-body">
+          <a href="https://pmsonline.bih.nic.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-external-link-alt"></i> Bihar Post Matric Scholarship Portal</a>
+          <a href="https://pmsonline.bih.nic.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-file-invoice"></i> Check Bihar Scholarship Status</a>
+        </div>
+      </div>
+
+      <div class="sw" style="margin-bottom:0;">
+        <div class="sw-head" style="background:#2dc653"><i class="fas fa-border-all"></i> Other State Portals</div>
+        <div class="sw-body">
+          <a href="http://scholarshipportal.mp.nic.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-external-link-alt"></i> MP Scholarship 2.0 Portal</a>
+          <a href="https://sjms.rajasthan.gov.in/" target="_blank" rel="noopener" class="sw-link"><i class="fas fa-external-link-alt"></i> Rajasthan SJE Scholarship Portal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. SARKARI TYPING SPEED TEST -->
+  <div class="tool-panel" id="panel-typing">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-keyboard"></i> Sarkari Typing Speed Test & Tutor</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Practice typing with live speed (WPM) and accuracy metrics. Perfect for SSC CHSL, CGL, and State Clerk typing exams.</p>
+    
+    <div style="background:var(--light);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:24px;">
+      <div class="form-row" style="margin-bottom:16px;">
+        <div class="form-group">
+          <label class="form-label">Select Passage / Test Matter</label>
+          <select class="form-control" id="typingPassageSelect" onchange="initTypingTest()">
+            <option value="ssc_chsl">SSC CHSL Clerk Mock Test Passage (English)</option>
+            <option value="general_easy">General Speed Practice (Easy English)</option>
+            <option value="technical_terms">Computer & IT Terms Practice</option>
+            <option value="custom">-- Paste Custom Passage --</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Test Duration</label>
+          <select class="form-control" id="typingDurationSelect" onchange="initTypingTest()">
+            <option value="60">1 Minute</option>
+            <option value="120">2 Minutes</option>
+            <option value="300">5 Minutes</option>
+            <option value="600">10 Minutes</option>
+          </select>
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end;">
+          <button class="filter-btn" id="typingSoundToggle" onclick="toggleTypingSound()" style="padding:12px;font-size:13px;background:var(--primary-light);color:#fff;border:none;border-radius:6px;cursor:pointer;width:100%;"><i class="fas fa-volume-up"></i> Typing Sounds: ON</button>
+        </div>
+      </div>
+      
+      <div id="customPassageWrapper" style="display:none;margin-bottom:16px;">
+        <label class="form-label">Paste Your Custom Text Below</label>
+        <textarea class="form-control" id="typingCustomText" placeholder="Paste your paragraph here..." style="height:80px;" oninput="initTypingTest()"></textarea>
+      </div>
+    </div>
+
+    <!-- Active Area -->
+    <div id="typingActiveArea">
+      <!-- Live Metrics Dashboard -->
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;margin-bottom:20px;">
+        <div style="background:var(--light);border:1px solid var(--border);padding:12px;border-radius:6px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:var(--primary);" id="typeWpm">0</div>
+          <div style="font-size:11px;color:var(--text-light);">Net WPM</div>
+        </div>
+        <div style="background:var(--light);border:1px solid var(--border);padding:12px;border-radius:6px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:var(--green);" id="typeAccuracy">100%</div>
+          <div style="font-size:11px;color:var(--text-light);">Accuracy</div>
+        </div>
+        <div style="background:var(--light);border:1px solid var(--border);padding:12px;border-radius:6px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:var(--accent);" id="typeMistakes">0</div>
+          <div style="font-size:11px;color:var(--text-light);">Mistakes</div>
+        </div>
+        <div style="background:var(--light);border:1px solid var(--border);padding:12px;border-radius:6px;text-align:center;">
+          <div style="font-size:24px;font-weight:700;color:#f39c12;" id="typeTimer">01:00</div>
+          <div style="font-size:11px;color:var(--text-light);">Time Remaining</div>
+        </div>
+      </div>
+
+      <!-- Text Display Panel -->
+      <div id="typingTextContainer" style="background:#fff;border:2px solid var(--border);border-radius:var(--radius);padding:24px;font-family:'Courier New', Courier, monospace;font-size:18px;line-height:1.7;min-height:180px;max-height:280px;overflow-y:auto;user-select:none;margin-bottom:20px;letter-spacing:0.5px;"></div>
+      
+      <!-- Input Textarea -->
+      <textarea class="form-control" id="typingInputArea" placeholder="Yahan type karna shuru karein test chalane ke liye..." style="height:100px;font-size:16px;font-family:inherit;resize:none;margin-bottom:16px;" oninput="processTypingInput(this)" onkeydown="handleTypingSpecialKeys(event)"></textarea>
+      
+      <div style="display:flex;gap:12px;">
+        <button class="submit-btn" onclick="initTypingTest()" style="background:var(--primary);flex:1;"><i class="fas fa-undo"></i> Reset / Restart Test</button>
+      </div>
+    </div>
+
+    <!-- Final Scorecard Card (Hidden by default) -->
+    <div id="typingScorecard" style="display:none;background:linear-gradient(135deg, #0f1b4c 0%, #1a3a8f 100%);color:#fff;border-radius:var(--radius);padding:30px;text-align:center;box-shadow:var(--shadow-md);animation:fadeIn 0.5s ease;">
+      <h4 style="color:var(--gold);font-size:22px;margin-bottom:16px;"><i class="fas fa-medal"></i> Typing Test Complete!</h4>
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;max-width:600px;margin:0 auto 24px auto;">
+        <div style="background:rgba(255,255,255,0.1);padding:16px;border-radius:8px;">
+          <div style="font-size:36px;font-weight:700;font-family:'Rajdhani',sans-serif;color:var(--gold);" id="scoreWpm">0</div>
+          <div style="font-size:12px;opacity:0.8;">Net WPM</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);padding:16px;border-radius:8px;">
+          <div style="font-size:36px;font-weight:700;font-family:'Rajdhani',sans-serif;" id="scoreAccuracy">0%</div>
+          <div style="font-size:12px;opacity:0.8;">Accuracy</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);padding:16px;border-radius:8px;">
+          <div style="font-size:36px;font-weight:700;font-family:'Rajdhani',sans-serif;color:var(--accent);" id="scoreErrors">0</div>
+          <div style="font-size:12px;opacity:0.8;">Total Errors</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.1);padding:16px;border-radius:8px;">
+          <div style="font-size:36px;font-weight:700;font-family:'Rajdhani',sans-serif;" id="scoreGrossWpm">0</div>
+          <div style="font-size:12px;opacity:0.8;">Gross WPM</div>
+        </div>
+      </div>
+      
+      <div style="background:rgba(255,255,255,0.08);padding:16px;border-radius:8px;max-width:500px;margin:0 auto 24px auto;font-size:14px;border:1px dashed rgba(255,255,255,0.2);">
+        <div id="scoreStatus" style="font-weight:700;font-size:16px;margin-bottom:8px;">Result Status: N/A</div>
+        <div id="scoreFeedback">Practice makes perfect. Try again to boost your typing speed!</div>
+      </div>
+      
+      <button class="submit-btn" onclick="retryTypingTest()" style="background:var(--gold);color:var(--primary);font-weight:700;max-width:200px;margin:0 auto;"><i class="fas fa-redo"></i> Start New Test</button>
+    </div>
+  </div>
+
+  <!-- 10. 7TH PAY COMMISSION SALARY CALCULATOR -->
+  <div class="tool-panel" id="panel-salary">
+    <h3 style="color:var(--primary);margin-bottom:8px;"><i class="fas fa-rupee-sign"></i> 7th Pay Commission Salary Calculator (In-Hand Pay Slip)</h3>
+    <p style="color:var(--text-light);font-size:13px;margin-bottom:24px;">Calculate your detailed gross salary, deductions, and net in-hand salary as per official Central Government 7th CPC norms (2026 update).</p>
+    
+    <div class="resizer-layout">
+      <!-- Input Panel -->
+      <div>
+        <div class="form-group">
+          <label class="form-label">Select Pay Level (7th CPC Post Scale)</label>
+          <select class="form-control" id="salaryLevel" onchange="calculateSalary()">
+            <option value="1">Level 1 (MTS, Group D, Peon) - Entry ₹18,000</option>
+            <option value="2">Level 2 (LDC, Clerk, Typist) - Entry ₹19,900</option>
+            <option value="3">Level 3 (Constable, Postman, Guard) - Entry ₹21,700</option>
+            <option value="4">Level 4 (Tax Asst, Head Constable) - Entry ₹25,500</option>
+            <option value="5">Level 5 (Auditor, Senior Clerk) - Entry ₹29,200</option>
+            <option value="6">Level 6 (Sub-Inspector, ASO Clerk) - Entry ₹35,400</option>
+            <option value="7">Level 7 (Inspector, Section Officer) - Entry ₹44,900</option>
+            <option value="8">Level 8 (Asst Audit Officer, Gazetted) - Entry ₹47,600</option>
+            <option value="9">Level 9 (Senior Section Officer) - Entry ₹53,100</option>
+            <option value="10">Level 10 (Civil Services Entry, IAS, IPS) - Entry ₹56,100</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Select City Category (For HRA & TA)</label>
+          <select class="form-control" id="salaryCity" onchange="calculateSalary()">
+            <option value="X">Class X (Metros: Delhi, Mumbai, Bengaluru, Hyderabad, Chennai, Kolkata)</option>
+            <option value="Y">Class Y (Cities > 5L population: Patna, Lucknow, Pune, Jaipur, etc.)</option>
+            <option value="Z">Class Z (Other small towns, rural posted areas)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Dearness Allowance (DA %)</label>
+          <input type="number" class="form-control" id="salaryDaPercent" value="50" oninput="calculateSalary()" min="0" max="100">
+          <p style="font-size:11px;color:var(--text-light);margin-top:4px;">Currently set to 50% for 2026.</p>
+        </div>
+
+        <div style="background:var(--light);padding:16px;border-radius:6px;border:1px solid var(--border);margin-top:20px;">
+          <h4 style="font-size:13px;color:var(--primary);margin-bottom:8px;"><i class="fas fa-info-circle"></i> Pay Calculation Details:</h4>
+          <ul style="font-size:12px;color:var(--text-light);padding-left:16px;line-height:1.6;">
+            <li><strong>HRA:</strong> 30% for Class X, 20% for Class Y, 10% for Class Z (min ₹5400/3600/1800).</li>
+            <li><strong>TA:</strong> Transport Allowance scales with level group & city category.</li>
+            <li><strong>DA on TA:</strong> Dearness Allowance is paid additionally on Transport Allowance.</li>
+            <li><strong>NPS Deduction:</strong> 10% of (Basic Pay + Dearness Allowance).</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Salary Slip Output -->
+      <div>
+        <div style="background:#fff;border:1px solid #ccd;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:24px;font-family:'Poppins', sans-serif;">
+          <!-- Slip Header -->
+          <div style="border-bottom:2px solid var(--primary);padding-bottom:12px;margin-bottom:16px;text-align:center;">
+            <h4 style="font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--primary);margin-bottom:2px;">ABHI RESULT SALARY SLIP SIMULATOR</h4>
+            <p style="font-size:11px;color:var(--text-light);text-transform:uppercase;letter-spacing:1px;">Monthly Pay Statement (Provisional)</p>
+          </div>
+          
+          <!-- Basic Data Grid -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:12px;margin-bottom:16px;border-bottom:1px dashed var(--border);padding-bottom:12px;">
+            <div><strong>Pay Scale Group:</strong> Group B/C</div>
+            <div><strong>Dearness Allowance:</strong> <span id="slipDaRate">50</span>%</div>
+            <div><strong>City Category:</strong> Class <span id="slipCityClass">X</span></div>
+            <div><strong>Deduction Scheme:</strong> NPS Contribution</div>
+          </div>
+          
+          <!-- Earnings and Deductions Columns -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:13px;">
+            <!-- Earnings -->
+            <div>
+              <h5 style="color:var(--green);border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:8px;"><i class="fas fa-plus-circle"></i> Monthly Allowances</h5>
+              <table style="width:100%;font-size:12px;line-height:2.0;">
+                <tr><td>Basic Pay:</td><td style="text-align:right;font-weight:600;">₹<span id="slipBasic">0</span></td></tr>
+                <tr><td>Dearness (DA):</td><td style="text-align:right;font-weight:600;">₹<span id="slipDa">0</span></td></tr>
+                <tr><td>House Rent (HRA):</td><td style="text-align:right;font-weight:600;">₹<span id="slipHra">0</span></td></tr>
+                <tr><td>Transport (TA):</td><td style="text-align:right;font-weight:600;">₹<span id="slipTa">0</span></td></tr>
+                <tr style="border-top:1px solid var(--border);padding-top:4px;"><td><strong>Gross Salary:</strong></td><td style="text-align:right;font-weight:700;color:var(--primary);">₹<span id="slipGross">0</span></td></tr>
+              </table>
+            </div>
+            
+            <!-- Deductions -->
+            <div>
+              <h5 style="color:var(--accent);border-bottom:1px solid var(--border);padding-bottom:4px;margin-bottom:8px;"><i class="fas fa-minus-circle"></i> Monthly Deductions</h5>
+              <table style="width:100%;font-size:12px;line-height:2.0;">
+                <tr><td>NPS Contribution:</td><td style="text-align:right;font-weight:600;">₹<span id="slipNps">0</span></td></tr>
+                <tr><td>Health (CGHS):</td><td style="text-align:right;font-weight:600;">₹<span id="slipCghs">0</span></td></tr>
+                <tr><td>Insurance (CGEGIS):</td><td style="text-align:right;font-weight:600;">₹<span id="slipCgegis">0</span></td></tr>
+                <tr><td>Professional Tax:</td><td style="text-align:right;font-weight:600;">₹200</td></tr>
+                <tr style="border-top:1px solid var(--border);padding-top:4px;"><td><strong>Total Deduct:</strong></td><td style="text-align:right;font-weight:700;color:var(--accent);">₹<span id="slipTotalDeduct">0</span></td></tr>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Net Salary Callout -->
+          <div style="background:var(--light);border-left:5px solid var(--green);border-radius:4px;padding:16px;margin-top:20px;display:flex;justify-content:space-between;align-items:center;">
+            <div>
+              <div style="font-size:12px;color:var(--text-light);font-weight:600;">NET IN-HAND SALARY (MONTHLY):</div>
+              <div style="font-family:'Rajdhani',sans-serif;font-size:28px;font-weight:700;color:var(--green);">₹<span id="slipNet">0</span></div>
+            </div>
+            <div style="text-align:right;font-size:11px;color:var(--text-light);">
+              *Approximate in-hand salary.<br>Subject to local state taxes.
+            </div>
+          </div>
+          
+          <!-- Dynamic Chart Breakdown (Pure SVG) -->
+          <div style="margin-top:20px;text-align:center;">
+            <div style="font-size:12px;font-weight:600;margin-bottom:8px;color:var(--primary);">Salary Breakdown Share:</div>
+            <svg width="100%" height="24" style="background:#ddd;border-radius:12px;overflow:hidden;">
+              <rect x="0" y="0" width="70%" height="100%" fill="var(--primary)" id="chartBasicWidth"></rect>
+              <rect x="70%" y="0" width="20%" height="100%" fill="var(--green)" id="chartAllowWidth"></rect>
+              <rect x="90%" y="0" width="10%" height="100%" fill="var(--accent)" id="chartDeductWidth"></rect>
+            </svg>
+            <div style="display:flex;justify-content:center;gap:15px;font-size:11px;margin-top:8px;">
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:var(--primary);display:inline-block;border-radius:2px;"></span> Basic Pay (<span id="chartBasicPct">70</span>%)</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:var(--green);display:inline-block;border-radius:2px;"></span> Allowances (<span id="chartAllowPct">20</span>%)</span>
+              <span style="display:flex;align-items:center;gap:4px;"><span style="width:10px;height:10px;background:var(--accent);display:inline-block;border-radius:2px;"></span> Deductions (<span id="chartDeductPct">10</span>%)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-col"><h4><i class="fas fa-tools"></i> Sarkari Tools</h4><ul>
+      <li><a href="tools.html?tab=resizer"><i class="fas fa-image"></i> Image Resizer</a></li>
+      <li><a href="tools.html?tab=agecalc"><i class="fas fa-calculator"></i> Age Calculator</a></li>
+      <li><a href="tools.html?tab=cvmaker"><i class="fas fa-file-invoice"></i> Resume / CV Maker</a></li>
+    </ul></div>
+    <div class="footer-col"><h4><i class="fas fa-link"></i> Quick Links</h4><ul>
+      <li><a href="index.html">Home</a></li><li><a href="latest-jobs.html">Latest Jobs</a></li>
+      <li><a href="admit-card.html">Admit Card</a></li><li><a href="results.html">Results</a></li>
+    </ul></div>
+    <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Follow Us</h4><ul class="social-links">
+      <li><a href="https://t.me/abhiresultofficial" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a></li>
+      <li><a href="https://youtube.com/@abhiresult" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a></li>
+    </ul></div>
+    <div class="footer-col footer-about"><h4><i class="fas fa-star"></i> About</h4>
+      <p>Abhi Result par sabhi sarkari results ke verify official links milte hain. Instant client-side utilities built for student convenience.</p>
+    </div>
+  </div></div></div>
+  <div class="footer-bottom"><div class="container"><p>Copyright © 2012–2026 | <strong>Abhi Result</strong> | All Rights Reserved</p></div></div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+let uploadedFile = null;
+let uploadedImage = new Image();
+let aspectLocked = true;
+let currentCvTemplate = 'serif';
+
+// Pre-populated Study Plans
+const studyPlans = {
+  ssc: {
+    title: "SSC CGL Syllabus Plan 2026",
+    subjects: [
+      {
+        name: "Quantitative Aptitude",
+        topics: ["Percentage & Ratio", "Profit, Loss & Discount", "Algebra & Equations", "Geometry & Mensuration", "Trigonometry"]
+      },
+      {
+        name: "Reasoning & Intelligence",
+        topics: ["Analogy & Classification", "Coding-Decoding", "Series & Missing Numbers", "Blood Relations", "Syllogism & Venn Diagrams"]
+      },
+      {
+        name: "English Comprehension",
+        topics: ["Error Spotting & Grammar", "Synonyms & Antonyms", "Cloze Test & Fillers", "Reading Comprehension", "One Word Substitution"]
+      },
+      {
+        name: "General Awareness",
+        topics: ["History & Culture", "Polity & Constitution", "Geography & Environment", "General Science", "Current Affairs"]
+      }
+    ]
+  },
+  upsc: {
+    title: "UPSC Civil Services Prelims GS-1 Plan",
+    subjects: [
+      {
+        name: "History & Art",
+        topics: ["Ancient & Medieval India", "Art & Culture", "Modern Indian History", "Indian National Movement"]
+      },
+      {
+        name: "Geography",
+        topics: ["Physical Geography", "Indian Geography", "World Geography", "Economic Geography"]
+      },
+      {
+        name: "Polity & Governance",
+        topics: ["Constitution of India", "Preamble & Rights", "Parliament & State Legislature", "Local Bodies & Panchayats"]
+      },
+      {
+        name: "Economy & Development",
+        topics: ["Growth, Inflation & Budgeting", "Banking & Monetary Policy", "Social Sector Initiatives", "Sustainable Development"]
+      },
+      {
+        name: "Science & Environment",
+        topics: ["Ecology & Biodiversity", "Climate Change", "Space & Defence Tech", "Biotechnology & Health"]
+      }
+    ]
+  },
+  rrb: {
+    title: "RRB NTPC Syllabus Plan 2026",
+    subjects: [
+      {
+        name: "Mathematics",
+        topics: ["Number System & Fractions", "Lcm & Hcf", "Decimals & Percentages", "Time & Work, Distance", "Simple & Compound Interest"]
+      },
+      {
+        name: "General Intelligence",
+        topics: ["Analogies & Puzzles", "Mathematical Operations", "Data Sufficiency", "Statement-Arguments", "Decision Making"]
+      },
+      {
+        name: "General Awareness",
+        topics: ["Current Events & Sports", "Art & Literature of India", "Monuments & Places", "General Science (up to 10th)", "UN & World Orgs"]
+      }
+    ]
+  }
+};
+
+// Quiz database
+const quizDatabase = {
+  gk: {
+    title: "History & Constitution Quiz",
+    questions: [
+      {
+        q: "Who was the first President of independent India?",
+        options: ["Dr. B.R. Ambedkar", "Dr. Rajendra Prasad", "Jawaharlal Nehru", "Sardar Vallabhbhai Patel"],
+        correct: 1,
+        desc: "Dr. Rajendra Prasad was the first President of India, serving from 1950 to 1962."
+      },
+      {
+        q: "Which Article of the Indian Constitution deal with the 'Right to Equality'?",
+        options: ["Article 12", "Article 14", "Article 19", "Article 21"],
+        correct: 1,
+        desc: "Article 14 of the Constitution of India provides for equality before the law or equal protection of the laws within the territory of India."
+      },
+      {
+        q: "Who was the founder of the Maurya Empire?",
+        options: ["Ashoka", "Chandragupta Maurya", "Samudragupta", "Harsha"],
+        correct: 1,
+        desc: "Chandragupta Maurya founded the Maurya Empire in 322 BCE with the help of his advisor Chanakya."
+      },
+      {
+        q: "In which year did the Battle of Plassey take place?",
+        options: ["1757", "1764", "1857", "1947"],
+        correct: 0,
+        desc: "The Battle of Plassey was fought on 23 June 1757 between the Nawab of Bengal (Siraj-ud-Daulah) and the British East India Company."
+      },
+      {
+        q: "The concept of 'Fundamental Duties' in the Indian Constitution was borrowed from which country?",
+        options: ["USA", "United Kingdom", "USSR (now Russia)", "Australia"],
+        correct: 2,
+        desc: "Fundamental Duties were added by the 42nd Amendment in 1976, borrowed from the Constitution of the USSR."
+      }
+    ]
+  },
+  science: {
+    title: "General Science Quiz",
+    questions: [
+      {
+        q: "What is the chemical symbol of Gold?",
+        options: ["Gd", "Ag", "Au", "Fe"],
+        correct: 2,
+        desc: "Au is the symbol of Gold, derived from the Latin word 'Aurum'."
+      },
+      {
+        q: "Which planet is known as the Red Planet?",
+        options: ["Venus", "Mars", "Jupiter", "Saturn"],
+        correct: 1,
+        desc: "Mars is called the Red Planet because of iron oxide (rust) on its surface."
+      },
+      {
+        q: "What is the unit of power in physics?",
+        options: ["Joule", "Newton", "Watt", "Pascal"],
+        correct: 2,
+        desc: "Watt (W) is the SI unit of power, named after James Watt."
+      },
+      {
+        q: "Which gas is most abundant in Earth's atmosphere?",
+        options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+        correct: 1,
+        desc: "Nitrogen makes up about 78% of the Earth's atmosphere, followed by Oxygen at 21%."
+      },
+      {
+        q: "Which gland in the human body is called the Master Gland?",
+        options: ["Thyroid Gland", "Adrenal Gland", "Pituitary Gland", "Pancreas"],
+        correct: 2,
+        desc: "The pituitary gland is called the master gland because it controls the functions of other endocrine glands."
+      }
+    ]
+  },
+  math: {
+    title: "Basic Mathematics Aptitude",
+    questions: [
+      {
+        q: "If 15% of a number is 45, what is the number?",
+        options: ["200", "250", "300", "350"],
+        correct: 2,
+        desc: "Let number be X. 0.15 * X = 45 => X = 45 / 0.15 = 300."
+      },
+      {
+        q: "What is the average of first five prime numbers?",
+        options: ["5.0", "5.6", "5.8", "6.2"],
+        correct: 1,
+        desc: "First five prime numbers are 2, 3, 5, 7, 11. Sum = 28. Average = 28 / 5 = 5.6."
+      },
+      {
+        q: "A train running at 72 km/h crosses a pole in 15 seconds. Find length of the train.",
+        options: ["150 meters", "200 meters", "250 meters", "300 meters"],
+        correct: 3,
+        desc: "Speed in m/s = 72 * (5/18) = 20 m/s. Length = Speed * Time = 20 * 15 = 300 meters."
+      },
+      {
+        q: "If A and B can do a work in 10 and 15 days respectively, in how many days can they complete it together?",
+        options: ["5 days", "6 days", "8 days", "9 days"],
+        correct: 1,
+        desc: "Combined rate = 1/10 + 1/15 = 5/30 = 1/6. Days taken = 6 days."
+      },
+      {
+        q: "What is the area of a circle with a radius of 7 cm? (Use pi = 22/7)",
+        options: ["44 sq cm", "154 sq cm", "308 sq cm", "616 sq cm"],
+        correct: 1,
+        desc: "Area = pi * r * r = (22/7) * 7 * 7 = 154 sq cm."
+      }
+    ]
+  }
+};
+
+// Quiz state variables
+let activeQuizKey = 'gk';
+let quizCurrentIdx = 0;
+let quizAnswers = {};
+let quizTimerVal = 0;
+let quizTimerInterval = null;
+let quizSubmitted = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+  const tc = document.getElementById('tickerContent');
+  if (tc && siteData.notifications) tc.textContent = siteData.notifications.join('  ●  ');
+  
+  // Set default target date for age calc to today
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('targetDate').value = today;
+
+  // Set default DOB for placeholder to 2000-01-01
+  document.getElementById('dob').value = "2000-01-01";
+  calculateAge();
+  
+  // Load Default Planner Plan
+  loadSelectedPlan('ssc');
+  
+  // Start Default Quiz
+  startQuiz('gk');
+
+  // Initialize typing test
+  initTypingTest();
+  
+  // Calculate default salary
+  calculateSalary();
+
+  // Parse tab parameter
+  const tabParam = getUrlParam('tab');
+  if (tabParam) {
+    const btn = document.querySelector(`.page-cat-btn[onclick*="${tabParam}"]`);
+    if (btn) switchToolTab(tabParam, btn);
+  }
+
+  // Aspect ratio handlers
+  const lockBox = document.getElementById('lockAspect');
+  if (lockBox) {
+    lockBox.addEventListener('change', function() {
+      aspectLocked = this.checked;
+    });
+  }
+
+  const wInput = document.getElementById('targetWidth');
+  const hInput = document.getElementById('targetHeight');
+
+  if (wInput) {
+    wInput.addEventListener('input', function() {
+      if (aspectLocked && uploadedImage.width && this.value) {
+        const ratio = uploadedImage.height / uploadedImage.width;
+        document.getElementById('targetHeight').value = Math.round(this.value * ratio);
+      }
+      doResize();
+    });
+  }
+
+  if (hInput) {
+    hInput.addEventListener('input', function() {
+      if (aspectLocked && uploadedImage.height && this.value) {
+        const ratio = uploadedImage.width / uploadedImage.height;
+        document.getElementById('targetWidth').value = Math.round(this.value * ratio);
+      }
+      doResize();
+    });
+  }
+});
+
+function switchToolTab(tabName, btn) {
+  document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.page-cat-btn').forEach(b => b.classList.remove('active'));
+  
+  const targetPanel = document.getElementById(`panel-${tabName}`);
+  if (targetPanel) targetPanel.classList.add('active');
+  btn.classList.add('active');
+}
+
+// ----- IMAGE RESIZER LOGIC -----
+function handleImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  uploadedFile = file;
+  const reader = new FileReader();
+  reader.onload = function(evt) {
+    uploadedImage.onload = function() {
+      document.getElementById('origWidth').textContent = uploadedImage.width;
+      document.getElementById('origHeight').textContent = uploadedImage.height;
+      document.getElementById('origSize').textContent = (file.size / 1024).toFixed(1) + ' KB';
+      
+      document.getElementById('targetWidth').value = uploadedImage.width;
+      document.getElementById('targetHeight').value = uploadedImage.height;
+      
+      document.getElementById('noImageText').style.display = 'none';
+      document.getElementById('previewContainer').style.display = 'block';
+      document.getElementById('resizePreviewArea').style.display = 'block';
+      doResize();
+    };
+    uploadedImage.src = evt.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function doResize() {
+  if (!uploadedFile) return;
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  const width = parseInt(document.getElementById('targetWidth').value) || uploadedImage.width;
+  const height = parseInt(document.getElementById('targetHeight').value) || uploadedImage.height;
+  const targetKb = parseInt(document.getElementById('targetKb').value) || 0;
+  const format = document.getElementById('targetFormat').value;
+  
+  canvas.width = width;
+  canvas.height = height;
+  ctx.drawImage(uploadedImage, 0, 0, width, height);
+  
+  let quality = 0.95;
+  let dataUrl = canvas.toDataURL(format, quality);
+  
+  if (targetKb > 0 && format === 'image/jpeg') {
+    let size = Math.round((dataUrl.length - 23) * 3 / 4) / 1024;
+    while (size > targetKb && quality > 0.05) {
+      quality -= 0.05;
+      dataUrl = canvas.toDataURL(format, quality);
+      size = Math.round((dataUrl.length - 23) * 3 / 4) / 1024;
+    }
+  }
+  
+  const finalSize = Math.round((dataUrl.length - (format === 'image/png' ? 22 : 23)) * 3 / 4) / 1024;
+  document.getElementById('compSize').textContent = finalSize.toFixed(1) + ' KB';
+  document.getElementById('compWidth').textContent = width + ' px';
+  document.getElementById('compHeight').textContent = height + ' px';
+  
+  const prevImg = document.getElementById('previewImg');
+  prevImg.src = dataUrl;
+}
+
+function downloadResized() {
+  const prevImg = document.getElementById('previewImg');
+  if (!prevImg.src) return;
+  const link = document.createElement('a');
+  const ext = document.getElementById('targetFormat').value === 'image/png' ? '.png' : '.jpg';
+  const origName = uploadedFile ? uploadedFile.name.substring(0, uploadedFile.name.lastIndexOf('.')) : 'image';
+  link.download = 'resized_' + origName + ext;
+  link.href = prevImg.src;
+  link.click();
+}
+
+// ----- AGE CALCULATOR LOGIC -----
+function calculateAge() {
+  const dobVal = document.getElementById('dob').value;
+  const targetVal = document.getElementById('targetDate').value;
+  if (!dobVal || !targetVal) return;
+  
+  const dob = new Date(dobVal);
+  const target = new Date(targetVal);
+  if (dob > target) {
+    alert("Date of Birth target date se pehle honi chahiye!");
+    return;
+  }
+  
+  let years = target.getFullYear() - dob.getFullYear();
+  let months = target.getMonth() - dob.getMonth();
+  let days = target.getDate() - dob.getDate();
+  
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
+    days += prevMonth.getDate();
+  }
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+  
+  document.getElementById('ageResultYears').textContent = years;
+  document.getElementById('ageResultMonths').textContent = months;
+  document.getElementById('ageResultDays').textContent = days;
+  
+  const diffTime = Math.abs(target - dob);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  const diffWeeks = (diffDays / 7).toFixed(1);
+  const diffMonths = (diffDays / 30.437).toFixed(1);
+  const diffHours = diffDays * 24;
+  
+  document.getElementById('totalMonthsLived').textContent = diffMonths;
+  document.getElementById('totalWeeksLived').textContent = diffWeeks;
+  document.getElementById('totalDaysLived').textContent = diffDays;
+  document.getElementById('totalHoursLived').textContent = diffHours.toLocaleString();
+  
+  let nextBday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
+  if (nextBday < target) {
+    nextBday.setFullYear(target.getFullYear() + 1);
+  }
+  const daysToBday = Math.ceil((nextBday - target) / (1000 * 60 * 60 * 24));
+  document.getElementById('daysToNextBirthday').textContent = daysToBday === 365 ? 0 : daysToBday;
+  
+  document.getElementById('ageStatsArea').style.display = 'block';
+}
+
+// ----- RESUME BUILDER LOGIC -----
+function changeCvTemplate(val) {
+  currentCvTemplate = val;
+  const sheet = document.getElementById('cvPreviewPrintArea');
+  sheet.className = 'cv-preview-sheet';
+  sheet.classList.add(`cv-template-${val}`);
+}
+
+function updateCv() {
+  document.getElementById('pName').textContent = document.getElementById('cvName').value || 'Abhinav Kumar';
+  document.getElementById('pTitle').textContent = document.getElementById('cvTitle').value || 'Graduate Clerk Aspirant';
+  document.getElementById('pEmail').textContent = document.getElementById('cvEmail').value || 'email@example.com';
+  document.getElementById('pPhone').textContent = document.getElementById('cvPhone').value || '+91 99999 99999';
+  document.getElementById('pLocation').textContent = document.getElementById('cvLocation').value || 'Patna, Bihar';
+  document.getElementById('pLink').textContent = document.getElementById('cvLinkedin').value || 'linkedin.com/in/username';
+  
+  document.getElementById('pSummary').textContent = document.getElementById('cvSummary').value || 'Dedicated and detail-oriented graduate seeking a growth-oriented career in public services...';
+  
+  const skillsVal = document.getElementById('cvSkills').value;
+  const skillsList = document.getElementById('pSkills');
+  skillsList.innerHTML = '';
+  if (skillsVal) {
+    skillsVal.split(',').forEach(skill => {
+      const s = skill.trim();
+      if (s) {
+        const li = document.createElement('span');
+        li.className = 'cv-skill-tag';
+        li.textContent = s;
+        skillsList.appendChild(li);
+      }
+    });
+  } else {
+    ['MS Office', 'Data Entry', 'Communication', 'Problem Solving'].forEach(s => {
+      const li = document.createElement('span');
+      li.className = 'cv-skill-tag';
+      li.textContent = s;
+      skillsList.appendChild(li);
+    });
+  }
+  
+  const eduContainer = document.getElementById('pEducation');
+  eduContainer.innerHTML = '';
+  let eduCount = 0;
+  for (let i = 1; i <= 3; i++) {
+    const deg = document.getElementById(`eduDeg${i}`).value;
+    const schl = document.getElementById(`eduSchl${i}`).value;
+    const yr = document.getElementById(`eduYr${i}`).value;
+    const score = document.getElementById(`eduScore${i}`).value;
+    if (deg || schl) {
+      eduCount++;
+      const div = document.createElement('div');
+      div.className = 'cv-item';
+      div.innerHTML = `
+        <div class="cv-item-title"><strong>${escapeHTML(deg || 'Degree/Certificate')}</strong></div>
+        <div class="cv-item-sub">${navyHighlight(escapeHTML(schl))} | Year: ${escapeHTML(yr || 'YYYY')} | Score: ${escapeHTML(score || '-')}</div>
+      `;
+      eduContainer.appendChild(div);
+    }
+  }
+  if (eduCount === 0) {
+    eduContainer.innerHTML = `
+      <div class="cv-item">
+        <div class="cv-item-title"><strong>Bachelor of Commerce (B.Com)</strong></div>
+        <div class="cv-item-sub">${navyHighlight('Delhi University')} | Year: 2024 | Score: 78%</div>
+      </div>
+      <div class="cv-item">
+        <div class="cv-item-title"><strong>12th Class (Intermediate)</strong></div>
+        <div class="cv-item-sub">${navyHighlight('State Board')} | Year: 2021 | Score: 85%</div>
+      </div>`;
+  }
+  
+  const expContainer = document.getElementById('pExperience');
+  expContainer.innerHTML = '';
+  let expCount = 0;
+  for (let i = 1; i <= 2; i++) {
+    const title = document.getElementById(`expTitle${i}`).value;
+    const comp = document.getElementById(`expComp${i}`).value;
+    const dur = document.getElementById(`expDur${i}`).value;
+    const desc = document.getElementById(`expDesc${i}`).value;
+    if (title || comp) {
+      expCount++;
+      const div = document.createElement('div');
+      div.className = 'cv-item';
+      div.innerHTML = `
+        <div class="cv-item-title"><strong>${escapeHTML(title || 'Job Title')}</strong></div>
+        <div class="cv-item-sub">${navyHighlight(escapeHTML(comp))} | ${escapeHTML(dur || 'Duration')}</div>
+        <div class="cv-item-desc">${desc ? escapeHTML(desc).replace(/\n/g, '<br>') : 'Job responsibilities and achievements.'}</div>
+      `;
+      expContainer.appendChild(div);
+    }
+  }
+  if (expCount === 0) {
+    expContainer.innerHTML = `
+      <div class="cv-item">
+        <div class="cv-item-title"><strong>Data Entry Operator & Assistant</strong></div>
+        <div class="cv-item-sub">${navyHighlight('Apex Solutions Pvt Ltd')} | Jan 2025 - Present</div>
+        <div class="cv-item-desc">Managed database operations, updated student registers, and generated daily excel reports. Key responsibilities included high-accuracy data sorting.</div>
+      </div>`;
+  }
+}
+
+function navyHighlight(txt) {
+  if (currentCvTemplate === 'navy') {
+    return `<span style="color:#1a3a8f;font-weight:600">${txt}</span>`;
+  }
+  return txt;
+}
+
+// export CV data as JSON file
+function exportCvJson() {
+  const data = {
+    name: document.getElementById('cvName').value,
+    title: document.getElementById('cvTitle').value,
+    email: document.getElementById('cvEmail').value,
+    phone: document.getElementById('cvPhone').value,
+    location: document.getElementById('cvLocation').value,
+    linkedin: document.getElementById('cvLinkedin').value,
+    summary: document.getElementById('cvSummary').value,
+    skills: document.getElementById('cvSkills').value,
+    education: [],
+    experience: []
+  };
+  
+  for (let i = 1; i <= 3; i++) {
+    data.education.push({
+      deg: document.getElementById(`eduDeg${i}`).value,
+      schl: document.getElementById(`eduSchl${i}`).value,
+      yr: document.getElementById(`eduYr${i}`).value,
+      score: document.getElementById(`eduScore${i}`).value
+    });
+  }
+  for (let i = 1; i <= 2; i++) {
+    data.experience.push({
+      title: document.getElementById(`expTitle${i}`).value,
+      comp: document.getElementById(`expComp${i}`).value,
+      dur: document.getElementById(`expDur${i}`).value,
+      desc: document.getElementById(`expDesc${i}`).value
+    });
+  }
+  
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.download = (data.name ? data.name.replace(/\s+/g, '_') : 'cv') + '_data.json';
+  a.href = URL.createObjectURL(blob);
+  a.click();
+}
+
+// load CV data from JSON file
+function importCvJson(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      document.getElementById('cvName').value = data.name || '';
+      document.getElementById('cvTitle').value = data.title || '';
+      document.getElementById('cvEmail').value = data.email || '';
+      document.getElementById('cvPhone').value = data.phone || '';
+      document.getElementById('cvLocation').value = data.location || '';
+      document.getElementById('cvLinkedin').value = data.linkedin || '';
+      document.getElementById('cvSummary').value = data.summary || '';
+      document.getElementById('cvSkills').value = data.skills || '';
+      
+      if (data.education) {
+        data.education.forEach((edu, idx) => {
+          if (idx < 3) {
+            document.getElementById(`eduDeg${idx+1}`).value = edu.deg || '';
+            document.getElementById(`eduSchl${idx+1}`).value = edu.schl || '';
+            document.getElementById(`eduYr${idx+1}`).value = edu.yr || '';
+            document.getElementById(`eduScore${idx+1}`).value = edu.score || '';
+          }
+        });
+      }
+      
+      if (data.experience) {
+        data.experience.forEach((exp, idx) => {
+          if (idx < 2) {
+            document.getElementById(`expTitle${idx+1}`).value = exp.title || '';
+            document.getElementById(`expComp${idx+1}`).value = exp.comp || '';
+            document.getElementById(`expDur${idx+1}`).value = exp.dur || '';
+            document.getElementById(`expDesc${idx+1}`).value = exp.desc || '';
+          }
+        });
+      }
+      
+      updateCv();
+      alert("✅ Data loaded successfully!");
+    } catch (err) {
+      alert("❌ Parsing error! Please check if this is a valid CV JSON file.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+// Bulletproof print window CV maker handler
+function printCv() {
+  const name = document.getElementById('cvName').value || 'Abhinav Kumar';
+  const title = document.getElementById('cvTitle').value || 'Graduate Clerk Aspirant';
+  const email = document.getElementById('cvEmail').value || 'email@example.com';
+  const phone = document.getElementById('cvPhone').value || '+91 99999 99999';
+  const location = document.getElementById('cvLocation').value || 'Patna, Bihar';
+  const link = document.getElementById('cvLinkedin').value || 'linkedin.com/in/username';
+  const summary = document.getElementById('cvSummary').value || 'A brief professional summary...';
+  
+  const skills = document.getElementById('pSkills').innerHTML;
+  const education = document.getElementById('pEducation').innerHTML;
+  const experience = document.getElementById('pExperience').innerHTML;
+  
+  const activeTemplate = currentCvTemplate; 
+  
+  let fontStyle = "font-family: 'Times New Roman', Times, serif;";
+  let colorTheme = "color: #333;";
+  let headerStyle = "border-bottom: 2px solid #333; text-align: center;";
+  
+  if (activeTemplate === 'sans') {
+    fontStyle = "font-family: 'Poppins', sans-serif;";
+  } else if (activeTemplate === 'navy') {
+    fontStyle = "font-family: 'Poppins', sans-serif;";
+    colorTheme = "color: #0f1b4c;";
+    headerStyle = "border-bottom: 3px solid #0f1b4c; text-align: left; background: #f0f4f8; padding: 20px; border-radius: 6px;";
+  }
+
+  const printWindow = window.open('', '_blank', 'width=800,height=900');
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>${name} - Resume</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+        <style>
+          body {
+            margin: 0;
+            padding: 30px;
+            ${fontStyle}
+            ${colorTheme}
+            font-size: 13px;
+            line-height: 1.5;
+            background: #fff;
+          }
+          .cv-header-preview {
+            ${headerStyle}
+            margin-bottom: 25px;
+          }
+          .cv-header-preview h2 {
+            font-size: 26px;
+            margin: 0 0 6px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+          }
+          .cv-header-preview p {
+            font-size: 14px;
+            margin: 0;
+            font-weight: 600;
+          }
+          .cv-meta-preview {
+            display: flex;
+            justify-content: ${activeTemplate === 'navy' ? 'flex-start' : 'center'};
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 11px;
+            margin-top: 10px;
+            font-style: italic;
+          }
+          .cv-meta-preview span {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+          }
+          .cv-sec-preview {
+            margin-bottom: 22px;
+          }
+          .cv-sec-title-preview {
+            font-size: 14px;
+            font-weight: bold;
+            border-bottom: 1.5px solid #666;
+            padding-bottom: 3px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: ${activeTemplate === 'navy' ? '#0f1b4c' : '#333'};
+            border-color: ${activeTemplate === 'navy' ? '#0f1b4c' : '#666'};
+          }
+          .cv-item {
+            margin-bottom: 14px;
+          }
+          .cv-item-title {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 13px;
+          }
+          .cv-item-sub {
+            font-style: italic;
+            color: #555;
+            font-size: 12px;
+            margin-bottom: 5px;
+          }
+          .cv-item-desc {
+            font-size: 12px;
+            text-align: justify;
+          }
+          .cv-skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+          }
+          .cv-skill-tag {
+            background: #f0f4f8;
+            border: 1px solid #d0d7de;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: 500;
+          }
+          @media print {
+            body { padding: 0; }
+            .no-print { display: none; }
+          }
+        </style>
+        <link rel="manifest" href="manifest.json">
+</head>
+      <body>
+        <div class="cv-header-preview">
+          <h2>${name}</h2>
+          <p>${title}</p>
+          <div class="cv-meta-preview">
+            <span><i class="fas fa-envelope"></i> ${email}</span>
+            <span><i class="fas fa-phone"></i> ${phone}</span>
+            <span><i class="fas fa-map-marker-alt"></i> ${location}</span>
+            <span><i class="fab fa-linkedin"></i> ${link}</span>
+          </div>
+        </div>
+        <div class="cv-sec-preview">
+          <div class="cv-sec-title-preview">Career Objective</div>
+          <p class="cv-item-desc">${summary}</p>
+        </div>
+        <div class="cv-sec-preview">
+          <div class="cv-sec-title-preview">Education Background</div>
+          <div>${education}</div>
+        </div>
+        <div class="cv-sec-preview">
+          <div class="cv-sec-title-preview">Work Experience</div>
+          <div>${experience}</div>
+        </div>
+        <div class="cv-sec-preview">
+          <div class="cv-sec-title-preview">Key Skills</div>
+          <div class="cv-skills-list">${skills}</div>
+        </div>
+        <script>
+          window.onload = function() {
+            setTimeout(function() {
+              window.print();
+              window.close();
+            }, 300);
+          }
+        <\/script>
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+}
+
+function generateAndPrintCv() {
+  updateCv(); // Compile latest changes into preview
+  
+  // Smooth scroll down to the preview sheet so the user sees it compile
+  const preview = document.getElementById('cvPreviewPrintArea');
+  if (preview) {
+    preview.scrollIntoView({ behavior: 'smooth' });
+  }
+  
+  // Trigger print with a slight delay for smooth visual transition
+  setTimeout(() => {
+    printCv();
+  }, 600);
+}
+
+function resetCvForm() {
+  if (!confirm("Kya aap sach mein form clear karna chahte hain?")) return;
+  
+  // Reset all input text elements
+  document.getElementById('cvName').value = '';
+  document.getElementById('cvTitle').value = '';
+  document.getElementById('cvEmail').value = '';
+  document.getElementById('cvPhone').value = '';
+  document.getElementById('cvLocation').value = '';
+  document.getElementById('cvLinkedin').value = '';
+  document.getElementById('cvSummary').value = '';
+  document.getElementById('cvSkills').value = '';
+  
+  for (let i = 1; i <= 3; i++) {
+    document.getElementById(`eduDeg${i}`).value = '';
+    document.getElementById(`eduSchl${i}`).value = '';
+    document.getElementById(`eduYr${i}`).value = '';
+    document.getElementById(`eduScore${i}`).value = '';
+  }
+  for (let i = 1; i <= 2; i++) {
+    document.getElementById(`expTitle${i}`).value = '';
+    document.getElementById(`expComp${i}`).value = '';
+    document.getElementById(`expDur${i}`).value = '';
+    document.getElementById(`expDesc${i}`).value = '';
+  }
+  
+  // Update preview to clear fields
+  updateCv();
+}
+
+// ----- SYLLABUS STUDY PLANNER LOGIC -----
+let currentPlanKey = 'ssc';
+
+function loadSelectedPlan(key) {
+  currentPlanKey = key;
+  const plan = studyPlans[key];
+  if (!plan) return;
+  
+  document.getElementById('plannerExamTitle').textContent = plan.title;
+  
+  // load saved progress from local storage
+  const storageKey = `sr_planner_${key}`;
+  const savedProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
+  
+  const container = document.getElementById('plannerSubjectsContainer');
+  container.innerHTML = '';
+  
+  plan.subjects.forEach((subj, sIdx) => {
+    const subjBlock = document.createElement('div');
+    subjBlock.className = 'subject-block';
+    
+    // Header
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'subject-title';
+    titleDiv.innerHTML = `<span><i class="fas fa-book-reader"></i> ${escapeHTML(subj.name)}</span> <span style="font-size:12px;opacity:0.8" id="subjProgress-${sIdx}">0% Completed</span>`;
+    subjBlock.appendChild(titleDiv);
+    
+    // Topics
+    const listDiv = document.createElement('div');
+    listDiv.className = 'topics-list';
+    
+    subj.topics.forEach((topic, tIdx) => {
+      const row = document.createElement('div');
+      row.className = 'topic-row-item';
+      
+      const topicId = `plan_${key}_s${sIdx}_t${tIdx}`;
+      const state = savedProgress[topicId] || { read: false, revise: false, practice: false };
+      
+      row.innerHTML = `
+        <span class="topic-name">${escapeHTML(topic)}</span>
+        <div class="task-checkboxes">
+          <label class="task-label"><input type="checkbox" id="${escapeHTML(topicId)}_read" ${state.read ? 'checked' : ''} onchange="updateTopicProgress('${escapeHTML(key)}', ${sIdx}, ${tIdx}, 'read')"><i class="fas fa-book-open"></i> Read</label>
+          <label class="task-label"><input type="checkbox" id="${escapeHTML(topicId)}_revise" ${state.revise ? 'checked' : ''} onchange="updateTopicProgress('${escapeHTML(key)}', ${sIdx}, ${tIdx}, 'revise')"><i class="fas fa-sync-alt"></i> Revise</label>
+          <label class="task-label"><input type="checkbox" id="${escapeHTML(topicId)}_practice" ${state.practice ? 'checked' : ''} onchange="updateTopicProgress('${escapeHTML(key)}', ${sIdx}, ${tIdx}, 'practice')"><i class="fas fa-pen-fancy"></i> Practice</label>
+        </div>
+      `;
+      listDiv.appendChild(row);
+    });
+    
+    subjBlock.appendChild(listDiv);
+    container.appendChild(subjBlock);
+  });
+  
+  calculatePlannerProgress();
+}
+
+function updateTopicProgress(key, sIdx, tIdx, taskType) {
+  const storageKey = `sr_planner_${key}`;
+  const savedProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
+  
+  const topicId = `plan_${key}_s${sIdx}_t${tIdx}`;
+  if (!savedProgress[topicId]) {
+    savedProgress[topicId] = { read: false, revise: false, practice: false };
+  }
+  
+  const isChecked = document.getElementById(`${topicId}_${taskType}`).checked;
+  savedProgress[topicId][taskType] = isChecked;
+  
+  localStorage.setItem(storageKey, JSON.stringify(savedProgress));
+  calculatePlannerProgress();
+}
+
+function calculatePlannerProgress() {
+  const plan = studyPlans[currentPlanKey];
+  if (!plan) return;
+  
+  const storageKey = `sr_planner_${currentPlanKey}`;
+  const savedProgress = JSON.parse(localStorage.getItem(storageKey)) || {};
+  
+  let totalTasks = 0;
+  let completedTasks = 0;
+  
+  plan.subjects.forEach((subj, sIdx) => {
+    let subjTotal = subj.topics.length * 3;
+    let subjCompleted = 0;
+    
+    subj.topics.forEach((topic, tIdx) => {
+      const topicId = `plan_${currentPlanKey}_s${sIdx}_t${tIdx}`;
+      const state = savedProgress[topicId] || { read: false, revise: false, practice: false };
+      
+      if (state.read) subjCompleted++;
+      if (state.revise) subjCompleted++;
+      if (state.practice) subjCompleted++;
+    });
+    
+    totalTasks += subjTotal;
+    completedTasks += subjCompleted;
+    
+    const pct = subjTotal > 0 ? Math.round((subjCompleted / subjTotal) * 100) : 0;
+    const progressSpan = document.getElementById(`subjProgress-${sIdx}`);
+    if (progressSpan) progressSpan.textContent = `${pct}% Completed`;
+  });
+  
+  const overallPct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+  document.getElementById('plannerProgressPercent').textContent = `${overallPct}%`;
+  document.getElementById('plannerProgressFill').style.width = `${overallPct}%`;
+}
+
+function resetPlanProgress() {
+  if (!confirm('Are you sure you want to reset all revision tracker progress for this exam?')) return;
+  const storageKey = `sr_planner_${currentPlanKey}`;
+  localStorage.removeItem(storageKey);
+  loadSelectedPlan(currentPlanKey);
+}
+
+// ----- MOCK QUIZ LOGIC -----
+function startQuiz(subject) {
+  activeQuizKey = subject;
+  quizCurrentIdx = 0;
+  quizAnswers = {};
+  quizSubmitted = false;
+  quizTimerVal = 0;
+  
+  document.getElementById('quizPlayZone').style.display = 'block';
+  document.getElementById('quizScoreZone').style.display = 'none';
+  
+  const quiz = quizDatabase[subject];
+  document.getElementById('quizTitle').textContent = quiz.title;
+  
+  // Timer Setup
+  if (quizTimerInterval) clearInterval(quizTimerInterval);
+  quizTimerInterval = setInterval(() => {
+    quizTimerVal++;
+    const min = String(Math.floor(quizTimerVal / 60)).padStart(2, '0');
+    const sec = String(quizTimerVal % 60).padStart(2, '0');
+    document.getElementById('quizTimer').textContent = `${min}:${sec}`;
+  }, 1000);
+  
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion() {
+  const quiz = quizDatabase[activeQuizKey];
+  const qObj = quiz.questions[quizCurrentIdx];
+  
+  document.getElementById('quizQuestionNumber').textContent = `Question ${quizCurrentIdx + 1} of ${quiz.questions.length}`;
+  document.getElementById('quizQuestionText').textContent = qObj.q;
+  
+  const optList = document.getElementById('quizOptionsList');
+  optList.innerHTML = '';
+  
+  qObj.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option-btn';
+    btn.textContent = `${String.fromCharCode(65 + idx)}. ${opt}`;
+    
+    // Selection state behavior
+    if (quizAnswers[quizCurrentIdx] === idx) {
+      btn.classList.add('selected');
+    }
+    
+    if (quizSubmitted) {
+      btn.disabled = true;
+      if (idx === qObj.correct) {
+        btn.classList.add('correct');
+      } else if (quizAnswers[quizCurrentIdx] === idx) {
+        btn.classList.add('incorrect');
+      }
+    } else {
+      btn.onclick = () => selectQuizOption(idx);
+    }
+    
+    optList.appendChild(btn);
+  });
+  
+  // Show explanation if submitted
+  const expl = document.getElementById('quizExplanation');
+  if (quizSubmitted) {
+    expl.style.display = 'block';
+    document.getElementById('quizExplanationText').textContent = qObj.desc;
+  } else {
+    expl.style.display = 'none';
+  }
+  
+  // Update button texts
+  document.getElementById('quizPrevBtn').disabled = (quizCurrentIdx === 0);
+  const nextBtn = document.getElementById('quizNextBtn');
+  if (quizCurrentIdx === quiz.questions.length - 1) {
+    nextBtn.innerHTML = quizSubmitted ? 'View Score Card <i class="fas fa-trophy"></i>' : 'Submit Quiz <i class="fas fa-check-double"></i>';
+  } else {
+    nextBtn.innerHTML = 'Next Question <i class="fas fa-chevron-right"></i>';
+  }
+}
+
+function selectQuizOption(idx) {
+  if (quizSubmitted) return;
+  quizAnswers[quizCurrentIdx] = idx;
+  renderQuizQuestion();
+}
+
+function prevQuizQuestion() {
+  if (quizCurrentIdx > 0) {
+    quizCurrentIdx--;
+    renderQuizQuestion();
+  }
+}
+
+function nextQuizQuestion() {
+  const quiz = quizDatabase[activeQuizKey];
+  if (quizCurrentIdx < quiz.questions.length - 1) {
+    quizCurrentIdx++;
+    renderQuizQuestion();
+  } else {
+    // Last question action
+    if (!quizSubmitted) {
+      submitQuiz();
+    } else {
+      showQuizScore();
+    }
+  }
+}
+
+function submitQuiz() {
+  const quiz = quizDatabase[activeQuizKey];
+  // check if all questions are answered
+  const answeredCount = Object.keys(quizAnswers).length;
+  if (answeredCount < quiz.questions.length) {
+    if (!confirm('Aapne sabhi sawaal hal nahi kiye hain. Kya aap quiz submit karna chahte hain?')) return;
+  }
+  
+  clearInterval(quizTimerInterval);
+  quizSubmitted = true;
+  renderQuizQuestion();
+}
+
+function showQuizScore() {
+  document.getElementById('quizPlayZone').style.display = 'none';
+  document.getElementById('quizScoreZone').style.display = 'block';
+  
+  const quiz = quizDatabase[activeQuizKey];
+  let correctCount = 0;
+  quiz.questions.forEach((q, idx) => {
+    if (quizAnswers[idx] === q.correct) correctCount++;
+  });
+  
+  document.getElementById('quizScoreText').textContent = `${correctCount} / ${quiz.questions.length}`;
+  
+  const min = Math.floor(quizTimerVal / 60);
+  const sec = quizTimerVal % 60;
+  document.getElementById('quizTimeTaken').textContent = `${min}m ${sec}s`;
+}
+
+function retryQuiz() {
+  startQuiz(activeQuizKey);
+}
+
+function reviewQuizAnswers() {
+  document.getElementById('quizPlayZone').style.display = 'block';
+  document.getElementById('quizScoreZone').style.display = 'none';
+  quizCurrentIdx = 0;
+  renderQuizQuestion();
+}
+
+// ----- ELIGIBILITY JOB MATCHER LOGIC -----
+function findMatchingJobs() {
+  if (!window.siteData || !siteData.latestJobs) {
+    alert("Database load nahi hua. Please check!");
+    return;
+  }
+  
+  const qual = document.getElementById('matchQual').value;
+  const dept = document.getElementById('matchDept').value;
+  const loc = document.getElementById('matchLoc').value;
+  
+  // Keyword mappings based on qualification selection
+  const keywordMap = {
+    '10th': ['mts', '10th', 'matric', 'gds', 'postman', 'constable', 'gd ', 'driver', 'peon', 'helper', 'sweeper'],
+    '12th': ['chsl', '12th', '10+2', 'intermediate', 'steno', 'clerk', 'typist', 'constable', 'gd ', 'rifleman', 'mts'],
+    'graduate': ['cgl', 'upsc', 'degree', 'graduate', 'officer', 'assistant', 'sub inspector', 'si ', 'po ', 'manager', 'executive', 'lecturer', 'professor', 'scientific', 'scientist'],
+    'pg': ['post graduate', 'master', 'pg ', 'pgt', 'lecturer', 'professor', 'scientist', 'scientific', 'phd']
+  };
+  
+  const keywords = keywordMap[qual] || [];
+  
+  const filtered = siteData.latestJobs.filter(job => {
+    const titleLower = job.title.toLowerCase();
+    
+    // 1. Qualification Check (fuzzy keyword matching)
+    let qualMatch = false;
+    if (qual === 'pg') {
+      qualMatch = keywords.some(kw => titleLower.includes(kw));
+    } else if (qual === 'graduate') {
+      // graduates match graduate items, plus intermediate/matric items as fallbacks
+      const gradKeywords = keywords;
+      const interKeywords = keywordMap['12th'];
+      const matricKeywords = keywordMap['10th'];
+      qualMatch = gradKeywords.some(kw => titleLower.includes(kw)) ||
+                  interKeywords.some(kw => titleLower.includes(kw)) ||
+                  matricKeywords.some(kw => titleLower.includes(kw)) ||
+                  // if no specific qualification is listed, it is open to all
+                  (!titleLower.includes('pgt') && !titleLower.includes('master'));
+    } else if (qual === '12th') {
+      // 12th pass can apply to 12th and 10th jobs
+      qualMatch = keywords.some(kw => titleLower.includes(kw)) ||
+                  keywordMap['10th'].some(kw => titleLower.includes(kw));
+    } else {
+      // 10th pass
+      qualMatch = keywords.some(kw => titleLower.includes(kw)) ||
+                  // Default fallbacks if no qualifications specified
+                  (!titleLower.includes('cgl') && !titleLower.includes('upsc') && !titleLower.includes('graduate') && !titleLower.includes('degree') && !titleLower.includes('officer') && !titleLower.includes('sub inspector') && !titleLower.includes('pgt') && !titleLower.includes('master'));
+    }
+    
+    // 2. Department check
+    let deptMatch = true;
+    if (dept) {
+      deptMatch = (job.category === dept);
+    }
+    
+    // 3. Location check
+    let locMatch = true;
+    if (loc) {
+      locMatch = (job.state === loc);
+    }
+    
+    return qualMatch && deptMatch && locMatch;
+  });
+  
+  // Render Matching Jobs
+  const list = document.getElementById('matchedJobsList');
+  document.getElementById('matchCountBadge').textContent = `${filtered.length} jobs matched`;
+  list.innerHTML = '';
+  
+  if (!filtered.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light)"><i class="fas fa-search" style="font-size:40px;opacity:0.2;display:block;margin-bottom:12px"></i>Aapke profile se match karne wala koi active job nahi mila. Eligibility badal kar try karein!</div>';
+    return;
+  }
+  
+  // Render matching rows
+  filtered.slice(0, 100).forEach((job, idx) => {
+    const row = document.createElement('div');
+    row.className = 'notice-row slide-up';
+    row.style.animationDelay = (idx * 0.02) + 's';
+    row.onclick = () => { window.location.href = `latest-jobs.html?id=${job.id}`; };
+    row.innerHTML = `
+      <span class="notice-tag tag-${escapeHTML(job.tag)}">${escapeHTML(job.tag.toUpperCase())}</span>
+      <span class="notice-title">${escapeHTML(job.title)} <strong style="color:var(--green)">(${escapeHTML(job.posts)} Posts)</strong></span>
+      <span class="notice-date" style="margin-left:auto"><i class="fas fa-calendar-alt"></i> Last Date: ${escapeHTML(job.lastDate)}</span>
+    `;
+    list.appendChild(row);
+  });
+  
+  if (filtered.length > 100) {
+    const note = document.createElement('p');
+    note.style.color = 'var(--text-light)';
+    note.style.padding = '16px';
+    note.style.fontSize = '12px';
+    note.style.textAlign = 'center';
+    note.textContent = 'Showing top 100 matches. Refine filters to see more targeted results.';
+    list.appendChild(note);
+  }
+}
+
+// ----- SARKARI TYPING SPEED TEST LOGIC -----
+const typingPassages = {
+  ssc_chsl: "The staff selection commission holds the combined graduate level examination and combined higher secondary level examination every year. Candidates must practice typing at thirty-five words per minute in English or thirty words per minute in Hindi to qualify for the data entry operator and lower division clerk posts. Typing speed is calculated by taking total characters typed divided by five, then divided by the total time taken in minutes. Accuracy is calculated as the ratio of correct characters to the total characters typed, which should ideally be above ninety-five percent for general candidates and ninety percent for reserved categories.",
+  general_easy: "Success in life is not measured by what you accomplish, but by the opposition you have encountered to reach your goals. Hard work and dedication are key factors. When preparing for competitive exams in India, a regular schedule is crucial. Study at least six hours a day, solve mock tests, and keep track of your performance. Always remember that persistence can break any obstacle. Keep typing, keep practicing, and you will eventually reach your target speed and secure a good rank.",
+  technical_terms: "A computer database is a structured collection of data. In modern web applications, the client-side refers to everything that is processed directly on the user's browser, using languages like HTML for markup, CSS for presentation, and JavaScript for runtime execution. Local storage is a web storage API that lets you store key-value pairs inside the client browser. For maximum performance and security, performing tasks client-side is often preferred over backend calls since it runs in under ten milliseconds."
+};
+
+let typingActiveText = "";
+let typingIndex = 0;
+let typingErrors = 0;
+let typingTimeTotal = 60;
+let typingTimeLeft = 60;
+let typingTimer = null;
+let typingStarted = false;
+let typingSoundEnabled = true;
+let audioCtx = null;
+
+function generateTypeSound(isError) {
+  if (!typingSoundEnabled) return;
+  try {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    if (isError) {
+      // Lower buzz sound for mistake
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(120, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.15);
+    } else {
+      // Short mechanical click sound
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.05);
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.05);
+    }
+  } catch (e) {
+    console.warn("AudioContext error: ", e);
+  }
+}
+
+function toggleTypingSound() {
+  typingSoundEnabled = !typingSoundEnabled;
+  const btn = document.getElementById('typingSoundToggle');
+  if (typingSoundEnabled) {
+    btn.innerHTML = '<i class="fas fa-volume-up"></i> Typing Sounds: ON';
+    btn.style.background = 'var(--primary-light)';
+  } else {
+    btn.innerHTML = '<i class="fas fa-volume-mute"></i> Typing Sounds: OFF';
+    btn.style.background = 'var(--text-light)';
+  }
+}
+
+function initTypingTest() {
+  if (typingTimer) clearInterval(typingTimer);
+  
+  // UI resets
+  document.getElementById('typingActiveArea').style.display = 'block';
+  document.getElementById('typingScorecard').style.display = 'none';
+  
+  const passageKey = document.getElementById('typingPassageSelect').value;
+  const customWrapper = document.getElementById('customPassageWrapper');
+  
+  if (passageKey === 'custom') {
+    customWrapper.style.display = 'block';
+    typingActiveText = document.getElementById('typingCustomText').value.trim();
+    if (!typingActiveText) {
+      typingActiveText = "Please type some text here to practice custom typing...";
+    }
+  } else {
+    customWrapper.style.display = 'none';
+    typingActiveText = typingPassages[passageKey] || typingPassages['ssc_chsl'];
+  }
+  
+  typingTimeTotal = parseInt(document.getElementById('typingDurationSelect').value) || 60;
+  typingTimeLeft = typingTimeTotal;
+  typingIndex = 0;
+  typingErrors = 0;
+  typingStarted = false;
+  
+  // Update live labels
+  document.getElementById('typeWpm').textContent = '0';
+  document.getElementById('typeAccuracy').textContent = '100%';
+  document.getElementById('typeMistakes').textContent = '0';
+  
+  const min = String(Math.floor(typingTimeLeft / 60)).padStart(2, '0');
+  const sec = String(typingTimeLeft % 60).padStart(2, '0');
+  document.getElementById('typeTimer').textContent = `${min}:${sec}`;
+  
+  // Setup passage container HTML
+  const container = document.getElementById('typingTextContainer');
+  container.innerHTML = '';
+  
+  // Add characters inside spans
+  for (let i = 0; i < typingActiveText.length; i++) {
+    const span = document.createElement('span');
+    span.className = 'typing-char';
+    span.textContent = typingActiveText[i];
+    if (i === 0) span.classList.add('current');
+    container.appendChild(span);
+  }
+  
+  // Reset input text area
+  const inputArea = document.getElementById('typingInputArea');
+  inputArea.value = '';
+  inputArea.disabled = false;
+  inputArea.focus();
+}
+
+function processTypingInput(textarea) {
+  const typedText = textarea.value;
+  
+  // Start timer on first keystroke
+  if (!typingStarted && typedText.length > 0) {
+    typingStarted = true;
+    startTypingTimer();
+  }
+  
+  const charIndex = typedText.length - 1;
+  const container = document.getElementById('typingTextContainer');
+  const spans = container.querySelectorAll('.typing-char');
+  
+  if (charIndex < 0) {
+    // Input was cleared or backspaced entirely
+    typingIndex = 0;
+    spans.forEach((s, idx) => {
+      s.className = 'typing-char';
+      if (idx === 0) s.classList.add('current');
+    });
+    return;
+  }
+  
+  const newIndex = typedText.length;
+  
+  // Check characters up to current newIndex
+  let errors = 0;
+  for (let i = 0; i < spans.length; i++) {
+    spans[i].classList.remove('current');
+    
+    if (i < newIndex) {
+      const expected = typingActiveText[i];
+      const actual = typedText[i];
+      
+      if (expected === actual) {
+        spans[i].className = 'typing-char correct';
+      } else {
+        spans[i].className = 'typing-char incorrect';
+        errors++;
+      }
+    } else {
+      spans[i].className = 'typing-char';
+    }
+  }
+  
+  // Set cursor on next char
+  if (newIndex < spans.length) {
+    spans[newIndex].classList.add('current');
+    // Scroll container
+    const containerHeight = container.clientHeight;
+    const currentCharEl = spans[newIndex];
+    const offsetTop = currentCharEl.offsetTop;
+    if (offsetTop > containerHeight - 60) {
+      container.scrollTop = offsetTop - 60;
+    } else if (offsetTop < container.scrollTop) {
+      container.scrollTop = offsetTop - 20;
+    }
+  }
+  
+  // Play sound
+  if (newIndex > typingIndex) {
+    const lastTypedExpected = typingActiveText[newIndex - 1];
+    const lastTypedActual = typedText[newIndex - 1];
+    generateTypeSound(lastTypedExpected !== lastTypedActual);
+  }
+  
+  typingIndex = newIndex;
+  typingErrors = errors;
+  
+  // Calculate WPM & accuracy
+  const timeSpent = typingTimeTotal - typingTimeLeft;
+  const minutes = timeSpent > 0 ? timeSpent / 60 : 1 / 60;
+  const grossWpm = Math.round((typedText.length / 5) / minutes);
+  const netWpm = Math.max(0, Math.round(((typedText.length - errors) / 5) / minutes));
+  const accuracy = typedText.length > 0 ? Math.round(((typedText.length - errors) / typedText.length) * 100) : 100;
+  
+  document.getElementById('typeWpm').textContent = netWpm;
+  document.getElementById('typeAccuracy').textContent = `${accuracy}%`;
+  document.getElementById('typeMistakes').textContent = errors;
+  
+  if (newIndex >= typingActiveText.length) {
+    finishTypingTest();
+  }
+}
+
+function handleTypingSpecialKeys(e) {
+  if ([35, 36, 37, 38, 39, 40].includes(e.keyCode)) {
+    e.preventDefault();
+  }
+}
+
+function startTypingTimer() {
+  typingTimer = setInterval(() => {
+    typingTimeLeft--;
+    
+    const min = String(Math.floor(typingTimeLeft / 60)).padStart(2, '0');
+    const sec = String(typingTimeLeft % 60).padStart(2, '0');
+    document.getElementById('typeTimer').textContent = `${min}:${sec}`;
+    
+    const timeSpent = typingTimeTotal - typingTimeLeft;
+    const minutes = timeSpent > 0 ? timeSpent / 60 : 1 / 60;
+    const inputVal = document.getElementById('typingInputArea').value;
+    const netWpm = Math.max(0, Math.round(((inputVal.length - typingErrors) / 5) / minutes));
+    document.getElementById('typeWpm').textContent = netWpm;
+    
+    if (typingTimeLeft <= 0) {
+      finishTypingTest();
+    }
+  }, 1000);
+}
+
+function finishTypingTest() {
+  if (typingTimer) clearInterval(typingTimer);
+  document.getElementById('typingInputArea').disabled = true;
+  
+  const inputVal = document.getElementById('typingInputArea').value;
+  const timeSpent = typingTimeTotal - typingTimeLeft;
+  const minutes = timeSpent > 0 ? timeSpent / 60 : 1 / 60;
+  
+  const grossWpm = Math.round((inputVal.length / 5) / minutes);
+  const netWpm = Math.max(0, Math.round(((inputVal.length - typingErrors) / 5) / minutes));
+  const accuracy = inputVal.length > 0 ? Math.round(((inputVal.length - typingErrors) / inputVal.length) * 100) : 100;
+  
+  document.getElementById('typingActiveArea').style.display = 'none';
+  document.getElementById('typingScorecard').style.display = 'block';
+  
+  document.getElementById('scoreWpm').textContent = netWpm;
+  document.getElementById('scoreAccuracy').textContent = `${accuracy}%`;
+  document.getElementById('scoreErrors').textContent = typingErrors;
+  document.getElementById('scoreGrossWpm').textContent = grossWpm;
+  
+  const statusLabel = document.getElementById('scoreStatus');
+  const feedbackLabel = document.getElementById('scoreFeedback');
+  
+  if (netWpm >= 35 && accuracy >= 95) {
+    statusLabel.innerHTML = 'STATUS: <span style="color:#2dc653;">PASSED (QUALIFIED)</span>';
+    feedbackLabel.textContent = `Excellent work! Your typing speed of ${netWpm} WPM and ${accuracy}% accuracy meets the requirements of SSC CHSL and other clerk level exams.`;
+  } else if (netWpm >= 30) {
+    statusLabel.innerHTML = 'STATUS: <span style="color:#f39c12;">PASSED (HINDI) / IMPROVABLE (ENGLISH)</span>';
+    feedbackLabel.textContent = `Good speed of ${netWpm} WPM. Qualified for Hindi typing clerk posts (30 WPM), but you need 35 WPM and higher accuracy for English clerk posts. Keep practicing!`;
+  } else {
+    statusLabel.innerHTML = 'STATUS: <span style="color:#e63946;">FAILED (NEED PRACTICE)</span>';
+    feedbackLabel.textContent = `Current net speed is ${netWpm} WPM. Most govt exams require a minimum of 35 WPM in English and 30 WPM in Hindi. Practice regularly to reduce errors!`;
+  }
+}
+
+function retryTypingTest() {
+  initTypingTest();
+}
+
+// ----- 7TH PAY COMMISSION SALARY CALCULATOR LOGIC -----
+function calculateSalary() {
+  const level = parseInt(document.getElementById('salaryLevel').value) || 1;
+  const city = document.getElementById('salaryCity').value || 'X';
+  const daPercent = parseFloat(document.getElementById('salaryDaPercent').value) || 50;
+  
+  const basics = {
+    1: 18000,
+    2: 19900,
+    3: 21700,
+    4: 25500,
+    5: 29200,
+    6: 35400,
+    7: 44900,
+    8: 47600,
+    9: 53100,
+    10: 56100
+  };
+  
+  const basic = basics[level] || 18000;
+  const da = Math.round(basic * (daPercent / 100));
+  
+  const hraPcts = { 'X': 0.30, 'Y': 0.20, 'Z': 0.10 };
+  const hraPct = hraPcts[city] || 0.10;
+  let hra = Math.round(basic * hraPct);
+  
+  const minHras = { 'X': 5400, 'Y': 3600, 'Z': 1800 };
+  const minHra = minHras[city] || 1800;
+  if (hra < minHra) hra = minHra;
+  
+  let taBase = 0;
+  if (level >= 9) {
+    taBase = (city === 'X') ? 7200 : 3600;
+  } else if (level >= 3) {
+    taBase = (city === 'X') ? 3600 : 1800;
+  } else {
+    taBase = (city === 'X') ? 1350 : 900;
+  }
+  
+  const daOnTa = Math.round(taBase * (daPercent / 100));
+  const ta = taBase + daOnTa;
+  const gross = basic + da + hra + ta;
+  const nps = Math.round((basic + da) * 0.10);
+  
+  let cghs = 250;
+  if (level >= 6) cghs = 450;
+  if (level >= 7) cghs = 650;
+  if (level >= 12) cghs = 1000;
+  
+  let cgegis = 30;
+  if (level >= 6) cgegis = 60;
+  if (level >= 10) cgegis = 120;
+  
+  const pt = 200;
+  const totalDeduct = nps + cghs + cgegis + pt;
+  const net = gross - totalDeduct;
+  
+  document.getElementById('slipDaRate').textContent = daPercent;
+  document.getElementById('slipCityClass').textContent = city;
+  
+  document.getElementById('slipBasic').textContent = basic.toLocaleString('en-IN');
+  document.getElementById('slipDa').textContent = da.toLocaleString('en-IN');
+  document.getElementById('slipHra').textContent = hra.toLocaleString('en-IN');
+  document.getElementById('slipTa').textContent = ta.toLocaleString('en-IN');
+  document.getElementById('slipGross').textContent = gross.toLocaleString('en-IN');
+  
+  document.getElementById('slipNps').textContent = nps.toLocaleString('en-IN');
+  document.getElementById('slipCghs').textContent = cghs.toLocaleString('en-IN');
+  document.getElementById('slipCgegis').textContent = cgegis.toLocaleString('en-IN');
+  document.getElementById('slipTotalDeduct').textContent = totalDeduct.toLocaleString('en-IN');
+  document.getElementById('slipNet').textContent = net.toLocaleString('en-IN');
+  
+  const basicPct = Math.max(5, Math.round((basic / gross) * 100));
+  const allowPct = Math.max(5, Math.round(((da + hra + ta) / gross) * 100));
+  const deductPct = Math.max(5, 100 - basicPct - allowPct);
+  
+  document.getElementById('chartBasicWidth').setAttribute('width', `${basicPct}%`);
+  document.getElementById('chartAllowWidth').setAttribute('x', `${basicPct}%`);
+  document.getElementById('chartAllowWidth').setAttribute('width', `${allowPct}%`);
+  document.getElementById('chartDeductWidth').setAttribute('x', `${basicPct + allowPct}%`);
+  document.getElementById('chartDeductWidth').setAttribute('width', `${deductPct}%`);
+  
+  document.getElementById('chartBasicPct').textContent = basicPct;
+  document.getElementById('chartAllowPct').textContent = allowPct;
+  document.getElementById('chartDeductPct').textContent = deductPct;
+}
+</script>
+</body>
+</html>

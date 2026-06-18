@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khoj Parinam (Search Results) – Abhi Result</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+<div class="particles" id="particles"></div>
+<div class="top-ticker"><span class="ticker-label"><i class="fas fa-bell"></i> LIVE</span><div class="ticker-wrap"><div class="ticker-content" id="tickerContent">Loading...</div></div></div>
+
+<header class="header" id="mainHeader">
+  <div class="header-top"><div class="container"><div class="header-inner">
+    <div class="logo-area"><a href="index.html" style="display:flex;align-items:center;gap:12px;text-decoration:none">
+      <div class="logo-3d"><div class="logo-badge-img"><img src="abhi-logo.png?v=3" alt="Abhi Result"></div></div>
+      <div><div class="brand-name">Abhi Result</div><p class="brand-tagline">India's No.1 सरकारी नौकरी पोर्टल</p></div>
+    </a></div>
+    <div class="header-right">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search..." autocomplete="off">
+        <button class="search-btn" onclick="doSearch()"><i class="fas fa-search"></i></button>
+        <div class="search-results" id="searchResults"></div>
+      </div>
+    </div>
+  </div></div></div>
+  <nav class="main-nav" id="mainNav"><div class="container">
+    <div class="nav-toggle" onclick="toggleNav()" id="navToggle"><span></span><span></span><span></span></div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="latest-jobs.html"><i class="fas fa-briefcase"></i> Latest Jobs</a></li>
+      <li><a href="results.html"><i class="fas fa-poll"></i> Results</a></li>
+      <li><a href="admit-card.html"><i class="fas fa-id-card"></i> Admit Card</a></li>
+      <li><a href="answer-key.html"><i class="fas fa-key"></i> Answer Key</a></li>
+      <li><a href="syllabus.html"><i class="fas fa-book"></i> Syllabus</a></li>
+      <li><a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a></li>
+      <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+    </ul>
+  </div></nav>
+</header>
+
+<section class="page-hero" style="background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 100%)">
+  <div class="container">
+    <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Search</span></div>
+    <h1>🔍 Search Results</h1>
+    <p>Search query: "<span id="queryDisplay" style="color:var(--gold);font-weight:700"></span>"</p>
+  </div>
+</section>
+
+<div class="container">
+  <!-- CATEGORY FILTERS -->
+  <div class="page-cats" style="margin-top:20px;">
+    <button class="page-cat-btn active" onclick="filterSearchType('', this)"><i class="fas fa-th"></i> All Items</button>
+    <button class="page-cat-btn" onclick="filterSearchType('job', this)"><i class="fas fa-briefcase"></i> Jobs</button>
+    <button class="page-cat-btn" onclick="filterSearchType('result', this)"><i class="fas fa-trophy"></i> Results</button>
+    <button class="page-cat-btn" onclick="filterSearchType('admit', this)"><i class="fas fa-id-card"></i> Admit Cards</button>
+    <button class="page-cat-btn" onclick="filterSearchType('answer', this)"><i class="fas fa-key"></i> Answer Keys</button>
+    <button class="page-cat-btn" onclick="filterSearchType('syllabus', this)"><i class="fas fa-book"></i> Syllabus</button>
+    <button class="page-cat-btn" onclick="filterSearchType('admission', this)"><i class="fas fa-graduation-cap"></i> Admission</button>
+  </div>
+
+  <div class="filter-bar">
+    <label><i class="fas fa-search"></i> New Search:</label>
+    <input type="text" class="filter-input" id="searchBar" placeholder="Search keywords...">
+    <button class="filter-btn" onclick="performNewSearch()"><i class="fas fa-search"></i> Search</button>
+    <span style="font-size:13px;color:var(--text-light);margin-left:auto" id="resultsCount">0 items found</span>
+  </div>
+
+  <div class="page-layout">
+    <div>
+      <div class="notice-board">
+        <div class="board-header jobs-header" id="resultsHeader">
+          <h2><i class="fas fa-search"></i> Search Results Matches</h2>
+        </div>
+        <div id="resultsGrid" style="min-height:150px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><div class="footer-bottom"><div class="container"><p>Copyright © 2012–2026 | <strong>Abhi Result</strong></p></div></div></footer>
+
+<nav class="bottom-nav"><div class="bottom-nav-items">
+  <a href="index.html" class="bn-item"><i class="fas fa-home"></i><span>Home</span></a>
+  <a href="latest-jobs.html" class="bn-item"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+  <a href="results.html" class="bn-item"><i class="fas fa-trophy"></i><span>Results</span></a>
+  <a href="admit-card.html" class="bn-item"><i class="fas fa-id-card"></i><span>Admit</span></a>
+  <a href="admission.html" class="bn-item"><i class="fas fa-graduation-cap"></i><span>Admission</span></a>
+</div></nav>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+let searchResults = [];
+let currentType = '';
+
+const typeLabels = {
+  job: 'JOB',
+  result: 'RESULT',
+  admit: 'ADMIT CARD',
+  answer: 'ANSWER KEY',
+  syllabus: 'SYLLABUS',
+  admission: 'ADMISSION'
+};
+
+const typePages = {
+  job: 'latest-jobs.html',
+  result: 'results.html',
+  admit: 'admit-card.html',
+  answer: 'answer-key.html',
+  syllabus: 'syllabus.html',
+  admission: 'admission.html'
+};
+
+const typeColors = {
+  job: '#1a73e8',
+  result: '#2dc653',
+  admit: '#e63946',
+  answer: '#f4a261',
+  syllabus: '#7b2d8b',
+  admission: '#ffd700'
+};
+
+const typeIcons = {
+  job: 'fa-briefcase',
+  result: 'fa-poll',
+  admit: 'fa-id-card',
+  answer: 'fa-key',
+  syllabus: 'fa-book',
+  admission: 'fa-graduation-cap'
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  const tc = document.getElementById('tickerContent');
+  if (tc && siteData.notifications) tc.textContent = siteData.notifications.join('  ●  ');
+
+  const q = getUrlParam('q') || '';
+  document.getElementById('queryDisplay').textContent = q;
+  document.getElementById('searchBar').value = q;
+  
+  if (q) {
+    doCrossSearch(q);
+  } else {
+    renderSearchResults([]);
+  }
+
+  document.getElementById('searchBar').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') performNewSearch();
+  });
+});
+
+function doCrossSearch(q) {
+  const query = q.toLowerCase().trim();
+  const allItems = [
+    ...(siteData.latestJobs || []).map(i => ({ ...i, type: 'job' })),
+    ...(siteData.results || []).map(i => ({ ...i, type: 'result' })),
+    ...(siteData.admitCards || []).map(i => ({ ...i, type: 'admit' })),
+    ...(siteData.answerKeys || []).map(i => ({ ...i, type: 'answer' })),
+    ...(siteData.syllabi || []).map(i => ({ ...i, type: 'syllabus' })),
+    ...(siteData.admissions || []).map(i => ({ ...i, type: 'admission' }))
+  ];
+
+  searchResults = allItems.filter(item => 
+    item.title.toLowerCase().includes(query) || 
+    (item.category || '').toLowerCase().includes(query)
+  );
+
+  filterAndRender();
+}
+
+function filterSearchType(type, btn) {
+  currentType = type;
+  document.querySelectorAll('.page-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterAndRender();
+}
+
+function filterAndRender() {
+  const filtered = searchResults.filter(item => !currentType || item.type === currentType);
+  const showText = filtered.length + ' items found' + (filtered.length > 100 ? ' (showing top 100)' : '');
+  document.getElementById('resultsCount').textContent = showText;
+  renderSearchResults(filtered);
+}
+
+function performNewSearch() {
+  const q = document.getElementById('searchBar').value.trim();
+  if (q) {
+    window.history.pushState({}, '', `search.html?q=${encodeURIComponent(q)}`);
+    document.getElementById('queryDisplay').textContent = q;
+    doCrossSearch(q);
+  }
+}
+
+function renderSearchResults(items) {
+  const grid = document.getElementById('resultsGrid');
+  grid.innerHTML = '';
+  
+  if (!items.length) {
+    grid.innerHTML = `<div style="text-align:center;padding:50px;color:var(--text-light)">
+      <i class="fas fa-search fa-3x" style="opacity:0.2;margin-bottom:16px;"></i>
+      <p style="font-size:15px;font-weight:500;">Koi parinam nahi mila. Kuch aur search karke dekhein.</p>
+    </div>`;
+    return;
+  }
+
+  items.slice(0, 100).forEach((item, idx) => {
+    const typeColor = typeColors[item.type] || '#1a73e8';
+    const typeIcon = typeIcons[item.type] || 'fa-info-circle';
+    const row = document.createElement('div');
+    row.className = 'item-row slide-up';
+    row.style.animationDelay = (idx * 0.03) + 's';
+    row.innerHTML = `
+      <div class="item-icon" style="background:${escapeHTML(typeColor)}"><i class="fas ${escapeHTML(typeIcon)}"></i></div>
+      <div class="item-info">
+        <div class="item-name">${escapeHTML(item.title)}</div>
+        <div class="item-meta">
+          <span><i class="fas fa-tag"></i> ${escapeHTML(typeLabels[item.type])}</span>
+          <span><i class="fas fa-calendar-alt"></i> ${escapeHTML(item.date)}</span>
+          <span><i class="fas fa-folder"></i> ${escapeHTML((item.category||'').toUpperCase())}</span>
+        </div>
+      </div>
+      <div class="item-action">
+        <button class="dl-btn blue" style="background:${escapeHTML(typeColor)};"><i class="fas fa-eye"></i> View</button>
+      </div>`;
+    row.onclick = () => {
+      window.location.href = `${typePages[item.type]}?id=${item.id}`;
+    };
+    grid.appendChild(row);
+  });
+}
+</script>
+</body>
+</html>

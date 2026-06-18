@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel – Abhi Result | Add Jobs, Results, Admit Card</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="logo.png">
+  <style>
+    .admin-login { max-width:420px; margin:60px auto; background:#fff; border-radius:20px; box-shadow:0 20px 60px rgba(15,27,76,0.2); overflow:hidden; }
+    .admin-login-header { background:linear-gradient(135deg,#0f1b4c,#1a3a8f); padding:30px; text-align:center; color:#fff; }
+    .admin-login-header h2 { font-family:'Rajdhani',sans-serif; font-size:28px; color:#ffd700; }
+    .admin-login-body { padding:30px; }
+    .admin-wrapper { display:none; }
+    .admin-wrapper.show { display:block; }
+    .admin-topbar { background:linear-gradient(135deg,#0f1b4c,#1a3a8f); color:#fff; padding:16px 24px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:100; }
+    .admin-topbar h1 { font-family:'Rajdhani',sans-serif; font-size:24px; color:#ffd700; }
+    .logout-btn { background:rgba(255,255,255,0.15); color:#fff; border:1px solid rgba(255,255,255,0.3); padding:8px 20px; border-radius:20px; cursor:pointer; font-size:13px; transition:all 0.3s; }
+    .logout-btn:hover { background:var(--accent); border-color:var(--accent); }
+    .admin-container { max-width:1100px; margin:30px auto; padding:0 16px; }
+    .admin-stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:16px; margin-bottom:30px; }
+    .admin-stat { background:#fff; border-radius:16px; padding:20px; text-align:center; box-shadow:var(--shadow); border-top:4px solid; transition:var(--transition); }
+    .admin-stat:hover { transform:translateY(-4px); box-shadow:var(--shadow-hover); }
+    .admin-stat:nth-child(1){border-color:#1a73e8} .admin-stat:nth-child(2){border-color:#2dc653} .admin-stat:nth-child(3){border-color:#e63946} .admin-stat:nth-child(4){border-color:#f4a261} .admin-stat:nth-child(5){border-color:#7b2d8b}
+    .admin-stat .num { font-family:'Rajdhani',sans-serif; font-size:32px; font-weight:700; color:var(--primary); }
+    .admin-stat .lbl { font-size:12px; color:var(--text-light); margin-top:4px; }
+    .success-msg { background:#e8f5e9; border:1px solid #2dc653; color:#1b5e20; padding:12px 16px; border-radius:8px; margin-bottom:16px; display:none; align-items:center; gap:8px; font-size:13px; font-weight:600; }
+    .success-msg.show { display:flex; animation:slideUp 0.3s ease; }
+    textarea.form-control { min-height:80px; resize:vertical; }
+    .ad-setup-box { background:var(--light); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:16px; }
+    .ad-setup-box h4 { font-size:14px; margin-bottom:10px; color:var(--primary); }
+    .ad-code-input { font-family:monospace; font-size:12px; background:#fff; border:1px solid var(--border); border-radius:6px; padding:10px; width:100%; min-height:100px; resize:vertical; }
+    .tab-count { background:var(--accent); color:#fff; border-radius:10px; padding:2px 8px; font-size:10px; margin-left:6px; }
+  </style>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+<div class="particles" id="particles"></div>
+
+<!-- LOGIN FORM -->
+<div id="loginSection">
+  <br><br>
+  <div class="admin-login">
+    <div class="admin-login-header">
+      <div style="font-size:48px;margin-bottom:10px;">🔐</div>
+      <h2>Admin Login</h2>
+      <p style="font-size:13px;opacity:0.7">Abhi Result Admin Panel</p>
+    </div>
+    <div class="admin-login-body">
+      <div id="loginError" style="background:#fce4ec;color:#c62828;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none;">❌ Invalid username or password!</div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-user"></i> Username</label>
+        <input type="text" class="form-control" id="adminUser" placeholder="Enter username">
+      </div>
+      <div class="form-group">
+        <label class="form-label"><i class="fas fa-lock"></i> Password</label>
+        <input type="password" class="form-control" id="adminPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button class="submit-btn" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Login to Admin Panel</button>
+      <p style="font-size:11px;color:var(--text-light);text-align:center;margin-top:12px;">Secure Admin Login Panel (सुरक्षित एडमिन लॉगिन सक्रिय)</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-wrapper" id="adminWrapper">
+  <div class="admin-topbar">
+    <h1><i class="fas fa-tachometer-alt"></i> Admin Panel</h1>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="index.html" style="color:rgba(255,255,255,0.7);font-size:13px;"><i class="fas fa-external-link-alt"></i> View Site</a>
+      <button class="logout-btn" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-container">
+    <!-- STATS -->
+    <div class="admin-stats-row">
+      <div class="admin-stat"><div class="num" id="statJobs">0</div><div class="lbl">Total Jobs</div></div>
+      <div class="admin-stat"><div class="num" id="statResults">0</div><div class="lbl">Results</div></div>
+      <div class="admin-stat"><div class="num" id="statAdmit">0</div><div class="lbl">Admit Cards</div></div>
+      <div class="admin-stat"><div class="num" id="statAnswer">0</div><div class="lbl">Answer Keys</div></div>
+      <div class="admin-stat"><div class="num" id="statSyllabus">0</div><div class="lbl">Syllabus</div></div>
+      <div class="admin-stat"><div class="num" id="statAdmission">0</div><div class="lbl">Admissions</div></div>
+    </div>
+
+    <!-- TABS -->
+    <div class="admin-panel">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('addJob', this)"><i class="fas fa-plus"></i> Add Job</button>
+        <button class="admin-tab" onclick="switchTab('addResult', this)"><i class="fas fa-poll"></i> Add Result</button>
+        <button class="admin-tab" onclick="switchTab('addAdmit', this)"><i class="fas fa-id-card"></i> Add Admit Card</button>
+        <button class="admin-tab" onclick="switchTab('addAnswer', this)"><i class="fas fa-key"></i> Add Answer Key</button>
+        <button class="admin-tab" onclick="switchTab('addSyllabus', this)"><i class="fas fa-book"></i> Add Syllabus</button>
+        <button class="admin-tab" onclick="switchTab('addAdmission', this)"><i class="fas fa-graduation-cap"></i> Add Admission</button>
+        <button class="admin-tab" onclick="switchTab('manageAds', this)"><i class="fas fa-ad"></i> Ads Setup</button>
+        <button class="admin-tab" onclick="switchTab('manageTicker', this)"><i class="fas fa-rss"></i> Ticker News</button>
+        <button class="admin-tab" onclick="switchTab('manageAll', this)"><i class="fas fa-list"></i> Manage All</button>
+      </div>
+
+      <div id="successMsg" class="success-msg"><i class="fas fa-check-circle"></i> <span id="successText">Saved successfully!</span></div>
+
+      <!-- ADD JOB -->
+      <div class="admin-form active" id="form-addJob">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-briefcase"></i> Add New Job</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Job Title *</label>
+            <input type="text" class="form-control" id="jobTitle" placeholder="e.g. SSC CGL 2026 – 17727 Vacancies">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Total Posts</label>
+            <input type="text" class="form-control" id="jobPosts" placeholder="e.g. 5000+">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-control" id="jobCategory">
+              <option value="upsc">UPSC</option><option value="ssc">SSC</option><option value="railway">Railway</option>
+              <option value="ibps">IBPS/Bank</option><option value="police">Police</option><option value="defence">Defence</option>
+              <option value="bpsc">BPSC</option><option value="upsssc">UPSSSC</option><option value="rpsc">RPSC</option>
+              <option value="dsssb">DSSSB</option><option value="navy">Navy</option><option value="airforce">Air Force</option><option value="tet">TET</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <select class="form-control" id="jobState">
+              <option value="central">Central</option><option value="up">Uttar Pradesh</option><option value="bihar">Bihar</option>
+              <option value="raj">Rajasthan</option><option value="delhi">Delhi</option><option value="hr">Haryana</option>
+              <option value="mp">Madhya Pradesh</option><option value="mh">Maharashtra</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Last Date to Apply</label>
+            <input type="date" class="form-control" id="jobLastDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tag</label>
+            <select class="form-control" id="jobTag">
+              <option value="new">NEW</option><option value="hot">HOT</option><option value="latest">LATEST</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Notification PDF Link</label>
+            <input type="url" class="form-control" id="jobNotifLink" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Apply Online Link</label>
+            <input type="url" class="form-control" id="jobApplyLink" placeholder="https://...">
+          </div>
+        </div>
+        <button class="submit-btn" onclick="addJob()"><i class="fas fa-plus-circle"></i> Add Job</button>
+      </div>
+
+      <!-- ADD RESULT -->
+      <div class="admin-form" id="form-addResult">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-trophy"></i> Add New Result</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Result Title *</label>
+            <input type="text" class="form-control" id="resultTitle" placeholder="e.g. SSC CGL Result 2026">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-control" id="resultCategory">
+              <option value="upsc">UPSC</option><option value="ssc">SSC</option><option value="railway">Railway</option>
+              <option value="ibps">IBPS</option><option value="police">Police</option><option value="bpsc">BPSC</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Result Link</label>
+            <input type="url" class="form-control" id="resultLink" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tag</label>
+            <select class="form-control" id="resultTag">
+              <option value="out">OUT</option><option value="new">NEW</option>
+            </select>
+          </div>
+        </div>
+        <button class="submit-btn" onclick="addResult()"><i class="fas fa-plus-circle"></i> Add Result</button>
+      </div>
+
+      <!-- ADD ADMIT CARD -->
+      <div class="admin-form" id="form-addAdmit">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-id-card"></i> Add Admit Card</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Admit Card Title *</label>
+            <input type="text" class="form-control" id="admitTitle" placeholder="e.g. SSC CGL Admit Card 2026">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Download Link</label>
+            <input type="url" class="form-control" id="admitLink" placeholder="https://...">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Exam Date</label>
+            <input type="date" class="form-control" id="admitExamDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tag</label>
+            <select class="form-control" id="admitTag"><option value="out">OUT</option><option value="new">NEW</option></select>
+          </div>
+        </div>
+        <button class="submit-btn" onclick="addAdmitCard()"><i class="fas fa-plus-circle"></i> Add Admit Card</button>
+      </div>
+
+      <!-- ADD ANSWER KEY -->
+      <div class="admin-form" id="form-addAnswer">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-key"></i> Add Answer Key</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Answer Key Title *</label>
+            <input type="text" class="form-control" id="answerTitle" placeholder="e.g. SSC CGL Answer Key 2026">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Download Link</label>
+            <input type="url" class="form-control" id="answerLink" placeholder="https://...">
+          </div>
+        </div>
+        <button class="submit-btn" onclick="addAnswerKey()"><i class="fas fa-plus-circle"></i> Add Answer Key</button>
+      </div>
+
+      <!-- ADD SYLLABUS -->
+      <div class="admin-form" id="form-addSyllabus">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-book"></i> Add Syllabus</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Syllabus Title *</label>
+            <input type="text" class="form-control" id="syllabusTitle" placeholder="e.g. UPSC IAS Syllabus 2026">
+          </div>
+          <div class="form-group">
+            <label class="form-label">PDF Link</label>
+            <input type="url" class="form-control" id="syllabusLink" placeholder="https://...">
+          </div>
+        </div>
+        <button class="submit-btn" onclick="addSyllabus()"><i class="fas fa-plus-circle"></i> Add Syllabus</button>
+      </div>
+
+      <!-- ADD ADMISSION -->
+      <div class="admin-form" id="form-addAdmission">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-graduation-cap"></i> Add New Admission</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Admission Title *</label>
+            <input type="text" class="form-control" id="admTitle" placeholder="e.g. JEE Main 2026 Session-2 Admission">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exam Name</label>
+            <input type="text" class="form-control" id="admExam" placeholder="e.g. JEE Main">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-control" id="admCategory">
+              <option value="engineering">Engineering</option>
+              <option value="medical">Medical/MBBS</option>
+              <option value="central_univ">Central University</option>
+              <option value="law">Law (CLAT)</option>
+              <option value="management">Management</option>
+              <option value="design">Design/NIFT</option>
+              <option value="polytechnic">Polytechnic</option>
+              <option value="bed">B.Ed</option>
+              <option value="state">State Exams</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Level</label>
+            <input type="text" class="form-control" id="admLevel" placeholder="e.g. UG, PG, Diploma">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Seats</label>
+            <input type="text" class="form-control" id="admSeats" placeholder="e.g. 15000+ or Unlimited">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Tag</label>
+            <select class="form-control" id="admTag">
+              <option value="open">OPEN</option>
+              <option value="upcoming">UPCOMING</option>
+              <option value="closed">CLOSED</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Official Link</label>
+            <input type="url" class="form-control" id="admLink" placeholder="https://...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Date</label>
+            <input type="text" class="form-control" id="admLastDate" placeholder="e.g. 31 Jul 2026">
+          </div>
+        </div>
+        <button class="submit-btn" onclick="addAdmission()"><i class="fas fa-plus-circle"></i> Add Admission</button>
+      </div>
+
+      <!-- ADS SETUP -->
+      <div class="admin-form" id="form-manageAds">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-ad"></i> Google AdSense Setup</h3>
+        <p style="font-size:13px;color:var(--text-light);margin-bottom:20px;">Yahan apna Google AdSense code paste karein. Ek baar save hone ke baad website par ads show hone lagenge.</p>
+        <div class="ad-setup-box">
+          <h4><i class="fas fa-code"></i> AdSense Client ID</h4>
+          <input type="text" class="form-control" id="adsClientId" placeholder="ca-pub-XXXXXXXXXXXXXXXXX">
+        </div>
+        <div class="ad-setup-box">
+          <h4><i class="fas fa-rectangle-landscape"></i> Top Banner (728×90) – Slot ID</h4>
+          <input type="text" class="form-control" id="adSlotTop" placeholder="Ad Slot ID: XXXXXXXXXX">
+        </div>
+        <div class="ad-setup-box">
+          <h4><i class="fas fa-sidebar"></i> Sidebar (300×250) – Slot ID</h4>
+          <input type="text" class="form-control" id="adSlotSidebar" placeholder="Ad Slot ID: XXXXXXXXXX">
+        </div>
+        <div class="ad-setup-box">
+          <h4><i class="fas fa-ad"></i> Custom Ad Code (HTML) – Optional</h4>
+          <textarea class="ad-code-input" id="customAdCode" placeholder="Paste your complete ad HTML code here..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="saveAdSettings()"><i class="fas fa-save"></i> Save Ad Settings</button>
+      </div>
+
+      <!-- TICKER NEWS -->
+      <div class="admin-form" id="form-manageTicker">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-rss"></i> Manage Ticker News</h3>
+        <p style="font-size:13px;color:var(--text-light);margin-bottom:16px;">Breaking news jo website ke upar ticker mein show hogi.</p>
+        <div class="form-group">
+          <label class="form-label">New Ticker Message</label>
+          <input type="text" class="form-control" id="tickerMsg" placeholder="🔴 New notification message yahan likhein...">
+        </div>
+        <button class="submit-btn" onclick="addTickerMsg()" style="margin-bottom:20px;"><i class="fas fa-plus"></i> Add to Ticker</button>
+        <div id="tickerList"></div>
+      </div>
+
+      <!-- MANAGE ALL -->
+      <div class="admin-form" id="form-manageAll">
+        <h3 style="margin-bottom:20px;color:var(--primary)"><i class="fas fa-list"></i> Manage All Entries</h3>
+        <div class="admin-tabs" style="margin-bottom:20px;">
+          <button class="admin-tab active" onclick="showManageSection('jobs',this)">Jobs (<span id="m-jobCount">0</span>)</button>
+          <button class="admin-tab" onclick="showManageSection('results',this)">Results (<span id="m-resultCount">0</span>)</button>
+          <button class="admin-tab" onclick="showManageSection('admits',this)">Admit Cards (<span id="m-admitCount">0</span>)</button>
+          <button class="admin-tab" onclick="showManageSection('answers',this)">Answers (<span id="m-answerCount">0</span>)</button>
+          <button class="admin-tab" onclick="showManageSection('syllabi',this)">Syllabus (<span id="m-syllabusCount">0</span>)</button>
+          <button class="admin-tab" onclick="showManageSection('admissions',this)">Admissions (<span id="m-admissionCount">0</span>)</button>
+        </div>
+        <div id="manageJobsList"></div>
+        <div id="manageResultsList" style="display:none"></div>
+        <div id="manageAdmitsList" style="display:none"></div>
+        <div id="manageAnswersList" style="display:none"></div>
+        <div id="manageSyllabiList" style="display:none"></div>
+        <div id="manageAdmissionsList" style="display:none"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+// ---- SECURE CRYPTO LOGIN ----
+const HASHED_CREDS = {
+  user: 'a131e558f96f46163f4bd4a094a4e8cd9f80b278d48ad8adb3a00257601863b6',
+  pass: '5c5693545289ddef5523416f1f0614df4917ef575a0cce9046c5af793145a3e7'
+};
+
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+}
+
+async function doLogin() {
+  const u = document.getElementById('adminUser').value;
+  const p = document.getElementById('adminPass').value;
+  
+  const uHash = await sha256(u);
+  const pHash = await sha256(p);
+  
+  if (uHash === HASHED_CREDS.user && pHash === HASHED_CREDS.pass) {
+    document.getElementById('loginSection').style.display = 'none';
+    document.getElementById('adminWrapper').classList.add('show');
+    loadAdminData();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  document.getElementById('loginSection').style.display = 'block';
+  document.getElementById('adminWrapper').classList.remove('show');
+}
+
+// ---- TABS ----
+function switchTab(id, btn) {
+  document.querySelectorAll('.admin-form').forEach(f => f.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('form-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'manageAll') loadManageSection();
+  if (id === 'manageTicker') loadTickerList();
+}
+
+// ---- STORAGE / SYNC ----
+function getData(key, fallback) {
+  const keyMap = {
+    'jobs': 'latestJobs',
+    'results': 'results',
+    'admitCards': 'admitCards',
+    'answerKeys': 'answerKeys',
+    'syllabi': 'syllabi',
+    'admissions': 'admissions',
+    'adSettings': 'adSettings',
+    'ticker': 'notifications'
+  };
+  return siteData[keyMap[key]] || fallback;
+}
+
+function saveData(key, data) {
+  const keyMap = {
+    'jobs': 'latestJobs',
+    'results': 'results',
+    'admitCards': 'admitCards',
+    'answerKeys': 'answerKeys',
+    'syllabi': 'syllabi',
+    'admissions': 'admissions',
+    'adSettings': 'adSettings',
+    'ticker': 'notifications'
+  };
+  if (keyMap[key]) {
+    siteData[keyMap[key]] = data;
+  }
+  
+  // Sync to backend global data.js
+  fetch('/api/update', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(siteData)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(!data.success) console.error('Failed to update data.js globally');
+  })
+  .catch(err => console.error('Network error during sync:', err));
+}
+
+// ---- LOAD ----
+function loadAdminData() {
+  // Merge stored data with defaults
+  const jobs = getData('jobs', siteData.latestJobs);
+  const results = getData('results', siteData.results);
+  const admits = getData('admitCards', siteData.admitCards);
+  const answers = getData('answerKeys', siteData.answerKeys);
+  const syllabi = getData('syllabi', siteData.syllabi);
+  const admissions = getData('admissions', siteData.admissions);
+
+  document.getElementById('statJobs').textContent = jobs.length;
+  document.getElementById('statResults').textContent = results.length;
+  document.getElementById('statAdmit').textContent = admits.length;
+  document.getElementById('statAnswer').textContent = answers.length;
+  document.getElementById('statSyllabus').textContent = syllabi.length;
+  document.getElementById('statAdmission').textContent = admissions.length;
+
+  // Load ad settings
+  const ads = getData('adSettings', {});
+  if (ads.clientId) document.getElementById('adsClientId').value = ads.clientId;
+  if (ads.slotTop) document.getElementById('adSlotTop').value = ads.slotTop;
+  if (ads.slotSidebar) document.getElementById('adSlotSidebar').value = ads.slotSidebar;
+  if (ads.customCode) document.getElementById('customAdCode').value = ads.customCode;
+}
+
+// ---- SUCCESS ----
+function showSuccess(msg) {
+  const el = document.getElementById('successMsg');
+  document.getElementById('successText').textContent = msg || 'Saved successfully!';
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ---- ADD JOB ----
+function addJob() {
+  const title = document.getElementById('jobTitle').value.trim();
+  if (!title) { alert('Job title required!'); return; }
+  const jobs = getData('jobs', siteData.latestJobs);
+  const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  const lastDate = document.getElementById('jobLastDate').value;
+  const newJob = {
+    id: Date.now(),
+    title,
+    posts: document.getElementById('jobPosts').value || 'Multiple',
+    category: document.getElementById('jobCategory').value,
+    state: document.getElementById('jobState').value,
+    lastDate: lastDate ? new Date(lastDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : 'Coming Soon',
+    tag: document.getElementById('jobTag').value,
+    notification: document.getElementById('jobNotifLink').value || '#',
+    apply: document.getElementById('jobApplyLink').value || '#',
+    date: today,
+    icon: 'fa-briefcase',
+    color: '#1a73e8'
+  };
+  jobs.unshift(newJob);
+  saveData('jobs', jobs);
+  // Update siteData
+  siteData.latestJobs = jobs;
+  document.getElementById('statJobs').textContent = jobs.length;
+  document.getElementById('jobTitle').value = '';
+  document.getElementById('jobPosts').value = '';
+  document.getElementById('jobNotifLink').value = '';
+  document.getElementById('jobApplyLink').value = '';
+  showSuccess('✅ Job "' + title + '" added successfully!');
+}
+
+// ---- ADD RESULT ----
+function addResult() {
+  const title = document.getElementById('resultTitle').value.trim();
+  if (!title) { alert('Result title required!'); return; }
+  const results = getData('results', siteData.results);
+  const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  const newResult = {
+    id: Date.now(), title,
+    category: document.getElementById('resultCategory').value,
+    link: document.getElementById('resultLink').value || '#',
+    tag: document.getElementById('resultTag').value,
+    date: today
+  };
+  results.unshift(newResult);
+  saveData('results', results);
+  siteData.results = results;
+  document.getElementById('statResults').textContent = results.length;
+  document.getElementById('resultTitle').value = '';
+  showSuccess('✅ Result added successfully!');
+}
+
+// ---- ADD ADMIT CARD ----
+function addAdmitCard() {
+  const title = document.getElementById('admitTitle').value.trim();
+  if (!title) { alert('Title required!'); return; }
+  const admits = getData('admitCards', siteData.admitCards);
+  const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  admits.unshift({ id: Date.now(), title, link: document.getElementById('admitLink').value || '#', tag: document.getElementById('admitTag').value, date: today });
+  saveData('admitCards', admits);
+  siteData.admitCards = admits;
+  document.getElementById('statAdmit').textContent = admits.length;
+  document.getElementById('admitTitle').value = '';
+  showSuccess('✅ Admit Card added!');
+}
+
+// ---- ADD ANSWER KEY ----
+function addAnswerKey() {
+  const title = document.getElementById('answerTitle').value.trim();
+  if (!title) { alert('Title required!'); return; }
+  const answers = getData('answerKeys', siteData.answerKeys);
+  const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  answers.unshift({ id: Date.now(), title, link: document.getElementById('answerLink').value || '#', tag: 'out', date: today });
+  saveData('answerKeys', answers);
+  siteData.answerKeys = answers;
+  document.getElementById('statAnswer').textContent = answers.length;
+  document.getElementById('answerTitle').value = '';
+  showSuccess('✅ Answer Key added!');
+}
+
+// ---- ADD SYLLABUS ----
+function addSyllabus() {
+  const title = document.getElementById('syllabusTitle').value.trim();
+  if (!title) { alert('Title required!'); return; }
+  const syllabi = getData('syllabi', siteData.syllabi);
+  const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  syllabi.unshift({ id: Date.now(), title, link: document.getElementById('syllabusLink').value || '#', tag: 'new', date: today });
+  saveData('syllabi', syllabi);
+  siteData.syllabi = syllabi;
+  document.getElementById('statSyllabus').textContent = syllabi.length;
+  document.getElementById('syllabusTitle').value = '';
+  showSuccess('✅ Syllabus added!');
+}
+
+// ---- ADD ADMISSION ----
+function addAdmission() {
+  const title = document.getElementById('admTitle').value.trim();
+  if (!title) { alert('Admission title required!'); return; }
+  const admissions = getData('admissions', siteData.admissions);
+  const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  const newAdm = {
+    id: Date.now(),
+    title,
+    exam: document.getElementById('admExam').value || '',
+    category: document.getElementById('admCategory').value,
+    level: document.getElementById('admLevel').value || 'UG',
+    seats: document.getElementById('admSeats').value || 'Unlimited',
+    tag: document.getElementById('admTag').value,
+    link: document.getElementById('admLink').value || '#',
+    lastDate: document.getElementById('admLastDate').value || 'Coming Soon',
+    date: today,
+    color: '',
+    icon: ''
+  };
+  admissions.unshift(newAdm);
+  saveData('admissions', admissions);
+  siteData.admissions = admissions;
+  document.getElementById('statAdmission').textContent = admissions.length;
+  document.getElementById('admTitle').value = '';
+  document.getElementById('admExam').value = '';
+  document.getElementById('admLevel').value = '';
+  document.getElementById('admSeats').value = '';
+  document.getElementById('admLink').value = '';
+  document.getElementById('admLastDate').value = '';
+  showSuccess('✅ Admission added!');
+}
+
+// ---- SAVE ADS ----
+function saveAdSettings() {
+  const ads = {
+    clientId: document.getElementById('adsClientId').value,
+    slotTop: document.getElementById('adSlotTop').value,
+    slotSidebar: document.getElementById('adSlotSidebar').value,
+    customCode: document.getElementById('customAdCode').value
+  };
+  saveData('adSettings', ads);
+  showSuccess('✅ Ad settings saved! Reload site to apply.');
+}
+
+// ---- TICKER ----
+function loadTickerList() {
+  const msgs = getData('ticker', siteData.notifications);
+  const list = document.getElementById('tickerList');
+  list.innerHTML = '<h4 style="margin-bottom:12px;font-size:14px;">Current Ticker Messages:</h4>';
+  msgs.forEach((msg, i) => {
+    const div = document.createElement('div');
+    div.className = 'admin-list-item';
+    div.innerHTML = `<span class="item-title">${escapeHTML(msg)}</span><div class="item-actions"><button class="btn-delete" onclick="deleteTicker(${i})"><i class="fas fa-trash"></i></button></div>`;
+    list.appendChild(div);
+  });
+}
+
+function addTickerMsg() {
+  const msg = document.getElementById('tickerMsg').value.trim();
+  if (!msg) return;
+  const msgs = getData('ticker', siteData.notifications);
+  msgs.unshift(msg);
+  saveData('ticker', msgs);
+  document.getElementById('tickerMsg').value = '';
+  loadTickerList();
+  showSuccess('✅ Ticker message added!');
+}
+
+function deleteTicker(i) {
+  const msgs = getData('ticker', siteData.notifications);
+  msgs.splice(i, 1);
+  saveData('ticker', msgs);
+  loadTickerList();
+}
+
+// ---- MANAGE SECTION ----
+function showManageSection(sec, btn) {
+  ['manageJobsList','manageResultsList','manageAdmitsList','manageAnswersList','manageSyllabiList','manageAdmissionsList'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  document.querySelectorAll('#form-manageAll .admin-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const map = { jobs: 'manageJobsList', results: 'manageResultsList', admits: 'manageAdmitsList', answers: 'manageAnswersList', syllabi: 'manageSyllabiList', admissions: 'manageAdmissionsList' };
+  const target = document.getElementById(map[sec]);
+  if (target) target.style.display = 'block';
+}
+
+function loadManageSection() {
+  const jobs = getData('jobs', siteData.latestJobs);
+  const results = getData('results', siteData.results);
+  const admits = getData('admitCards', siteData.admitCards);
+  const answers = getData('answerKeys', siteData.answerKeys);
+  const syllabi = getData('syllabi', siteData.syllabi);
+  const admissions = getData('admissions', siteData.admissions);
+
+  document.getElementById('m-jobCount').textContent = jobs.length;
+  document.getElementById('m-resultCount').textContent = results.length;
+  document.getElementById('m-admitCount').textContent = admits.length;
+  document.getElementById('m-answerCount').textContent = answers.length;
+  document.getElementById('m-syllabusCount').textContent = syllabi.length;
+  document.getElementById('m-admissionCount').textContent = admissions.length;
+
+  renderManageList('manageJobsList', jobs, 'jobs');
+  renderManageList('manageResultsList', results, 'results');
+  renderManageList('manageAdmitsList', admits, 'admits');
+  renderManageList('manageAnswersList', answers, 'answers');
+  renderManageList('manageSyllabiList', syllabi, 'syllabi');
+  renderManageList('manageAdmissionsList', admissions, 'admissions');
+}
+
+function renderManageList(containerId, items, key) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  const sliceOfItems = items.slice(0, 100);
+  sliceOfItems.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'admin-list-item';
+    div.innerHTML = `<span class="item-title">${escapeHTML(item.title)} <small style="color:var(--text-light)">(${escapeHTML(item.date)})</small></span>
+      <div class="item-actions">
+        <button class="btn-delete" onclick="deleteItem('${key}',${i})"><i class="fas fa-trash"></i> Delete</button>
+      </div>`;
+    el.appendChild(div);
+  });
+  if (items.length === 0) {
+    el.innerHTML = '<p style="color:var(--text-light);padding:16px">No items yet.</p>';
+  } else if (items.length > 100) {
+    const note = document.createElement('p');
+    note.style.color = 'var(--text-light)';
+    note.style.padding = '16px';
+    note.style.textAlign = 'center';
+    note.style.fontSize = '13px';
+    note.textContent = 'Showing latest 100 entries. Older entries are preserved in database.';
+    el.appendChild(note);
+  }
+}
+
+function deleteItem(key, idx) {
+  if (!confirm('Delete this entry?')) return;
+  
+  let dataKey, fallback;
+  if (key === 'jobs') { dataKey = 'jobs'; fallback = siteData.latestJobs; }
+  else if (key === 'results') { dataKey = 'results'; fallback = siteData.results; }
+  else if (key === 'admits') { dataKey = 'admitCards'; fallback = siteData.admitCards; }
+  else if (key === 'answers') { dataKey = 'answerKeys'; fallback = siteData.answerKeys; }
+  else if (key === 'syllabi') { dataKey = 'syllabi'; fallback = siteData.syllabi; }
+  else if (key === 'admissions') { dataKey = 'admissions'; fallback = siteData.admissions; }
+
+  const items = getData(dataKey, fallback);
+  items.splice(idx, 1);
+  saveData(dataKey, items);
+  
+  // Sync back to siteData so it updates globally
+  if (key === 'jobs') siteData.latestJobs = items;
+  else if (key === 'results') siteData.results = items;
+  else if (key === 'admits') siteData.admitCards = items;
+  else if (key === 'answers') siteData.answerKeys = items;
+  else if (key === 'syllabi') siteData.syllabi = items;
+  else if (key === 'admissions') siteData.admissions = items;
+  
+  loadManageSection();
+  loadAdminData();
+  showSuccess('Deleted successfully!');
+}
+
+// ---- PATCH SCRIPT.JS loadHomepageTables to use localStorage ----
+// Override with stored data
+const _origLoad = window.loadHomepageTables;
+</script>
+</body>
+</html>

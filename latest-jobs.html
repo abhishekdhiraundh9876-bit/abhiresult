@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latest Sarkari Jobs 2026 – Government Job Vacancy | Abhi Result</title>
+  <meta name="description" content="Latest Government Jobs 2026 - UPSC, SSC, Railway, Bank, Police, Army Bharti. Apply Online for Abhi Result Naukri 2026.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+<div class="particles" id="particles"></div>
+
+<!-- TOP TICKER -->
+<div class="top-ticker">
+  <span class="ticker-label"><i class="fas fa-bell"></i> LIVE</span>
+  <div class="ticker-wrap"><div class="ticker-content" id="tickerContent">Loading...</div></div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="mainHeader">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo-area">
+          <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+            <div class="logo-3d"><div class="logo-badge-img"><img src="abhi-logo.png?v=3" alt="Abhi Result Logo"></div></div>
+            <div class="site-title">
+              <div class="brand-name">Abhi Result</div>
+              <p class="brand-tagline">सरकारी नौकरी का सबसे भरोसेमंद पोर्टल</p>
+            </div>
+          </a>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search jobs, results..." autocomplete="off">
+            <button class="search-btn" onclick="doSearch()"><i class="fas fa-search"></i></button>
+            <div class="search-results" id="searchResults"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-nav" id="mainNav">
+    <div class="container">
+      <div class="nav-toggle" onclick="toggleNav()" id="navToggle"><span></span><span></span><span></span></div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li class="has-dropdown"><a href="latest-jobs.html" class="active"><i class="fas fa-briefcase"></i> Latest Jobs <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="latest-jobs.html?cat=central">Central Govt Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=state">State Govt Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=bank">Bank Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=railway">Railway Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=defence">Defence Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=police">Police Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="results.html"><i class="fas fa-poll"></i> Results</a></li>
+        <li><a href="admit-card.html"><i class="fas fa-id-card"></i> Admit Card</a></li>
+        <li><a href="answer-key.html"><i class="fas fa-key"></i> Answer Key</a></li>
+        <li><a href="syllabus.html"><i class="fas fa-book"></i> Syllabus</a></li>
+        <li><a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a></li>
+      <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+        <li><a href="admin.html" class="admin-link"><i class="fas fa-cog"></i> Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>/</span><span>Latest Jobs</span>
+    </div>
+    <h1>🔥 Latest Government Jobs 2026</h1>
+    <p>UPSC, SSC, Railway, Bank, Police, Army – सभी सरकारी नौकरियाँ एक जगह</p>
+  </div>
+</section>
+
+<!-- AD TOP -->
+<div class="ad-container">
+  <div class="container">
+    <div class="ad-slot insta-ad" id="adTop">
+      <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-horizontal">
+        <div class="insta-ad-gradient"></div>
+        <div class="insta-ad-content">
+          <div class="insta-ad-left">
+            <div class="insta-ad-profile-pic" style="background-image: url('profile.jpg?v=2');"></div>
+            <div class="insta-ad-text">
+              <span class="insta-ad-username">@abhiii.__.yadav</span>
+              <span class="insta-ad-title">Official Instagram of Abhi Result</span>
+              <span class="insta-ad-desc">Follow for fastest Sarkari updates, daily quizzes & support!</span>
+            </div>
+          </div>
+          <div class="insta-ad-btn"><i class="fab fa-instagram"></i> Follow</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <label><i class="fas fa-filter"></i> Filter:</label>
+    <select class="filter-select" id="catFilter" onchange="filterJobs()">
+      <option value="">All Categories</option>
+      <option value="upsc">UPSC</option>
+      <option value="ssc">SSC</option>
+      <option value="railway">Railway</option>
+      <option value="bank">Bank</option>
+      <option value="police">Police</option>
+      <option value="defence">Defence</option>
+      <option value="bpsc">BPSC</option>
+      <option value="upsssc">UPSSSC</option>
+      <option value="rpsc">RPSC</option>
+      <option value="dsssb">DSSSB</option>
+      <option value="navy">Navy</option>
+      <option value="airforce">Air Force</option>
+    </select>
+    <select class="filter-select" id="stateFilter" onchange="filterJobs()">
+      <option value="">All States</option>
+      <option value="central">Central</option>
+      <option value="up">Uttar Pradesh</option>
+      <option value="bihar">Bihar</option>
+      <option value="raj">Rajasthan</option>
+      <option value="delhi">Delhi</option>
+      <option value="hr">Haryana</option>
+    </select>
+    <input type="text" class="filter-input" id="searchFilter" placeholder="Search job title..." oninput="filterJobs()">
+    <button class="filter-btn" onclick="clearFilters()"><i class="fas fa-times"></i> Clear</button>
+  </div>
+
+  <!-- JOBS COUNT -->
+  <div style="margin:10px 0 16px; font-size:13px; color:var(--text-light);">
+    Showing <strong id="jobCount">0</strong> jobs
+  </div>
+
+  <!-- JOBS GRID -->
+  <div class="jobs-grid" id="jobsGrid"></div>
+
+  <!-- JOB DETAIL PANEL -->
+  <div class="detail-box" id="jobDetail" style="display:none;">
+    <div id="jobDetailContent"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-col"><h4><i class="fas fa-th-list"></i> Page Links</h4><ul>
+      <li><a href="latest-jobs.html?cat=bpsc">BPSC</a></li>
+      <li><a href="latest-jobs.html?cat=upsssc">UPSSSC</a></li>
+      <li><a href="latest-jobs.html?cat=ssc">SSC</a></li>
+      <li><a href="latest-jobs.html?cat=upsc">UPSC</a></li>
+      <li><a href="latest-jobs.html?cat=airforce">Air Force</a></li>
+      <li><a href="latest-jobs.html?cat=navy">Navy</a></li>
+      <li><a href="latest-jobs.html?cat=railway">Railways</a></li>
+    </ul></div>
+    <div class="footer-col"><h4><i class="fas fa-link"></i> Quick Links</h4><ul>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="admit-card.html">Admit Card</a></li>
+      <li><a href="answer-key.html">Answer Key</a></li>
+      <li><a href="syllabus.html">Syllabus</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul></div>
+    <div class="footer-col"><h4><i class="fas fa-share-alt"></i> Follow Us</h4><ul class="social-links">
+      <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+      <li><a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
+      <li><a href="https://t.me" target="_blank"><i class="fab fa-telegram"></i> Telegram</a></li>
+      <li><a href="https://wa.me" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+    </ul></div>
+    <div class="footer-col footer-about"><h4><i class="fas fa-star"></i> About</h4>
+      <p>Abhi Result – India ka No.1 Government Job Portal. Since 2012.</p>
+      <div class="footer-logo"><img src="logo.png?v=3" alt="Abhi Result Logo" style="width:48px; height:48px; border-radius:50%; border:2px solid var(--gold); object-fit:cover; background:#fff;"><span>Since 2012</span></div>
+    </div>
+  </div></div></div>
+  <div class="footer-bottom"><div class="container"><p>Copyright © 2012–2026 | <strong>Abhi Result</strong></p></div></div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+<div class="notif-popup" id="notifPopup"><div class="notif-icon"><i class="fas fa-bell"></i></div><div class="notif-content"><strong>New Alert!</strong><span id="notifText"></span></div><button class="notif-close" onclick="closeNotif()">×</button></div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+<script>
+let allJobs = [];
+let displayedCount = 50;
+let filteredJobs = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+  allJobs = siteData.latestJobs || [];
+  // Check URL param for category, state & id
+  const catParam = getUrlParam('cat');
+  const stateParam = getUrlParam('state');
+  const idParam = getUrlParam('id');
+  if (catParam) document.getElementById('catFilter').value = catParam;
+  if (stateParam) document.getElementById('stateFilter').value = stateParam;
+  filterJobs();
+  if (idParam) showJobDetail(+idParam);
+
+  // Update ticker
+  const tc = document.getElementById('tickerContent');
+  if (tc && siteData.notifications) tc.textContent = siteData.notifications.join(' | ');
+});
+
+function filterJobs() {
+  const cat = document.getElementById('catFilter').value;
+  const state = document.getElementById('stateFilter').value;
+  const search = document.getElementById('searchFilter').value.toLowerCase();
+
+  // Reset count when filtering
+  displayedCount = 50;
+
+  filteredJobs = allJobs.filter(job => {
+    return (!cat || job.category === cat) &&
+           (!state || job.state === state) &&
+           (!search || job.title.toLowerCase().includes(search));
+  });
+
+  document.getElementById('jobCount').textContent = filteredJobs.length;
+  renderJobsList();
+}
+
+function clearFilters() {
+  document.getElementById('catFilter').value = '';
+  document.getElementById('stateFilter').value = '';
+  document.getElementById('searchFilter').value = '';
+  filterJobs();
+}
+
+function renderJobsList() {
+  const grid = document.getElementById('jobsGrid');
+  grid.innerHTML = '';
+  
+  if (filteredJobs.length === 0) {
+    grid.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-light)"><i class="fas fa-search fa-3x" style="opacity:0.3"></i><p style="margin-top:16px">No jobs found. Try different filters.</p></div>';
+    removeLoadMoreButton();
+    return;
+  }
+  
+  const sliceOfJobs = filteredJobs.slice(0, displayedCount);
+  
+  sliceOfJobs.forEach(job => {
+    const card = document.createElement('div');
+    card.className = 'job-card slide-up';
+    card.innerHTML = `
+      <div class="job-card-icon" style="background:${escapeHTML(job.color || '#1a73e8')}">
+        <i class="fas ${escapeHTML(job.icon || 'fa-briefcase')}"></i>
+      </div>
+      <div class="job-card-body">
+        <div class="job-card-title">${escapeHTML(job.title)}</div>
+        <div class="job-card-meta">
+          <span class="job-meta-item"><i class="fas fa-users"></i> ${escapeHTML(job.posts || 'Multiple')} Posts</span>
+          <span class="job-meta-item"><i class="fas fa-calendar"></i> Posted: ${escapeHTML(job.date)}</span>
+          <span class="job-meta-item"><i class="fas fa-clock"></i> Last Date: ${escapeHTML(job.lastDate || 'Coming Soon')}</span>
+        </div>
+        <div class="job-card-tags">
+          <span class="job-tag tag-blue">${escapeHTML(job.category?.toUpperCase() || 'GOVT')}</span>
+          <span class="job-tag tag-${job.tag === 'new' ? 'green' : job.tag === 'hot' ? 'red' : 'orange'}">${escapeHTML(job.tag?.toUpperCase())}</span>
+        </div>
+      </div>
+      <div class="job-card-action">
+        <button class="apply-btn" onclick="showJobDetail(${job.id}); event.stopPropagation();">View Details</button>
+        <span class="last-date">⏰ ${escapeHTML(job.lastDate || 'Check Notification')}</span>
+      </div>
+    `;
+    card.onclick = () => showJobDetail(job.id);
+    grid.appendChild(card);
+  });
+  
+  if (filteredJobs.length > displayedCount) {
+    showLoadMoreButton();
+  } else {
+    removeLoadMoreButton();
+  }
+}
+
+function showLoadMoreButton() {
+  removeLoadMoreButton();
+  
+  const grid = document.getElementById('jobsGrid');
+  const btn = document.createElement('button');
+  btn.id = 'loadMoreBtn';
+  btn.className = 'filter-btn';
+  btn.style.display = 'block';
+  btn.style.margin = '30px auto';
+  btn.style.padding = '12px 30px';
+  btn.style.fontSize = '15px';
+  btn.style.borderRadius = '30px';
+  btn.style.background = 'linear-gradient(135deg, #1a73e8, #0b4fba)';
+  btn.style.color = '#fff';
+  btn.style.border = 'none';
+  btn.style.cursor = 'pointer';
+  btn.style.fontWeight = '600';
+  btn.style.boxShadow = '0 8px 20px rgba(26, 115, 232, 0.3)';
+  btn.style.transition = 'all 0.3s ease';
+  
+  btn.innerHTML = '<i class="fas fa-sync-alt"></i> Load More Jobs';
+  btn.onclick = () => {
+    displayedCount += 50;
+    renderJobsList();
+  };
+  
+  grid.parentNode.insertBefore(btn, grid.nextSibling);
+}
+
+function removeLoadMoreButton() {
+  const btn = document.getElementById('loadMoreBtn');
+  if (btn) btn.remove();
+}
+
+function showJobDetail(id) {
+  const job = allJobs.find(j => j.id === id);
+  if (!job) return;
+  const detail = document.getElementById('jobDetail');
+  const content = document.getElementById('jobDetailContent');
+  detail.style.display = 'block';
+  content.innerHTML = `
+    <h2 class="detail-title"><i class="fas ${escapeHTML(job.icon || 'fa-briefcase')}" style="color:${escapeHTML(job.color)}"></i> ${escapeHTML(job.title)}</h2>
+    <table class="detail-table">
+      <tr><th>Post Name</th><td>${escapeHTML(job.title)}</td></tr>
+      <tr><th>Total Posts</th><td><strong>${escapeHTML(job.posts || 'Multiple')}</strong></td></tr>
+      <tr><th>Category</th><td>${escapeHTML(job.category?.toUpperCase())}</td></tr>
+      <tr><th>Last Date</th><td><strong style="color:var(--accent)">${escapeHTML(job.lastDate || 'Check Notification')}</strong></td></tr>
+      <tr><th>Post Date</th><td>${escapeHTML(job.date)}</td></tr>
+      <tr><th>Job Type</th><td>Government Job</td></tr>
+    </table>
+    <div style="margin-top:20px;display:flex;flex-wrap:wrap;gap:10px;">
+      <a href="${safeURL(job.notification)}" target="_blank" class="detail-btn btn-primary"><i class="fas fa-file-pdf"></i> Download Notification</a>
+      <a href="${safeURL(job.apply)}" target="_blank" class="detail-btn btn-success"><i class="fas fa-edit"></i> Apply Online</a>
+      <button class="detail-btn btn-danger" onclick="document.getElementById('jobDetail').style.display='none'"><i class="fas fa-times"></i> Close</button>
+    </div>
+  `;
+  detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>

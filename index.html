@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhi Result 2026 – Latest Sarkari Naukri, Result, Admit Card | India's Best Govt Job Portal</title>
+  <meta name="description" content="Abhi Result 2026 – India ka No.1 Government Job Portal. Latest Sarkari Jobs, Results, Admit Card, Answer Key, Syllabus, Admission – sab kuch ek jagah. UPSC, SSC, Railway, Bank, Police, Army bharti.">
+  <meta name="keywords" content="sarkari result, sarkari naukri, government jobs, admit card, answer key, syllabus, UPSC, SSC, Railway, Bank, Police, Army">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<!-- TOP TICKER -->
+<div class="top-ticker">
+  <span class="ticker-label"><i class="fas fa-bell"></i> LIVE</span>
+  <div class="ticker-wrap"><div class="ticker-content" id="tickerContent">Loading latest updates...</div></div>
+</div>
+
+<!-- HEADER -->
+<header class="header" id="mainHeader">
+  <div class="header-top">
+    <div class="container">
+      <div class="header-inner">
+        <div class="logo-area">
+          <div class="logo-3d"><div class="logo-badge-img"><img src="abhi-logo.png?v=3" alt="Abhi Result Logo"></div></div>
+          <div class="site-title">
+            <h1 class="brand-name">Abhi Result</h1>
+            <p class="brand-tagline">India's No.1 सरकारी नौकरी पोर्टल – Since 2012</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Jobs, Result, Admit Card khojein..." autocomplete="off">
+            <button class="search-btn" onclick="doSearch()"><i class="fas fa-search"></i></button>
+            <div class="search-results" id="searchResults"></div>
+          </div>
+          <div class="social-header">
+            <a href="https://t.me/abhiresultofficial" target="_blank" rel="noopener" class="sh-btn telegram" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="https://wa.me/910000000000" target="_blank" rel="noopener" class="sh-btn whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.youtube.com/@nawada_scoughtsss" target="_blank" rel="noopener" class="sh-btn youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="main-nav" id="mainNav">
+    <div class="container">
+      <div class="nav-toggle" onclick="toggleNav()" id="navToggle"><span></span><span></span><span></span></div>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+        <li class="has-dropdown">
+          <a href="latest-jobs.html"><i class="fas fa-briefcase"></i> Latest Jobs <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="latest-jobs.html?cat=upsc"><i class="fas fa-landmark"></i> UPSC Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=ssc"><i class="fas fa-file-alt"></i> SSC Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=railway"><i class="fas fa-train"></i> Railway Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=ibps"><i class="fas fa-university"></i> Bank Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=defence"><i class="fas fa-star"></i> Defence Jobs</a></li>
+            <li><a href="latest-jobs.html?cat=police"><i class="fas fa-shield-alt"></i> Police Jobs</a></li>
+          </ul>
+        </li>
+        <li><a href="results.html"><i class="fas fa-poll"></i> Results</a></li>
+        <li><a href="admit-card.html"><i class="fas fa-id-card"></i> Admit Card</a></li>
+        <li><a href="answer-key.html"><i class="fas fa-key"></i> Answer Key</a></li>
+        <li><a href="syllabus.html"><i class="fas fa-book"></i> Syllabus</a></li>
+        <li><a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a></li>
+        <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+        <li><a href="admin.html" class="admin-link"><i class="fas fa-cog"></i> Admin</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<!-- AD BANNER TOP -->
+<div class="ad-container">
+  <div class="container">
+    <div class="ad-slot insta-ad" id="adBannerTop">
+      <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-horizontal">
+        <div class="insta-ad-gradient"></div>
+        <div class="insta-ad-content">
+          <div class="insta-ad-left">
+            <div class="insta-ad-profile-pic" style="background-image: url('profile.jpg?v=2');"></div>
+            <div class="insta-ad-text">
+              <span class="insta-ad-username">@abhiii.__.yadav</span>
+              <span class="insta-ad-title">Official Instagram of Abhi Result</span>
+              <span class="insta-ad-desc">Follow for fastest Sarkari updates, daily quizzes & support!</span>
+            </div>
+          </div>
+          <div class="insta-ad-btn"><i class="fab fa-instagram"></i> Follow</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="hero-3d-bg"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><span>🔥 2026 का सबसे बड़ा Sarkari Job Portal</span></div>
+      <h2 class="hero-title">सरकारी नौकरी की <span class="gradient-text">सम्पूर्ण जानकारी</span> एक जगह</h2>
+      <p class="hero-sub">Latest Jobs, Results, Admit Card, Answer Key, Syllabus, Admission – सब कुछ Real Official Links के साथ!</p>
+      <div class="hero-stats">
+        <div class="stat-card"><div class="stat-num" data-count="50000">0</div><div class="stat-label">+ Active Jobs</div></div>
+        <div class="stat-card"><div class="stat-num" data-count="1200">0</div><div class="stat-label">Results Today</div></div>
+        <div class="stat-card"><div class="stat-num" data-count="850">0</div><div class="stat-label">Admit Cards</div></div>
+        <div class="stat-card"><div class="stat-num" data-count="50">0</div><div class="stat-label">Lakh+ Students</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK CATEGORIES -->
+<section class="quick-cats">
+  <div class="container">
+    <div class="cat-grid">
+      <a href="latest-jobs.html" class="cat-card cat-jobs">
+        <div class="cat-icon"><i class="fas fa-briefcase"></i></div>
+        <div class="cat-info"><h3>Latest Jobs</h3><span>नई भर्ती 2026</span></div>
+        <div class="cat-count">1,800+</div>
+      </a>
+      <a href="results.html" class="cat-card cat-result">
+        <div class="cat-icon"><i class="fas fa-trophy"></i></div>
+        <div class="cat-info"><h3>Results</h3><span>परीक्षा परिणाम</span></div>
+        <div class="cat-count">1,100+</div>
+      </a>
+      <a href="admit-card.html" class="cat-card cat-admit">
+        <div class="cat-icon"><i class="fas fa-id-card"></i></div>
+        <div class="cat-info"><h3>Admit Card</h3><span>Hall Ticket</span></div>
+        <div class="cat-count">1,200+</div>
+      </a>
+      <a href="answer-key.html" class="cat-card cat-answer">
+        <div class="cat-icon"><i class="fas fa-key"></i></div>
+        <div class="cat-info"><h3>Answer Key</h3><span>उत्तर कुंजी</span></div>
+        <div class="cat-count">400+</div>
+      </a>
+      <a href="syllabus.html" class="cat-card cat-syllabus">
+        <div class="cat-icon"><i class="fas fa-book-open"></i></div>
+        <div class="cat-info"><h3>Syllabus</h3><span>पाठ्यक्रम PDF</span></div>
+        <div class="cat-count">100+</div>
+      </a>
+      <a href="admission.html" class="cat-card cat-admission">
+        <div class="cat-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="cat-info"><h3>Admission</h3><span>College Admission</span></div>
+        <div class="cat-count">200+</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SARKARI TOOLS SHOWCASE -->
+<section class="tools-showcase">
+  <div class="container">
+    <div class="tools-showcase-box">
+      <div class="tools-showcase-header">
+        <div>
+          <h2 class="tools-showcase-title"><i class="fas fa-tools"></i> Abhi Result Advanced Student Tools</h2>
+          <p class="tools-showcase-subtitle">Free client-side tools designed for job applications, age checks, and resume creation.</p>
+        </div>
+        <a href="tools.html" class="tools-showcase-btn"><i class="fas fa-external-link-alt"></i> All Tools Hub</a>
+      </div>
+      <div class="tools-showcase-grid">
+        <a href="tools.html?tab=resizer" class="tool-ov-card">
+          <div class="tool-ov-icon" style="color:#ffd700;"><i class="fas fa-compress-arrows-alt"></i></div>
+          <h4>Photo & Sig Resizer</h4>
+          <p>Compress and resize photo/signature files under 20KB/50KB for online forms.</p>
+        </a>
+        <a href="tools.html?tab=agecalc" class="tool-ov-card">
+          <div class="tool-ov-icon" style="color:#2dc653;"><i class="fas fa-calculator"></i></div>
+          <h4>Age Calculator</h4>
+          <p>Check your exact eligibility age (Years, Months, Days) on custom cut-off dates.</p>
+        </a>
+        <a href="tools.html?tab=cvmaker" class="tool-ov-card">
+          <div class="tool-ov-icon" style="color:#1a73e8;"><i class="fas fa-file-invoice"></i></div>
+          <h4>Resume CV Builder</h4>
+          <p>Create, format, and save a professional job resume as a clean PDF instantly.</p>
+        </a>
+        <a href="tools.html?tab=typing" class="tool-ov-card">
+          <div class="tool-ov-icon" style="color:#f39c12;"><i class="fas fa-keyboard"></i></div>
+          <h4>Sarkari Typing Test</h4>
+          <p>Practice typing with live speed (WPM) and accuracy metrics for clerk exams.</p>
+        </a>
+        <a href="tools.html?tab=salary" class="tool-ov-card">
+          <div class="tool-ov-icon" style="color:#2e7d32;"><i class="fas fa-rupee-sign"></i></div>
+          <h4>Salary Calculator</h4>
+          <p>Calculate your detailed 7th CPC basic, HRA, DA, NPS and net in-hand salary.</p>
+        </a>
+        <a href="tools.html?tab=documents" class="tool-ov-card">
+          <div class="tool-ov-icon" style="color:#e63946;"><i class="fas fa-address-card"></i></div>
+          <h4>Govt Document Grids</h4>
+          <p>Direct access to official Aadhaar downloads, PAN corrections, and Voter services.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AD MIDDLE -->
+<div class="ad-container">
+  <div class="container">
+    <div class="ad-slot insta-ad" id="adMiddle">
+      <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-horizontal">
+        <div class="insta-ad-gradient"></div>
+        <div class="insta-ad-content">
+          <div class="insta-ad-left">
+            <div class="insta-ad-profile-pic" style="background-image: url('profile.jpg?v=2');"></div>
+            <div class="insta-ad-text">
+              <span class="insta-ad-username">@abhiii.__.yadav</span>
+              <span class="insta-ad-title">Join our Instagram community</span>
+              <span class="insta-ad-desc">Daily Job Notifications, Exam Dates & Prep Guidance</span>
+            </div>
+          </div>
+          <div class="insta-ad-btn"><i class="fab fa-instagram"></i> Follow</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+  <div class="content-grid">
+    <div class="main-col">
+
+      <!-- LATEST JOBS -->
+      <div class="notice-board" id="latestJobsSection">
+        <div class="board-header jobs-header">
+          <h2><i class="fas fa-fire"></i> Latest Government Jobs 2026</h2>
+          <a href="latest-jobs.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="notice-table" id="latestJobsTable"></div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="notice-board" id="resultsSection">
+        <div class="board-header result-header">
+          <h2><i class="fas fa-trophy"></i> Latest Sarkari Results 2026</h2>
+          <a href="results.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="notice-table" id="resultsTable"></div>
+      </div>
+
+      <!-- AD IN CONTENT -->
+      <div class="ad-slot insta-ad" id="adContent" style="margin-bottom:30px;">
+        <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-horizontal">
+          <div class="insta-ad-gradient"></div>
+          <div class="insta-ad-content">
+            <div class="insta-ad-left">
+              <div class="insta-ad-profile-pic" style="background-image: url('profile.jpg?v=2');"></div>
+              <div class="insta-ad-text">
+                <span class="insta-ad-username">@abhiii.__.yadav</span>
+                <span class="insta-ad-title">Sarkari Exams Daily Guide</span>
+                <span class="insta-ad-desc">Latest Notifications direct to your feed. Don't miss out!</span>
+              </div>
+            </div>
+            <div class="insta-ad-btn"><i class="fab fa-instagram"></i> Follow</div>
+          </div>
+        </a>
+      </div>
+
+      <!-- ADMIT CARD -->
+      <div class="notice-board" id="admitSection">
+        <div class="board-header admit-header">
+          <h2><i class="fas fa-id-card"></i> Admit Card / Hall Ticket 2026</h2>
+          <a href="admit-card.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="notice-table" id="admitTable"></div>
+      </div>
+
+      <!-- ANSWER KEY -->
+      <div class="notice-board" id="answerSection">
+        <div class="board-header answer-header">
+          <h2><i class="fas fa-key"></i> Answer Key 2026</h2>
+          <a href="answer-key.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="notice-table" id="answerTable"></div>
+      </div>
+
+      <!-- SYLLABUS -->
+      <div class="notice-board" id="syllabusSection">
+        <div class="board-header syllabus-header">
+          <h2><i class="fas fa-book"></i> Syllabus & Exam Pattern 2026</h2>
+          <a href="syllabus.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="notice-table" id="syllabusTable"></div>
+      </div>
+
+      <!-- ADMISSION -->
+      <div class="notice-board" id="admissionSection">
+        <div class="board-header admission-header">
+          <h2><i class="fas fa-graduation-cap"></i> Government Admission 2026</h2>
+          <a href="admission.html" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="notice-table" id="admissionTable"></div>
+      </div>
+
+      <!-- ABOUT PORTAL CARD -->
+      <div class="notice-board" id="aboutPortalSection">
+        <div class="board-header about-header">
+          <h2><i class="fas fa-info-circle"></i> Abhi Result – भारत का सर्वश्रेष्ठ सरकारी नौकरी एवं शिक्षा पोर्टल</h2>
+        </div>
+        <div class="about-body">
+          <p class="about-p">
+            <strong>Abhi Result</strong> भारत का एक अग्रणी और विश्वसनीय शिक्षा व करियर मार्गदर्शन पोर्टल है। हमारा मुख्य उद्देश्य देश के सभी छात्रों और नौकरी की तैयारी करने वाले उम्मीदवारों तक नवीनतम <strong>Sarkari Naukri</strong>, <strong>Exam Results</strong>, <strong>Admit Cards</strong>, <strong>Answer Keys</strong>, <strong>Syllabus</strong>, and <strong>Admissions</strong> की सटीक जानकारी सबसे पहले और 100% सत्यापित आधिकारिक लिंक्स के साथ पहुँचाना है।
+          </p>
+          <div class="about-features">
+            <div class="about-feature-card">
+              <h4><i class="fas fa-check-circle" style="color: var(--green);"></i> 100% सत्यापित लिंक्स</h4>
+              <p>हम केवल आधिकारिक सरकारी वेबसाइटों (.gov.in, .nic.in, .ac.in) के डायरेक्ट लिंक्स प्रदान करते हैं, जिससे छात्रों का कीमती समय बचे और वे धोखाधड़ी से सुरक्षित रहें.</p>
+            </div>
+            <div class="about-feature-card">
+              <h4><i class="fas fa-bolt" style="color: var(--gold);"></i> सबसे तेज़ अपडेट</h4>
+              <p>नवीनतम सरकारी भर्तियों, परीक्षा परिणामों, प्रवेश पत्र (Admit Card), उत्तर कुंजी (Answer Key) और एडमिशन से जुड़ी हर एक जानकारी सबसे पहले यहाँ अपडेट की जाती है.</p>
+            </div>
+            <div class="about-feature-card">
+              <h4><i class="fas fa-tools" style="color: var(--blue);"></i> उपयोगी छात्र टूल्स</h4>
+              <p>Photo & Signature Resizer, Age Calculator, Professional Resume / CV Maker, Typing Test और Salary Calculator जैसे ढेरों टूल्स बिल्कुल मुफ्त उपयोग करें.</p>
+            </div>
+            <div class="about-feature-card">
+              <h4><i class="fas fa-graduation-cap" style="color: var(--purple);"></i> सम्पूर्ण शिक्षा मार्गदर्शक</h4>
+              <p>UPSC, SSC, Railway, Banking, Police, Defense, State Board, Board Results & Colleges से जुड़ी समस्त शैक्षिक जानकारियों का एक साझा केंद्र.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end main-col -->
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="ad-slot insta-ad" id="adSidebar">
+        <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-vertical">
+          <div class="insta-ad-gradient"></div>
+          <div class="insta-ad-card">
+            <div class="insta-ad-avatar-wrap">
+              <div class="insta-ad-avatar" style="background-image: url('profile.jpg?v=2'); background-size: cover; background-position: center;"></div>
+              <div class="insta-ad-badge"><i class="fas fa-check"></i></div>
+            </div>
+            <div class="insta-ad-info">
+              <h4 class="insta-ad-name">Abhi Yadav</h4>
+              <p class="insta-ad-username">@abhiii.__.yadav</p>
+              <p class="insta-ad-bio">Founder Abhi Result • Software Developer • Daily Govt Job Updates</p>
+            </div>
+            <div class="insta-ad-stats">
+              <div><strong>250K+</strong><span>Followers</span></div>
+              <div><strong>1.2K+</strong><span>Posts</span></div>
+            </div>
+            <div class="insta-ad-btn block-btn"><i class="fab fa-instagram"></i> Follow on Instagram</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="widget">
+        <div class="widget-header"><i class="fas fa-link"></i> Important Official Links</div>
+        <div class="widget-body">
+          <ul class="imp-links">
+            <li><a href="https://upsc.gov.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> UPSC Official</a></li>
+            <li><a href="https://ssc.nic.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> SSC Official</a></li>
+            <li><a href="https://www.rrbapply.gov.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> RRB Apply</a></li>
+            <li><a href="https://www.ibps.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> IBPS Official</a></li>
+            <li><a href="https://bank.sbi/careers" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> SBI Careers</a></li>
+            <li><a href="https://joinindianarmy.nic.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Indian Army</a></li>
+            <li><a href="https://joinindiannavy.gov.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Indian Navy</a></li>
+            <li><a href="https://nta.ac.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> NTA (JEE/NEET)</a></li>
+            <li><a href="https://indiapostgdsonline.gov.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> India Post GDS</a></li>
+            <li><a href="https://csbc.bih.nic.in" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Bihar Police CSBC</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="widget-header"><i class="fas fa-map-marker-alt"></i> State Wise Jobs</div>
+        <div class="widget-body">
+          <div class="state-grid">
+            <a href="latest-jobs.html?state=up" class="state-btn">UP</a>
+            <a href="latest-jobs.html?state=bihar" class="state-btn">Bihar</a>
+            <a href="latest-jobs.html?state=raj" class="state-btn">Rajasthan</a>
+            <a href="latest-jobs.html?state=mp" class="state-btn">MP</a>
+            <a href="latest-jobs.html?state=delhi" class="state-btn">Delhi</a>
+            <a href="latest-jobs.html?state=hr" class="state-btn">Haryana</a>
+            <a href="latest-jobs.html?state=mh" class="state-btn">Maharashtra</a>
+            <a href="latest-jobs.html?state=gj" class="state-btn">Gujarat</a>
+            <a href="latest-jobs.html?state=wb" class="state-btn">West Bengal</a>
+            <a href="latest-jobs.html?state=central" class="state-btn">Central</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-slot insta-ad" id="adSidebar2">
+        <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-vertical">
+          <div class="insta-ad-gradient"></div>
+          <div class="insta-ad-card">
+            <div class="insta-ad-avatar-wrap">
+              <div class="insta-ad-avatar" style="background-image: url('profile.jpg?v=2'); background-size: cover; background-position: center;"></div>
+              <div class="insta-ad-badge"><i class="fas fa-check"></i></div>
+            </div>
+            <div class="insta-ad-info">
+              <h4 class="insta-ad-name">Abhi Yadav</h4>
+              <p class="insta-ad-username">@abhiii.__.yadav</p>
+              <p class="insta-ad-bio">Sarkari Updates • Photo/Signature Compressors • Eligibility Tools</p>
+            </div>
+            <div class="insta-ad-stats">
+              <div><strong>250K+</strong><span>Followers</span></div>
+              <div><strong>1.2K+</strong><span>Posts</span></div>
+            </div>
+            <div class="insta-ad-btn block-btn"><i class="fab fa-instagram"></i> Follow on Instagram</div>
+          </div>
+        </a>
+      </div>
+
+      <div class="widget app-widget">
+        <div class="widget-header"><i class="fas fa-mobile-alt"></i> Download Our App</div>
+        <div class="widget-body app-body">
+          <p>Abhi Result App – सभी Sarkari Updates तुरंत पाएं!</p>
+          <div class="app-btns">
+            <a href="#" class="app-btn android"><i class="fab fa-google-play"></i> Google Play</a>
+            <a href="#" class="app-btn ios"><i class="fab fa-apple"></i> App Store</a>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon"><i class="fas fa-building"></i></div>
+        <h3>Abhi Result – India का No.1 Portal</h3>
+        <p>Abhi Result 2026 par sabhi Sarkari Jobs, Results, Admit Card, Answer Key aur Syllabus real official links ke saath milta hai. Hum 2012 se crores of students ki seva kar rahe hain.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>100% Verified Official Links</h3>
+        <p>Hamare portal par jo bhi links diye jaate hain wo sirf official government websites ke hote hain – .gov.in, .nic.in, .ac.in. Koi fake ya misleading link nahi. Student ka time bachao.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon"><i class="fas fa-mobile-alt"></i></div>
+        <h3>Mobile Friendly – 24x7 Updated</h3>
+        <p>Abhi Result mobile-first design ke saath banaya gaya hai. Kisi bhi device par perfectly kaam karta hai. Hum 24x7 naye jobs, results aur admit cards update karte hain.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AD BEFORE FOOTER -->
+<div class="ad-container">
+  <div class="container">
+    <div class="ad-slot insta-ad" id="adFooterTop">
+      <a href="https://instagram.com/abhiresult" target="_blank" rel="noopener" class="insta-ad-link insta-ad-horizontal">
+        <div class="insta-ad-gradient"></div>
+        <div class="insta-ad-content">
+          <div class="insta-ad-left">
+            <div class="insta-ad-profile-pic" style="background-image: url('profile.jpg?v=2');"></div>
+            <div class="insta-ad-text">
+              <span class="insta-ad-username">@abhiii.__.yadav</span>
+              <span class="insta-ad-title">Official Portal - Abhi Result 2026</span>
+              <span class="insta-ad-desc">Join 2.5 Lakh+ students getting updates instantly!</span>
+            </div>
+          </div>
+          <div class="insta-ad-btn"><i class="fab fa-instagram"></i> Follow</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top"><div class="container"><div class="footer-grid">
+    <div class="footer-col">
+      <h4><i class="fas fa-th-list"></i> Quick Links</h4>
+      <ul>
+        <li><a href="latest-jobs.html"><i class="fas fa-briefcase"></i> Latest Jobs</a></li>
+        <li><a href="results.html"><i class="fas fa-trophy"></i> Results</a></li>
+        <li><a href="admit-card.html"><i class="fas fa-id-card"></i> Admit Card</a></li>
+        <li><a href="answer-key.html"><i class="fas fa-key"></i> Answer Key</a></li>
+        <li><a href="syllabus.html"><i class="fas fa-book"></i> Syllabus</a></li>
+        <li><a href="admission.html"><i class="fas fa-graduation-cap"></i> Admission</a></li>
+        <li><a href="tools.html"><i class="fas fa-tools"></i> Tools</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fas fa-link"></i> Official Sites</h4>
+      <ul>
+        <li><a href="https://upsc.gov.in" target="_blank" rel="noopener">UPSC Official</a></li>
+        <li><a href="https://ssc.nic.in" target="_blank" rel="noopener">SSC Official</a></li>
+        <li><a href="https://www.rrbapply.gov.in" target="_blank" rel="noopener">RRB Official</a></li>
+        <li><a href="https://www.ibps.in" target="_blank" rel="noopener">IBPS Official</a></li>
+        <li><a href="https://jeemain.nta.ac.in" target="_blank" rel="noopener">JEE Main NTA</a></li>
+        <li><a href="https://neet.nta.ac.in" target="_blank" rel="noopener">NEET NTA</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fas fa-share-alt"></i> Follow Us</h4>
+      <ul class="social-links">
+        <li><a href="https://instagram.com/abhiii.__.yadav" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> Instagram</a></li>
+        <li><a href="https://www.youtube.com/@nawada_scoughtsss" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> YouTube</a></li>
+        <li><a href="https://t.me/abhiresultofficiattl" target="_blank" rel="noopener"><i class="fab fa-telegram"></i> Telegram</a></li>
+        <li><a href="https://wa.me/910000000000" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+        <li><a href="https://twitter.com/abhiresulttt" target="_blank" rel="noopener"><i class="fab fa-twitter"></i> Twitter/X</a></li>
+        <li><a href="https://facebook.com/abhiresulttt" target="_blank" rel="noopener"><i class="fab fa-facebook"></i> Facebook</a></li>
+      </ul>
+    </div>
+    <div class="footer-col footer-about">
+      <h4><i class="fas fa-star"></i> About Abhi Result</h4>
+      <p>Welcome to Abhi Result – India's most trusted Government Job portal since 2025. We provide verified information about Jobs, Results, Admit Cards, Answer Keys, Syllabus & Admissions.</p>
+      <div class="footer-logo">
+        <img src="logo.png?v=3" alt="Abhi Result Logo" style="width:48px; height:48px; border-radius:50%; border:2px solid var(--gold); object-fit:cover; background:#fff;">
+        <div><strong style="color:var(--gold)">Abhi Result</strong><br><span style="font-size:11px;color:rgba(255,255,255,0.5)">Since 2025 | Since 2025</span></div>
+      </div>
+      <div class="trademark-info"><p>📌 Registered Trademark – Intellectual Property India</p></div>
+    </div>
+  </div></div></div>
+  <div class="footer-bottom"><div class="container">
+    <p style="margin-bottom: 12px; font-size: 13px;">
+      <a href="about-us.html" style="color:rgba(255,255,255,0.6); margin:0 12px; transition:var(--transition);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">About Us</a> |
+      <a href="contact-us.html" style="color:rgba(255,255,255,0.6); margin:0 12px; transition:var(--transition);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Contact Us</a> |
+      <a href="privacy-policy.html" style="color:rgba(255,255,255,0.6); margin:0 12px; transition:var(--transition);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Privacy Policy</a> |
+      <a href="disclaimer.html" style="color:rgba(255,255,255,0.6); margin:0 12px; transition:var(--transition);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Disclaimer</a> |
+      <a href="terms-conditions.html" style="color:rgba(255,255,255,0.6); margin:0 12px; transition:var(--transition);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Terms & Conditions</a>
+    </p>
+    <p>Copyright © 2025–2026 | <strong>Abhi Result</strong> | All Rights Reserved</p>
+    <p class="disclaimer-text">Disclaimer: All links provided are official government websites. Results & information are for reference only. Verify from official sources before taking action.</p>
+  </div></div>
+</footer>
+
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-chevron-up"></i></button>
+
+<!-- NOTIFICATION POPUP -->
+<div class="notif-popup" id="notifPopup">
+  <div class="notif-icon"><i class="fas fa-bell"></i></div>
+  <div class="notif-content"><strong>🔔 New Alert!</strong><span id="notifText">Loading...</span></div>
+  <button class="notif-close" onclick="closeNotif()">×</button>
+</div>
+
+<!-- BOTTOM MOBILE NAV -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-items">
+    <a href="index.html" class="bn-item active"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="latest-jobs.html" class="bn-item"><i class="fas fa-briefcase"></i><span>Jobs</span></a>
+    <a href="results.html" class="bn-item"><i class="fas fa-trophy"></i><span>Results</span></a>
+    <a href="admit-card.html" class="bn-item"><i class="fas fa-id-card"></i><span>Admit</span></a>
+    <a href="admission.html" class="bn-item"><i class="fas fa-graduation-cap"></i><span>Admission</span></a>
+  </div>
+</nav>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
